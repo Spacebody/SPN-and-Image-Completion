@@ -7,17 +7,17 @@ To be continued...
 
 ### Timeline:
 
-[ ] Implementation of SPN (Dec. 28, 2018)
+- [ ] Implementation of SPN (Dec. 28, 2018)
 
-[ ] Experiments of Application (Feb. 14, 2019)
+- [ ] Experiments of Application (Feb. 14, 2019)
 
-[ ] Thesis (April 15m 2019)
+- [ ] Thesis (April 15m 2019)
 
-[ ] Presentation and Defense (TBD)
+- [ ] Presentation and Defense (TBD)
 
 ### Author
 
-Yilin ZHENG
+Yilin ZHENG  E-mail: 11510506@mail.sustc.edu.cn 
 
 ### License
 
