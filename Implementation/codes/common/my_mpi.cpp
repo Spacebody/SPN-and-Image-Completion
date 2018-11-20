@@ -50,26 +50,26 @@ std::vector<int> buf_int(MyMPI::buf_size);
 std::vector<double> buf_double(100);
 std::vector<char> buf_char(100);
 
-// MPI util  TODO
+// MPI util
 double MyMPI::recv_double(int src, int tag)
 {
-    MPI::COMM_WORLD.Recv(MyMPI::buf_double, 1, MPI::DOUBLE, src, tag);
+    MPI::COMM_WORLD.Recv(&MyMPI::buf_double, 1, MPI::DOUBLE, src, tag);
     return MyMPI::buf_double[0];
 }
 
 void MyMPI::send_double(int dest, int tag, double d)
 {
     MyMPI::buf_double[0] = d;
-    MPI::COMM_WORLD.Send(MyMPI::buf_double, 1, MPI::DOUBLE, dest, tag);
+    MPI::COMM_WORLD.Send(&MyMPI::buf_double, 1, MPI::DOUBLE, dest, tag);
 }
 char MyMPI::recv_char(int src, int tag)
 {
-    MPI::COMM_WORLD.Recv(MyMPI::buf_char, 1, MPI::CHAR, src, tag);
+    MPI::COMM_WORLD.Recv(&MyMPI::buf_char, 1, MPI::CHAR, src, tag);
     return MyMPI::buf_char[0];
 }
 
 void MyMPI::send_char(int dest, int tag, char c)
 {
     MyMPI::buf_char[0] = c;
-    MPI::COMM_WORLD.Send(MyMPI::buf_char, 1, MPI::CHAR, dest, tag);
+    MPI::COMM_WORLD.Send(&MyMPI::buf_char, 1, MPI::CHAR, dest, tag);
 }
