@@ -2,7 +2,6 @@
 #define _MYMPI_HPP
 
 #include <mpi.h>
-// #include <cstdlib>
 #include <random>
 #include <vector>
 
