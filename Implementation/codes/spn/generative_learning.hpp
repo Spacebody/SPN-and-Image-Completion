@@ -1,0 +1,4 @@
+#ifndef _GENERATIVE_LEARNING_HPP
+#define _GENERATIVE_LEARNING_HPP
+
+#endif
