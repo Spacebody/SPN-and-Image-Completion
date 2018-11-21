@@ -11,7 +11,7 @@ int Utils::get_int_val(const Instance &ins, const double p)
 Timer Utils::timer = Timer();
 void Utils::log_time(std::string &msg)
 {
-    long sec = Utils::timer.get_time_elapsed()/1000;
+    long sec = Utils::timer.get_time_elapsed() / 1000;
     std::string str = std::string("<TIME> ") + msg + " " + std::to_string(sec) + std::string("s");
     Utils::println(msg);
     Utils::timer.timer_start();

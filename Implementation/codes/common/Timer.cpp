@@ -2,7 +2,7 @@
 
 void Timer::timer_start()
 {
-    time(&start_timer); 
+    time(&start_timer);
 }
 
 long Timer::get_time_elapsed()

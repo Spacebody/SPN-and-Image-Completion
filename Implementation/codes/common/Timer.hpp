@@ -11,8 +11,8 @@ class Timer
   public:
     Timer() {}
     ~Timer() {}
-    static void timer_start();  // start timer
-    static long get_time_elapsed();  // get elapsed time
+    static void timer_start();      // start timer
+    static long get_time_elapsed(); // get elapsed time
 };
 
 #endif

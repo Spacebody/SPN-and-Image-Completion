@@ -2,7 +2,6 @@
 #include "parameter.hpp"
 #include "utils.hpp"
 
-
 // master
 int MyMPI::rank = MPI::COMM_WORLD.Get_rank();
 bool MyMPI::is_class_master = false;
@@ -17,19 +16,19 @@ void MyMPI::set_constants_for_imgs()
 {
     MyMPI::is_class_master = (MyMPI::rank == 0);
     MyMPI::master_rank = 0;
-    
-    MyMPI::my_offset = MyMPI::rank - 1;  // slave
-    MyMPI::my_start = 1;  // slave
-    MyMPI::my_slave = 1;  // class master
+
+    MyMPI::my_offset = MyMPI::rank - 1; // slave
+    MyMPI::my_start = 1;                // slave
+    MyMPI::my_slave = 1;                // class master
 }
 
 void MyMPI::set_constants_for_imgs_parallel()
 {
     MyMPI::is_class_master = (MyMPI::rank % (Parameter::num_slave_per_class + 1) == 0);
-    
+
     // slave
-    MyMPI::my_offset = (MyMPI::rank - 1) % (Parameter::num_slave_per_class + 1);  // slave
-    MyMPI::my_start = MyMPI::rank + 1;  
+    MyMPI::my_offset = (MyMPI::rank - 1) % (Parameter::num_slave_per_class + 1); // slave
+    MyMPI::my_start = MyMPI::rank + 1;
     MyMPI::my_slave = 1;
 
     // master

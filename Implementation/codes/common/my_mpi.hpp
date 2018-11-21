@@ -12,7 +12,7 @@ class MyMPI
     {
         MPI_Init(&argc, &argv);
     }
-    ~MyMPI() 
+    ~MyMPI()
     {
         MPI_Finalize();
     }

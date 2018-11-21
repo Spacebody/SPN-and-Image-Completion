@@ -10,12 +10,12 @@
 class Utils
 {
   public:
-    Utils() 
-    { 
-        timer.timer_start(); 
+    Utils()
+    {
+        timer.timer_start();
     }
     ~Utils() {}
-    
+
     // time
     static int get_int_val(const Instance &ins, const double p);
 
@@ -34,7 +34,7 @@ class Utils
     static double round(const double x);
     static double round(const double x, int n);
     static double add_log(const double l1, const double l2);
-    
+
     // random
     static long seed;
     static std::default_random_engine rd;

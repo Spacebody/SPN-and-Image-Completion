@@ -27,7 +27,6 @@ class Parameter
     static std::string domain;
     static int num_slave_per_class;
     static int num_slave_grp;
-
 };
 
 #endif
