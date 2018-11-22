@@ -10,8 +10,14 @@ class Instance
     double mean;
     double std;
 
-    Instance();
+    Instance():mean(0), std(1)
+    {
+        this->vals.empty();
+    }
     ~Instance(){};
+    Instance(const Instance &ins);
+    Instance &operator=(const Instance &ins);
+
 };
 
 #endif

@@ -12,13 +12,15 @@ class ProdNode : public Node
         this->children.empty();
     }
     ~ProdNode() {}
-
-    std::vector<Node> children;
+    ProdNode(const ProdNode &prod_node);
+    ProdNode &operator=(const ProdNode &prod_node);
 
     void pass_derivative();
     void eval();
     void add_child(Node n);
 
+  private:
+    std::vector<Node> children;
 };
 
 #endif
