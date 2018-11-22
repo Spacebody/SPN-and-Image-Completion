@@ -15,6 +15,8 @@ class Utils
         timer.timer_start();
     }
     ~Utils() {}
+    Utils(const Utils &utils);
+    Utils &operator=(const Utils &utils);
 
     // time
     static int get_int_val(const Instance &ins, const double p);

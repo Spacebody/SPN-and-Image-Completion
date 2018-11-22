@@ -8,6 +8,9 @@ class Parameter
   public:
     Parameter() {}
     ~Parameter() {}
+    Parameter(const Parameter &parameter);
+    Parameter &operator=(const Parameter &parameter);
+
     // EM
     static int max_iter;
     static double threshold_LLHChg;

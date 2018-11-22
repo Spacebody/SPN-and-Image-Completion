@@ -16,6 +16,9 @@ class MyMPI
     {
         MPI_Finalize();
     }
+    MyMPI(const MyMPI &my_mpi);
+    MyMPI &operator=(const MyMPI &my_mpi);
+
     // master
     static int rank;
     static bool is_class_master;

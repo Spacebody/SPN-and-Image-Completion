@@ -10,6 +10,9 @@ class Node
         this->log_derivative = Node::zero_log_val;
     }
     virtual ~Node() {}
+    Node(const Node &node);
+    Node &operator=(const Node &node);
+
     static double zero_log_val;
 
     double log_val;
@@ -19,8 +22,8 @@ class Node
     void set_value(double v);
 
     /*
-        * the two pure virtual function should be implemented in subclasses
-        */
+        the two pure virtual function should be implemented in subclasses
+    */    
     // evaluate root
     virtual void eval();
 
