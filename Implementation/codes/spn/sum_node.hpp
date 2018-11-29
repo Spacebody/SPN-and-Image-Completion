@@ -1,5 +1,5 @@
-#ifndef _SUM_NODE_HPP
-#define _SUM_NODE_HPP
+#ifndef SUM_NODE_HPP
+#define SUM_NODE_HPP
 
 #include "node.hpp"
 #include <map>

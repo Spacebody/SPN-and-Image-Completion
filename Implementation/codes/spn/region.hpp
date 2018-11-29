@@ -1,5 +1,5 @@
-#ifndef _REGION_HPP
-#define _REGION_HPP
+#ifndef REGION_HPP
+#define REGION_HPP
 
 
 #endif

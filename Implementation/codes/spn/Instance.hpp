@@ -1,5 +1,5 @@
-#ifndef _INSTANCE_HPP
-#define _INSTANCE_HPP
+#ifndef INSTANCE_HPP
+#define INSTANCE_HPP
 
 #include <vector>
 

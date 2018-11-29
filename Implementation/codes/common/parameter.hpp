@@ -1,5 +1,5 @@
-#ifndef _PARAMETER_HPP
-#define _PARAMETER_HPP
+#ifndef PARAMETER_HPP
+#define PARAMETER_HPP
 
 #include <string>
 

@@ -1,5 +1,5 @@
-#ifndef _TIMER_HPP
-#define _TIMER_HPP
+#ifndef TIMER_HPP
+#define TIMER_HPP
 
 #include <ctime>
 

@@ -1,5 +1,5 @@
-#ifndef _PROD_NODE_HPP
-#define _PROD_NODE_HPP
+#ifndef PROD_NODE_HPP
+#define PROD_NODE_HPP
 
 #include "node.hpp"
 #include <vector>

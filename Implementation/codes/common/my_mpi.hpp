@@ -1,5 +1,5 @@
-#ifndef _MYMPI_HPP
-#define _MYMPI_HPP
+#ifndef MYMPI_HPP
+#define MYMPI_HPP
 
 #include <mpi.h>
 #include <random>

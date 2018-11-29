@@ -1,5 +1,5 @@
-#ifndef _SPN_HPP
-#define _SPN_HPP
+#ifndef SPN_HPP
+#define SPN_HPP
 
 
 
