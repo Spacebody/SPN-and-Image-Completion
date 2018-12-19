@@ -65,7 +65,7 @@ void SumNode::set_child_cnt(std::string di, double cnt)
 
 void SumNode::add_child_only(std::string decomp_idx, double cnt, Node n)
 {
-    if(!this->children.count(decomp_idx))
+    if (!this->children.count(decomp_idx))
         this->children.insert(std::pair<std::string, Node>(decomp_idx, n));
     if (!this->child_cnts.count(decomp_idx))
         this->child_cnts.insert(std::pair<std::string, double>(decomp_idx, cnt));

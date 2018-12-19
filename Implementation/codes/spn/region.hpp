@@ -13,6 +13,11 @@
 class Region
 {
   private:
+    Region(int id, int a1, int a2, int b1, int b2);
+    Region();  // default constructor
+    ~Region() {}
+
+  public:
     int id;
     int a1, a2, b1, b2;
     int a, b; //a = a2 - a1, b = b2 - b1
@@ -25,9 +30,9 @@ class Region
     double ttl_cnts;
 
     // data structure for a parse
-    std::map<int, int> inst_type;
-    std::map<int, std::string> inst_decomp;
-    std::map<std::string, ProdNode> ecomp_prod;
+    std::unordered_map<int, int> inst_type;
+    std::unordered_map<int, std::string> inst_decomp;
+    std::unordered_map<std::string, ProdNode> decomp_prod;
 
     // each region is alloted a set of sum nodes
     std::vector<SumNode> types;
@@ -39,11 +44,9 @@ class Region
     double def_map_prod_prob;
 
     double invar;
+    
+    /*************************************************************/
 
-    Region(int id, int a1, int a2, int b1, int b2);
-    ~Region() {}
-
-  public:
     static std::unordered_map<int, Region> id_regions;
    
     static int get_region_id(int a1, int a2, int b1, int b2);
