@@ -3,6 +3,7 @@
 #include "../common/utils.hpp"
 #include "decomposition.hpp"
 #include "../common/my_mpi.hpp"
+#include "SPN.hpp"
 
 std::unordered_map<int, Region> Region::id_regions = std::unordered_map<int, Region>();
 
@@ -46,7 +47,7 @@ int Region::get_region_id(int a1, int a2, int b1, int b2)
 {
     int id = ((a1 * Parameter::input_dim1 + a2 - 1) * Parameter::input_dim2 + b1) * Parameter::input_dim2 + b2 - 1;
     if (Region::id_regions.count(id) > 0)
-        Region::id_regions.insert(std::pair<int, Region>(id, Region(id, a1, a2, b1, b2)));  // TODO: unknown problem
+        Region::id_regions.insert(std::pair<int, Region>(id, Region(id, a1, a2, b1, b2)));
     return id;
 }
 
@@ -106,7 +107,7 @@ void Region::set_types(int num_types)
     }
 }
 
-int Region::set_base(double val)
+void Region::set_base(double val)
 {
     this->set_Gauss_base(val);
 }
@@ -419,7 +420,7 @@ void Region::set_cur_parse_to_MAP(int inst_idx)
     r2.inst_type.insert(std::pair<int, int>(inst_idx, d.type_id_2));
 
     // record update if slave
-    if (!MyMPI::is_class_master && SPN::is_recording_update) // TODO: need to implement SPN
+    if (!MyMPI::is_class_master && SPN::is_recording_update)
     {
         MyMPI::buf_int[MyMPI::buf_idx++] = id;
         MyMPI::buf_int[MyMPI::buf_idx++] = chosen_type;
@@ -456,7 +457,7 @@ void Region::clear_cur_parse(int inst_idx)
     Decomposition d = Decomposition::get_decomposition(di);
 
     // record update if slave
-    if (!MyMPI::is_class_master && SPN::is_recording_update) // TODO: need to implement SPN
+    if (!MyMPI::is_class_master && SPN::is_recording_update)
     {
         MyMPI::buf_int[MyMPI::buf_idx++] = id;
         MyMPI::buf_int[MyMPI::buf_idx++] = cti;

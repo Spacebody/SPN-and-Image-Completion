@@ -2,7 +2,6 @@
 #define DECOMPOSITION_HPP
 #include <map>
 #include <string>
-#include <cstdlib>
 
 class Decomposition
 {

@@ -8,20 +8,22 @@
 #include "sum_node.hpp"
 #include "prod_node.hpp"
 #include "../common/parameter.hpp"
-#include "Instance.hpp"
+#include "instance.hpp"
 
 class Region
 {
   private:
-    Region(int id, int a1, int a2, int b1, int b2);
-    Region() {}  // default constructor
-    ~Region() {}
+    
 
   public:
     int id;
     int a1, a2, b1, b2;
     int a, b; //a = a2 - a1, b = b2 - b1
     int interval; // coarse resolution
+
+    Region() {} // default constructor
+    Region(int id, int a1, int a2, int b1, int b2);
+    ~Region() {}
 
     // pixel region only: gaussian units
     std::vector<double> means;
@@ -55,7 +57,7 @@ class Region
     std::string my_str();
     void reset_types(int num_types);
     void set_types(int num_types);
-    int set_base(double val);
+    void set_base(double val);
     double cmp_Gauss(double v, double mean);
     void set_Gauss_base(double v);
     void set_Gauss_for_sum_out();

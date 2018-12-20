@@ -1,3 +1,3 @@
-#include "Instance.hpp"
+#include "instance.hpp"
 
 // maybe useless

@@ -1,10 +1,9 @@
 #ifndef UTILS_HPP
 #define UTILS_HPP
 
-#include <cstdlib>
 #include <iostream>
 #include <random>
-#include "../spn/Instance.cpp"
+#include "../spn/instance.cpp"
 #include "timer.hpp"
 
 class Utils
