@@ -24,6 +24,9 @@ class SumNode: public Node
     void add_child_only(std::string decomp_idx, double cnt, Node n);
     void remove_child_only(std::string decomp_idx, double cnt);
 
+    std::map<std::string, Node> get_children();
+    double get_cnt();
+
   private:
     std::map<std::string, Node> children;
     std::map<std::string, double> child_cnts;

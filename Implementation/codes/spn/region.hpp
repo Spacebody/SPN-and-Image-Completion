@@ -14,7 +14,7 @@ class Region
 {
   private:
     Region(int id, int a1, int a2, int b1, int b2);
-    Region();  // default constructor
+    Region() {}  // default constructor
     ~Region() {}
 
   public:

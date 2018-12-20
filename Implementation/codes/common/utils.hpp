@@ -38,8 +38,9 @@ class Utils
     static double add_log(const double l1, const double l2);
 
     // random
-    static long seed;
-    static std::default_random_engine rd;
+    static std::random_device rd;
+    static std::default_random_engine random_;
+    static int random_next_int(int bound);
 };
 
 #endif

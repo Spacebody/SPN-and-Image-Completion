@@ -91,3 +91,13 @@ void SumNode::remove_child_only(std::string decomp_idx, double cnt)
         this->child_cnts.insert(std::pair<std::string, double>(decomp_idx, cnt));
     this->cnt -= cnt;
 }
+
+std::map<std::string, Node> SumNode::get_children()
+{
+    return this->children;
+}
+
+double SumNode::get_cnt()
+{
+    return this->cnt;
+}

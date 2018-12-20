@@ -13,6 +13,8 @@ class Decomposition
             id(id), region_id_1(region_id_1), region_id_2(region_id_2), type_id_1(type_id_1), type_id_2(type_id_2) {}
     ~Decomposition() {}  // deconstructor
 
+    int region_id_1, region_id_2, type_id_1, type_id_2;
+
     static Decomposition get_decomposition(int region_id_1, int region_id_2, int type_id_1, int type_id_2);
     static Decomposition get_decomposition(std::string id);
     std::string get_id();
@@ -26,8 +28,7 @@ class Decomposition
     static std::map<std::string, Decomposition> id_decomp;
     static Decomposition blank_decomp;
     std::string id;
-    int region_id_1, region_id_2, type_id_1, type_id_2;
-    
+
 };
 
 #endif
