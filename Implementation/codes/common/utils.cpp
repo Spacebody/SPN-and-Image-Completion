@@ -76,6 +76,7 @@ double Utils::add_log(const double l1, const double l2)
 }
 
 // random
+long Utils::seed = -1;
 std::random_device Utils::rd;
 std::default_random_engine Utils::random_(Utils::rd);
 

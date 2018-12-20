@@ -39,7 +39,7 @@ void MyMPI::set_constants_for_imgs_parallel()
 void MyMPI::set_random_seed_by_rank()
 {
     Utils::seed = MyMPI::rank;
-    Utils::rd = std::default_random_engine(Utils::seed);
+    Utils::random_ = std::default_random_engine(Utils::seed);
 }
 
 // buffer
