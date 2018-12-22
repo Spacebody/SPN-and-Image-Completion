@@ -2,7 +2,6 @@
 #define SPN_HPP
 
 #include <iostream>
-// #include "../common/.hpp"
 #include <mpi.h>
 #include <vector>
 #include "instance.hpp"
@@ -26,10 +25,10 @@ class SPN
     Region root_region;
 
     // coarser resolution for larger regions
-    int coarse_dim_1, coarse_dim_2;
+    int coarse_dim1, coarse_dim2;
 
-    SPN() : coarse_dim_1(Parameter::input_dim1 / Parameter::base_resolution), \
-            coarse_dim_2(Parameter::input_dim2 / Parameter::base_resolution) {}
+    SPN() : coarse_dim1(Parameter::input_dim1 / Parameter::base_resolution), \
+            coarse_dim2(Parameter::input_dim2 / Parameter::base_resolution) {}
 
     // ----------------------------------------------
     // Bottom
@@ -104,7 +103,7 @@ class SPN
     // ----------------------------------------------
     // load/save
     // ----------------------------------------------
-    void save_SPN(Region r, std::ostream &out); // TODO: BufferWriter in Java
+    void save_SPN(Region r, std::ostream &out);
     static Region load_region(std::vector<std::string> t);
     void add_child(Region r, SumNode n, std::string di, double cc);
 
