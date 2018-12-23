@@ -390,13 +390,86 @@ void SPN::cmp_derivative()
 
     this->root.set_log_derivative(0);
     this->root.pass_derivative();
-    // TODO: continue the implementation
-    
+    for (std::map<std::string, Node>::iterator iter = this->root.get_children().begin(); iter != this->root.get_children().end(); ++iter)
+    {
+        Node n = this->root.get_children()[iter->first];
+        n.pass_derivative();
+    }
+
+    // coarse region
+    for (int ca = this->coarse_dim1; ca >= 1; --ca)
+        for (int cb = this->coarse_dim2; cb >= 1; --cb)
+        {
+            if (ca == 1 && cb == 1)
+                continue;
+
+            for (int a1 = 0; a1 <= Parameter::input_dim1 - ca * Parameter::base_resolution; a1 += Parameter::base_resolution)
+            {
+                int a2 = a1 + ca * Parameter::base_resolution;
+                for (int b1 = 0; b1 <= Parameter::input_dim2 - cb * Parameter::base_resolution; b1 += Parameter::base_resolution)
+                {
+                    int b2 = b1 + cb * Parameter::base_resolution;
+
+                    // coarse regions
+                    int ri = Region::get_region_id(a1, a2, b1, b2);
+                    Region r = Region::get_region(ri);
+                    this->cmp_derivative(r);
+                }
+            }
+        }
+
+    // fine region
+    for (int ca = this->coarse_dim1 - 1; ca >= 0; --ca)
+        for (int cb = this->coarse_dim2 - 1; cb >= 0; --cb)
+            for (int a = Parameter::base_resolution; a >= 1; --a)
+                for (int b = Parameter::base_resolution; b >= 1; --b)
+                {
+                    if (a == 1 && b == 1)
+                        continue;
+                    for (int a1 = ca * Parameter::base_resolution; a1 <= (ca + 1) * Parameter::base_resolution - a; ++a1)
+                    {
+                        int a2 = a1 + a;
+                        for (int b1 = cb * Parameter::base_resolution; b1 <= (cb + 1) * Parameter::base_resolution - b; ++b1)
+                        {
+                            int b2 = b1 + b;
+                            int ri = Region::get_region_id(a1, a2, b1, b2);
+                            Region r = Region::get_region(ri);
+                            this->cmp_derivative(r);
+                        }
+                    }
+                }
 }
+
 // void SPN::eval();
-// void SPN::cmp_derivative(Region r);
+
+void SPN::cmp_derivative(Region r)
+{
+    for (int i = 0; i < r.types.size(); ++i)
+    {
+        r.types[i].pass_derivative();
+    }
+    for (std::unordered_map<std::string, ProdNode>::iterator iter = r.decomp_prod.begin(); iter != r.decomp_prod.end(); ++iter)
+    {
+        Node n = r.decomp_prod[iter->first];
+        n.pass_derivative();
+    }
+}
+
 // void SPN::eval(Region r);
-// void SPN::init_derviative(Region r);
+
+void SPN::init_derviative(Region r)
+{
+    for (std::unordered_map<std::string, ProdNode>::iterator iter = r.decomp_prod.begin(); iter != r.decomp_prod.end(); ++iter)
+    {
+        ProdNode n = r.decomp_prod[iter->first];
+        n.set_log_derivative(Node::zero_log_val);
+    }
+    for (std::vector<SumNode>::iterator iter2 = r.types.begin(); iter2 != r.types.end(); ++iter2)
+    {
+        iter2->set_log_derivative(Node::zero_log_val);
+    }
+}
+
 // void SPN::init_derviative();
 // void SPN::infer_MAP_left_half(int ii, Instance inst);
 // void SPN::infer_MAP_for_learning(int ii, Instance inst);
