@@ -60,7 +60,7 @@ class Region
     void set_base(double val);
     double cmp_Gauss(double v, double mean);
     void set_Gauss_base(double v);
-    void set_Gauss_for_sum_out();
+    void set_base_for_sum_out();
     void infer_MAP(int inst_idx, Instance inst);
     void infer_MAP_for_learning(int inst_idx, Instance inst);
     void set_cur_parse_to_MAP(int inst_idx);

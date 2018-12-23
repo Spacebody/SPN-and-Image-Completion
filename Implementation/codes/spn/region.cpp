@@ -134,7 +134,7 @@ void Region::set_Gauss_base(double v)
     }
 }
 
-void Region::set_Gauss_for_sum_out()
+void Region::set_base_for_sum_out()
 {
     this->def_map_type_idx = -1;
     for (int i = 0; i < Parameter::num_components_per_var; ++i)

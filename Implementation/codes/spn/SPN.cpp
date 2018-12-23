@@ -572,23 +572,229 @@ void SPN::init_derviative()
                 }
 }
 
-// void SPN::infer_MAP_left_half(int ii, Instance inst);
-// void SPN::infer_MAP_for_learning(int ii, Instance inst);
-// void SPN::clear_cur_parse(int ii);
-// void SPN::set_cur_parse_to_MAP(int ii);
-// void SPN::set_cur_parse_from_buf();
-// void SPN::clear_cur_parse_from_buf();
-// void SPN::send_update(int dest);
-// void SPN::recv_update(int src);
-// double SPN::llh(Instance inst);
-// void SPN::set_input(Instance inst);
-// void SPN::set_input_occlude_left_half(Instance inst);
-// void SPN::set_input_occlude_bottom_half(Instance inst);
+// compute MAP
+void SPN::infer_MAP_left_half(int ii, Instance inst)
+{
+    this->set_input_occlude_left_half(inst);
+
+    // fine region
+    for (int ca = 0; ca < this->coarse_dim1; ++ca)
+        for (int cb = 1; cb <= this->coarse_dim2; ++cb)
+            for (int a = 1; a <= Parameter::base_resolution; ++a)
+                for (int b = 1; b <= Parameter::base_resolution; ++b)
+                {
+                    if (ca == 1 && cb == 1)
+                        continue;
+
+                    for (int a1 = ca * Parameter::base_resolution; a1 <= (ca + 1) * Parameter::base_resolution - a; ++a1)
+                    {
+                        int a2 = a1 + a;
+                        for (int b1 = cb * Parameter::base_resolution; b1 <= (cb + 1) * Parameter::base_resolution - b; ++b1)
+                        {
+                            int b2 = b1 + cb * Parameter::base_resolution;
+                            int ri = Region::get_region_id(a1, a2, b1, b2);
+                            Region r = Region::get_region(ri);
+                            r.infer_MAP(ii, inst);
+                        }
+                    }
+                }
+
+    // coarse region
+    for (int ca = 1; ca <= this->coarse_dim1; ++ca)
+        for (int cb = 1; cb <= this->coarse_dim2; ++cb)
+        {
+            if (ca == 1 && cb == 1)
+                continue;  // taken care of below in fine
+
+            for (int a1 = 0; a1 <= Parameter::input_dim1 - ca * Parameter::base_resolution; a1 += Parameter::base_resolution)
+            {
+                int a2 = a1 + ca * Parameter::base_resolution;
+                for (int b1 = 0; b1 <= Parameter::input_dim2 - cb * Parameter::base_resolution; b1 += Parameter::base_resolution)
+                {
+                    int b2 = b1 + cb * Parameter::base_resolution;
+                    int ri = Region::get_region_id(a1, a2, b1, b2);
+                    Region r = Region::get_region(ri);
+                    r.infer_MAP(ii, inst);
+                }
+            }
+        }
+}
+
+void SPN::infer_MAP_for_learning(int ii, Instance inst)
+{
+    this->set_input(inst);
+
+    //fine region
+    for (int ca = 0; ca < this->coarse_dim1; ++ca)
+        for (int cb = 1; cb <= this->coarse_dim2; ++cb)
+            for (int a = 1; a <= Parameter::base_resolution; ++a)
+                for (int b = 1; b <= Parameter::base_resolution; ++b)
+                {
+                    if (ca == 1 && cb == 1)
+                        continue;
+                    for (int a1 = ca * Parameter::base_resolution; a1 <= (ca + 1) * Parameter::base_resolution - a; ++a1)
+                    {
+                        int a2 = a1 + a;
+                        for (int b1 = cb * Parameter::base_resolution; b1 <= (cb + 1) * Parameter::base_resolution - b; ++b1)
+                        {
+                            int b2 = b1 + cb * Parameter::base_resolution;
+                            int ri = Region::get_region_id(a1, a2, b1, b2);
+                            Region r = Region::get_region(ri);
+                            r.infer_MAP_for_learning(ii, inst);
+                        }
+                    }
+                }
+
+    // coarse region
+    for (int ca = 1; ca <= this->coarse_dim1; ++ca)
+        for (int cb = 1; cb <= this->coarse_dim2; ++cb)
+        {
+            if (ca == 1 && cb == 1)
+                continue; // taken care of below in fine
+            for (int a1 = 0; a1 <= Parameter::input_dim1 - ca * Parameter::base_resolution; a1 += Parameter::base_resolution)
+            {
+                int a2 = a1 + ca * Parameter::base_resolution;
+                for (int b1 = 0; b1 <= Parameter::input_dim2 - cb * Parameter::base_resolution; b1 += Parameter::base_resolution)
+                {
+                    int b2 = b1 + cb * Parameter::base_resolution;
+                    int ri = Region::get_region_id(a1, a2, b1, b2);
+                    Region r = Region::get_region(ri);
+                    r.infer_MAP_for_learning(ii, inst);
+                }
+            }
+        }
+}
+
+// clear/set parse
+void SPN::clear_cur_parse(int ii)
+{
+    this->root_region.clear_cur_parse(ii);
+}
+
+void SPN::set_cur_parse_to_MAP(int ii)
+{
+    this->root_region.set_cur_parse_to_MAP(ii);
+}
+
+void SPN::set_cur_parse_from_buf()
+{
+    // --- update format: inst_id, region_id, type, decomp(rid1, rid2, type1, type2) - in buf_inf
+    int k = 0;
+    while ( k < MyMPI::buf_idx)
+    {
+        int ri = MyMPI::buf_int[k++];
+        int chosen_type = MyMPI::buf_int[k++];
+        int ri1 = MyMPI::buf_int[k++];
+        int ri2 = MyMPI::buf_int[k++];
+        int ti1 = MyMPI::buf_int[k++];
+        int ti2 = MyMPI::buf_int[k++];
+        Region r = Region::get_region(ri);
+        r.set_cur_parse_from_buf(chosen_type, ri1, ri2, ti1, ti2);
+    }
+}
+
+void SPN::clear_cur_parse_from_buf()
+{
+    // --- update format: inst_id, region_id, type, decomp(rid1, rid2, type1, type2) - in buf_inf
+    int k = 0;
+    while (k < MyMPI::buf_idx)
+    {
+        int ri = MyMPI::buf_int[k++];
+        int chosen_type = MyMPI::buf_int[k++];
+        int ri1 = MyMPI::buf_int[k++];
+        int ri2 = MyMPI::buf_int[k++];
+        int ti1 = MyMPI::buf_int[k++];
+        int ti2 = MyMPI::buf_int[k++];
+        Region r = Region::get_region(ri);
+        r.clear_cur_parse_from_buf(chosen_type, ri1, ri2, ti1, ti2);
+    }
+}
+
+void SPN::send_update(int dest)
+{
+    if (MyMPI::buf_idx >= MyMPI::buf_size)
+        Utils::println("ERR: buffer overflow to" + std::to_string(dest));
+    MPI::COMM_WORLD.Send(&MyMPI::buf_int, MyMPI::buf_idx, MPI::INT, dest, 0);
+}
+
+void SPN::recv_update(int src)
+{
+    MPI::Status status;
+    MPI::COMM_WORLD.Recv(&MyMPI::buf_int, MyMPI::buf_idx, MPI::INT, src, 0, status);
+    MyMPI::buf_idx += status.Get_count(MPI::INT);
+    if (MyMPI::buf_idx >= MyMPI::buf_size)
+        Utils::println("ERR: buffer overflow from" + std::to_string(src));
+}
+
+// compute log probability
+double SPN::llh(Instance inst)
+{
+    this->set_input(inst);
+    this->eval();
+    return this->root.get_log_val();
+}
+
+// set dspn input
+void SPN::set_input(Instance inst)
+{
+    for (int a1 = 0; a1 <= Parameter::input_dim1 - 1; ++a1)
+    {
+        int a2 = a1 + 1;
+        for (int b1 = 0; b1 <= Parameter::input_dim2 - 1; ++b1)
+        {
+            int b2 = b1 + 1;
+            int ri = Region::get_region_id(a1, a2, b1, b2);
+            Region r = Region::get_region(ri);
+            r.set_base(inst.vals[a1][b1]);
+        }
+    }
+}
+
+void SPN::set_input_occlude_left_half(Instance inst)
+{
+    for (int a1 = 0; a1 <= Parameter::input_dim1 - 1; ++a1)
+    {
+        int a2 = a1 + 1;
+        for (int b1 = 0; b1 <= Parameter::input_dim2 - 1; ++b1)
+        {
+            int b2 = b1 + 1;
+            int ri = Region::get_region_id(a1, a2, b1, b2);
+            Region r = Region::get_region(ri);
+            if (b1 < Parameter::input_dim2 / 2) // r.set_base(0, 0); // log 1, 1
+                r.set_base_for_sum_out();
+            else
+                r.set_base(inst.vals[a1][b1]);
+        }
+    }
+}
+
+void SPN::set_input_occlude_bottom_half(Instance inst)
+{
+    for (int a1 = 0; a1 <= Parameter::input_dim1 - 1; ++a1)
+    {
+        int a2 = a1 + 1;
+        for (int b1 = 0; b1 <= Parameter::input_dim2 - 1; ++b1)
+        {
+            int b2 = b1 + 1;
+            int ri = Region::get_region_id(a1, a2, b1, b2);
+            Region r = Region::get_region(ri);
+            if (b1 < Parameter::input_dim2 / 2)
+                r.set_base_for_sum_out();
+            else
+                r.set_base(inst.vals[a1][b1]);
+        }
+    }
+}
 
 // ----------------------------------------------
 // load/save
 // ----------------------------------------------
-// void SPN::save_SPN(std::string mdl_name);
+void SPN::save_SPN(std::string mdl_name)
+{
+    std::string file_name = mdl_name + ".mdl";
+    // TODO
+}
+
 // SPN SPN::load_D_SPN();
 // void SPN::save_SPN(Region r, std::ostream &out);
 // Region SPN::load_region(std::vector<std::string> t);
