@@ -3,6 +3,7 @@
 #include "../common/my_mpi.hpp"
 #include <set>
 #include "decomposition.hpp"
+#include <sstream>
 
 bool SPN::is_recording_update = true;
 bool SPN::complete_by_marginal = true;
@@ -885,12 +886,101 @@ SPN SPN::load_DSPN(std::string mdl_name)
     std::vector<std::string> t;
     while (std::getline(in, s))
     {
-        // TODO
+        if (s.find("<REGION>") == std::string::npos)
+            t = std::vector<std::string>();
+        else if (s == "</REGION>")
+        {
+            Region r = SPN::load_region(t);
+            if (r.types.size() == 1)
+            {
+                dspn.root_region = r;
+                dspn.root = r.types[0];
+                t.clear();
+            }
+        }
+        else
+        {
+            if (t.empty())
+                Utils::println("ERR: " + s);
+            t.push_back(s);
+        }
     }
+    in.close();
+    return dspn;
 }
 
-// void SPN::save_SPN(Region r, std::ostream &out);
-// Region SPN::load_region(std::vector<std::string> t);
+Region SPN::load_region(std::vector<std::string> t)
+{
+    int a1, a2, b1, b2;
+    std::string s;
+    std::vector<std::string> ts;
+    int idx = 0;
+    s = t[idx++];
+    std::stringstream ss(s);  // split by ' '
+    ts = std::vector<std::string>((std::istream_iterator<std::string>(ss)), std::istream_iterator<std::string>());
+    a1 = std::stoi(ts[0]);
+    a2 = std::stoi(ts[1]);
+    b1 = std::stoi(ts[2]);
+    b2 = std::stoi(ts[3]);
+    Region r = Region::get_region(Region::get_region_id(a1, a2, b1, b2));
+
+    // type
+    s = t[idx++];  // <TYPE>
+    s = t[idx++];
+    int num_types = std::stoi(s);
+    r.reset_types(num_types);
+    for (int i = 0; i < num_types; ++i)
+    {
+        s = t[idx++];
+        std::stringstream ss(s);
+        ts.clear();
+        while (std::getline(ss, s, ':'))
+            ts.push_back(s); // split by ':'
+        SumNode n = r.types[i];
+        n.set_cnt(std::stod(ts[0]));
+        for (int j = 1; j < ts.size(); j += 2)
+        {
+            std::string di = ts[j];
+            di = di.substr(1, di.length() - 1);
+            double cc = std::stod(ts[j + 1]);
+            SPN::add_child(r, n, di, cc);
+        }
+    }
+    s = t[idx++]; // </TYPE>
+
+    // unit
+    if (idx < t.size())
+    {
+        s = t[idx++];
+        if (s.find("<MEAN>") != std::string::npos)
+        {
+            Utils::println("ERR: not mean: " + s);
+            exit(-1);
+        }
+        s = s.substr(s.find(":") + 1);
+        ts.clear();
+        std::stringstream ss(s); // split by ' '
+        ts = std::vector<std::string>((std::istream_iterator<std::string>(ss)), std::istream_iterator<std::string>());
+        r.means = std::vector<double>();
+        for (int i = 0; i < ts.size(); ++i)
+            r.means.push_back(std::stod(ts[i]));
+        s = t[idx++];
+        if (s.find("<CNT>") != std::string::npos)
+        {
+            Utils::println("ERR: not cnt: " + s);
+            exit(-1);
+        }
+        s = s.substr(s.find(":") + 1);
+        ts.clear();
+        std::stringstream ss2(s); // split by ' '
+        ts = std::vector<std::string>((std::istream_iterator<std::string>(ss2)), std::istream_iterator<std::string>());
+        r.cnts = std::vector<double>();
+        for (int i = 0; i < ts.size(); ++i)
+            r.cnts.push_back(std::stod(ts[i]));
+    }
+    
+    return r;
+}
 
 void SPN::add_child(Region r, SumNode n, std::string di, double cc)
 {

@@ -104,10 +104,9 @@ class SPN
     // ----------------------------------------------
     // load/save
     // ----------------------------------------------
-    void save_SPN(Region r, std::fstream &fs);
     void save_region(Region r, std::fstream &fs);
     static Region load_region(std::vector<std::string> t);
-    void add_child(Region r, SumNode n, std::string di, double cc);
+    static void add_child(Region r, SumNode n, std::string di, double cc);
 
     // ----------------------------------------------
     // utils

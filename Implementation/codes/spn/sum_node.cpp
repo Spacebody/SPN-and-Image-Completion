@@ -102,6 +102,11 @@ double SumNode::get_cnt()
     return this->cnt;
 }
 
+void SumNode::set_cnt(double cnt)
+{
+    this->cnt = cnt;
+}
+
 void SumNode::add_child_only(std::string di, Node n)
 {
     this->children.insert(std::pair<std::string, Node>(di, n));
