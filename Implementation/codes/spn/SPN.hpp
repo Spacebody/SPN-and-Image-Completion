@@ -56,12 +56,25 @@ class SPN
     // ----------------------------------------------
     void cmp_derivative();
     void eval();
+    void send_update(int dest);
+    void recv_update(int src);
+    void clear_cur_parse(int ii);
+    void set_cur_parse_from_buf();
+    void clear_cur_parse_from_buf();
+    void infer_MAP_for_learning(int ii, Instance inst);
+    void set_cur_parse_to_MAP(int ii);
+    double llh(Instance inst);
 
     // ----------------------------------------------
     // load/save
     // ----------------------------------------------
     void save_DSPN(std::string mdl_name);
     static SPN load_DSPN(std::string mdl_name);
+
+    // ----------------------------------------------
+    // utils
+    // ----------------------------------------------
+    void print_params();
 
   private:
     // ----------------------------------------------
@@ -89,14 +102,6 @@ class SPN
     void init_derviative(Region r);
     void init_derviative();
     void infer_MAP_left_half(int ii, Instance inst);
-    void infer_MAP_for_learning(int ii, Instance inst);
-    void clear_cur_parse(int ii);
-    void set_cur_parse_to_MAP(int ii);
-    void set_cur_parse_from_buf();
-    void clear_cur_parse_from_buf();
-    void send_update(int dest);
-    void recv_update(int src);
-    double llh(Instance inst);
     void set_input(Instance inst);
     void set_input_occlude_left_half(Instance inst);
     void set_input_occlude_bottom_half(Instance inst);
@@ -108,10 +113,6 @@ class SPN
     static Region load_region(std::vector<std::string> t);
     static void add_child(Region r, SumNode n, std::string di, double cc);
 
-    // ----------------------------------------------
-    // utils
-    // ----------------------------------------------
-    void print_params();
 };
 
 #endif

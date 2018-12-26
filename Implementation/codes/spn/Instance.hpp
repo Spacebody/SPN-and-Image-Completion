@@ -14,7 +14,7 @@ class Instance
     {
         this->vals.empty();
     }
-    ~Instance(){};
+    virtual ~Instance(){};
     Instance(const Instance &ins);
     Instance &operator=(const Instance &ins);
 
