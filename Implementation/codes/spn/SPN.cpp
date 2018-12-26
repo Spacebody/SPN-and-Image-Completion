@@ -789,16 +789,125 @@ void SPN::set_input_occlude_bottom_half(Instance inst)
 // ----------------------------------------------
 // load/save
 // ----------------------------------------------
-void SPN::save_SPN(std::string mdl_name)
+void SPN::save_DSPN(std::string mdl_name)
 {
     std::string file_name = mdl_name + ".mdl";
-    // TODO
+    std::fstream out(file_name, std::fstream::out);
+
+    // fine region
+    for (int ca = 0; ca < this->coarse_dim1; ++ca)
+        for (int cb = 1; cb <= this->coarse_dim2; ++cb)
+            for (int a = 1; a <= Parameter::base_resolution; ++a)
+                for (int b = 1; b <= Parameter::base_resolution; ++b)
+                {
+                    // if (ca == 1 && cb == 1)
+                        // continue;
+                    for (int a1 = ca * Parameter::base_resolution; a1 <= (ca + 1) * Parameter::base_resolution - a; ++a1)
+                    {
+                        int a2 = a1 + a;
+                        for (int b1 = cb * Parameter::base_resolution; b1 <= (cb + 1) * Parameter::base_resolution - b; ++b1)
+                        {
+                            int b2 = b1 + cb * Parameter::base_resolution;
+                            int ri = Region::get_region_id(a1, a2, b1, b2);
+                            Region r = Region::get_region(ri);
+                            this->save_region(r, out);
+                        }
+                    }
+                }
+
+    // coarse region
+    for (int ca = 1; ca <= this->coarse_dim1; ++ca)
+        for (int cb = 1; cb <= this->coarse_dim2; ++cb)
+        {
+            if (ca == 1 && cb == 1)
+                continue; // taken care of below in fine
+            for (int a1 = 0; a1 <= Parameter::input_dim1 - ca * Parameter::base_resolution; a1 += Parameter::base_resolution)
+            {
+                int a2 = a1 + ca * Parameter::base_resolution;
+                for (int b1 = 0; b1 <= Parameter::input_dim2 - cb * Parameter::base_resolution; b1 += Parameter::base_resolution)
+                {
+                    int b2 = b1 + cb * Parameter::base_resolution;
+                    int ri = Region::get_region_id(a1, a2, b1, b2);
+                    Region r = Region::get_region(ri);
+                    this->save_region(r, out);
+                }
+            }
+        }
+    out.close();
 }
 
-// SPN SPN::load_D_SPN();
+void SPN::save_region(Region r, std::fstream &out)
+{
+    std::string s;
+
+    // region ID
+    out << "<REGION>\n";
+    out << std::to_string(r.a1) + " " + std::to_string(r.a2) + " " + std::to_string(r.b1) + " " + std::to_string(r.b2) + "\n";
+
+    // type -> decomp / cnt
+    out << "<TYPE>\n";
+    out << std::to_string(r.types.size()) + "\n";
+    for (int i = 0; i < r.types.size(); ++i)
+    {
+        SumNode n = r.types[i];
+        s = std::to_string(n.get_cnt()) + "";
+        for (std::map<std::string, Node>::iterator iter = n.get_children().begin(); iter != n.get_children().end(); ++iter)
+        {
+            s += ":<" + iter->first + ">:" + std::to_string(n.get_child_cnt(iter->first));
+        }
+        out << s + "\n";
+    }
+    out << "</TYPE>\n";
+
+    // unit:
+    if (r.a == 1 && r.b == 1)
+    {
+        out << "<MEAN>" + std::to_string(r.a1) + " " + std::to_string(r.b1) + ":";
+        for (int i = 0; i < r.means.size(); ++i)
+            out << " " + std::to_string(r.means[i]);
+        out << "\n";
+        out << "<CNT> " + std::to_string(r.a1) + " " + std::to_string(r.b1) + ":";
+        for (int i = 0; i < r.cnts.size(); ++i)
+            out << " " + std::to_string(r.cnts[i]);
+        out << "\n";
+    }
+    out << "</REGION>\n";
+}
+
+SPN SPN::load_DSPN(std::string mdl_name)
+{
+    std::string file_name = mdl_name + ".mdl";
+    std::fstream in(file_name, std::fstream::in);
+
+    SPN dspn = SPN();
+
+    std::string s;
+    std::vector<std::string> t;
+    while (std::getline(in, s))
+    {
+        // TODO
+    }
+}
+
 // void SPN::save_SPN(Region r, std::ostream &out);
 // Region SPN::load_region(std::vector<std::string> t);
-// void SPN::add_child(Region r, SumNode n, std::string di, double cc);
+
+void SPN::add_child(Region r, SumNode n, std::string di, double cc)
+{
+    n.set_child_cnt(di, cc);
+    ProdNode np;
+    if (r.decomp_prod.count(di) > 0)
+    {
+        Decomposition d = Decomposition::get_decomposition(di);
+        np = ProdNode();
+        Region r1 = Region::get_region(d.type_id_1);
+        Region r2 = Region::get_region(d.type_id_2);
+        np.add_child(r1.types[d.type_id_1]);
+        np.add_child(r2.types[d.type_id_2]);
+        r.decomp_prod.insert(std::pair<std::string, ProdNode>(di, np));
+    }
+    n.add_child_only(di, np);
+}
 
 // ----------------------------------------------
 // utils

@@ -26,7 +26,7 @@ class SumNode: public Node
 
     std::map<std::string, Node> get_children();
     double get_cnt();
-
+    void add_child_only(std::string di, Node n);
   private:
     std::map<std::string, Node> children;
     std::map<std::string, double> child_cnts;

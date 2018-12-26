@@ -9,6 +9,7 @@
 #include "region.hpp"
 #include "../common/parameter.hpp"
 #include <string>
+#include <fstream>
 
 class SPN
 {
@@ -59,8 +60,8 @@ class SPN
     // ----------------------------------------------
     // load/save
     // ----------------------------------------------
-    void save_SPN(std::string mdl_name);
-    static SPN load_D_SPN();
+    void save_DSPN(std::string mdl_name);
+    static SPN load_DSPN(std::string mdl_name);
 
   private:
     // ----------------------------------------------
@@ -103,7 +104,8 @@ class SPN
     // ----------------------------------------------
     // load/save
     // ----------------------------------------------
-    void save_SPN(Region r, std::ostream &out);
+    void save_SPN(Region r, std::fstream &fs);
+    void save_region(Region r, std::fstream &fs);
     static Region load_region(std::vector<std::string> t);
     void add_child(Region r, SumNode n, std::string di, double cc);
 
