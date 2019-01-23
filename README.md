@@ -36,19 +36,19 @@ TODO
    3. `timer`: Manage the time to help calculate the time spent on computation.
    4. `utils`: Some helper functions to access time, print log, and do some numeric process.
 2. **evaluation(TODO)**
-   1. `dataset`: 
+   1. `dataset`:
    2. `eval`
    3. `image_completion`
    4. `run`
 3. **spn**
-   1. `decomposition`
-   2. `generative_learning`
-   3. `instance`
-   4. `node`
-   5. `prod_node`
-   6. `sum_node`
-   7. `region`
-   8. `SPN`
+   1. `decomposition`:
+   2. `generative_learning`:
+   3. `instance`:
+   4. `node`: Define the node, to provide the base class of the sum node and the product node.
+   5. `prod_node`: Define the product node, derived from `node`.
+   6. `sum_node`: Define the sum node, derived from `node`.
+   7. `region`:
+   8. `SPN`:
 
 ### Callgraph of Program
 
