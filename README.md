@@ -36,10 +36,10 @@ TODO
    3. `timer`: Manage the time to help calculate the time spent on computation.
    4. `utils`: Some helper functions to access time, print log, and do some numeric process.
 2. **evaluation(TODO)**
-   1. `dataset`:
-   2. `eval`:
-   3. `image_completion`:
-   4. `run`:
+   1. `dataset`: Read and process data from dataset.
+   2. `eval`: Conduct evaluation over dataset.
+   3. `image_completion`: Conduct image completion, which is the application.
+   4. `run`: Control the program, which is the main function.
 3. **spn**
    1. `decomposition`: Decompose the regions.
    2. `generative_learning`: Conduct the learning process to generative the model.
