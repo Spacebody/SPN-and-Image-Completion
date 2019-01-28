@@ -37,22 +37,22 @@ TODO
    4. `utils`: Some helper functions to access time, print log, and do some numeric process.
 2. **evaluation(TODO)**
    1. `dataset`:
-   2. `eval`
-   3. `image_completion`
-   4. `run`
+   2. `eval`:
+   3. `image_completion`:
+   4. `run`:
 3. **spn**
-   1. `decomposition`:
-   2. `generative_learning`:
-   3. `instance`:
+   1. `decomposition`: Decompose the regions.
+   2. `generative_learning`: Conduct the learning process to generative the model.
+   3. `instance`: Record the mean and variance of a instance, which is calculated from dataset.
    4. `node`: Define the node, to provide the base class of the sum node and the product node.
    5. `prod_node`: Define the product node, derived from `node`.
    6. `sum_node`: Define the sum node, derived from `node`.
-   7. `region`:
-   8. `SPN`:
+   7. `region`: Compute the mean and variance of regions in the picture(for this image completion application), as well as the MAP.
+   8. `SPN`: Define the Sum-product network, including a root, functions of learning and applications. These functions are implemented via calling other modules.
 
 ### Callgraph of Program
 
-This picture will show the call graph of this program.
+This picture will show the call graph between modules of this program.
 
 TODO
 
