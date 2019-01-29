@@ -36,14 +36,14 @@ TODO
    3. `timer`: Manage the time to help calculate the time spent on computation.
    4. `utils`: Some helper functions to access time, print log, and do some numeric process.
 2. **evaluation(TODO)**
-   1. `dataset`: Read and process data from dataset.
-   2. `eval`: Conduct evaluation over dataset.
+   1. `dataset`: Read and process data from the dataset.
+   2. `eval`: Conduct evaluation over the dataset.
    3. `image_completion`: Conduct image completion, which is the application.
    4. `run`: Control the program, which is the main function.
 3. **spn**
    1. `decomposition`: Decompose the regions.
    2. `generative_learning`: Conduct the learning process to generative the model.
-   3. `instance`: Record the mean and variance of a instance, which is calculated from dataset.
+   3. `instance`: Record the mean and variance of an instance, which is calculated from the dataset.
    4. `node`: Define the node, to provide the base class of the sum node and the product node.
    5. `prod_node`: Define the product node, derived from `node`.
    6. `sum_node`: Define the sum node, derived from `node`.
