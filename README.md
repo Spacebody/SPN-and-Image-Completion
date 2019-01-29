@@ -54,7 +54,7 @@ TODO
 
 This picture will show the call graph between modules of this program.
 
-TODO
+![Call graph of SPN](./figures/spn_callgraph.png)
 
 ### How to Run
 
@@ -68,9 +68,9 @@ TODO
 
 - [x] Implementation of SPN (*Dec. 28, 2018*)
 
-- [ ] Documents of Code (**Jan. 31, 2019**)
+- [x] Documents of Code (*Jan. 31, 2019*)
 
-- [ ] Implementation of rest part(**Mar. 1, 2019**)
+- [ ] Implementation of rest part(*Mar. 1, 2019*)
 
 - [ ] Reproduce of the Original Application (*Feb. 14, 2019*)
 

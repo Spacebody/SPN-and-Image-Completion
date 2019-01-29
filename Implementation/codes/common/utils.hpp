@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <random>
-#include "../spn/instance.cpp"
+#include "../spn/instance.hpp"
 #include "timer.hpp"
 
 class Utils
