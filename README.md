@@ -32,7 +32,7 @@ TODO
 
 1. **common**
    1. `my_mpi`: Use **OpenMPI** to support the messaging in a parallel program. It means that this program will use parallel architecture to accelerate computing.
-   2. `parameters`: Control parameters for EM algorithm, SPN, and evaluation.
+   2. `parameter`: Control parameters for EM algorithm, SPN, and evaluation.
    3. `timer`: Manage the time to help calculate the time spent on computation.
    4. `utils`: Some helper functions to access time, print log, and do some numeric process.
 2. **evaluation(TODO)**
