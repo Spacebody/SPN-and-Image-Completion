@@ -72,9 +72,9 @@ TODO
 
 - [ ] Implementation of rest part(*Mar. 1, 2019*)
 
-- [ ] Reproduce of the Original Application (*Feb. 14, 2019*)
+- [ ] Reproduce of the Original Application (*Mar. 15, 2019*)
 
-- [ ] Further Exploration and Optimization (*Mar. 15, 2019*)
+- [ ] Further Exploration and Optimization (*Mar. 25, 2019*)
 
 - [ ] Thesis (*April 15, 2019*)
 
