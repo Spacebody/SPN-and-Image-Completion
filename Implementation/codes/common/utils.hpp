@@ -41,6 +41,9 @@ class Utils
     static std::random_device rd;
     static std::default_random_engine random_;
     static int random_next_int(int bound);
+
+    // trim string
+    static std::string trim(const std::string &str);
 };
 
 #endif

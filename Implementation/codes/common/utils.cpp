@@ -86,3 +86,14 @@ int Utils::random_next_int(int bound)
     return dist(Utils::random_);
 }
 
+// trim string
+std::string Utils::trim(const std::string &str)
+{
+    size_t first = str.find_first_not_of(' ');
+    while (std::string::npos == first)
+    {
+        return "";
+    }
+    size_t last = str.find_last_not_of(' ');
+    return str.substr(first, (last - first + 1));
+}
