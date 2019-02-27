@@ -3,6 +3,7 @@
 #include "../common/utils.hpp"
 #include <fstream>
 #include <sstream>
+#include <cmath>
 
 std::string Dataset::exp_dir = "../..";
 std::string Dataset::olivetti_raw_file_name = Dataset::exp_dir + "/data/olivetti/olivetti.raw";
@@ -133,7 +134,7 @@ void Dataset::load_olivetti()
     std::set<int> tis = Dataset::gen_test_idx(400, Parameter::max_test_size);
     std::ifstream in;
     in.open(Dataset::olivetti_raw_file_name, std::fstream::in);
-    std::vector<std::vector<double> > faces = std::vector<std::vector<double>>();
+    std::vector<std::vector<double> > faces = std::vector<std::vector<double> >();
     std::string s;
     std::vector<std::string> ts;
     int idx = 0;

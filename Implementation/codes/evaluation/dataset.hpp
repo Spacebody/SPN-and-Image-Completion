@@ -1,3 +1,6 @@
+#ifndef DATASET_HPP
+#define DATASET_HPP
+
 #include "../common/parameter.hpp"
 #include "../spn/instance.hpp"
 #include "../common/my_mpi.hpp"
@@ -59,3 +62,5 @@ class Dataset
   private:
     // nothing
 };
+
+#endif
