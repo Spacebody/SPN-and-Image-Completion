@@ -7,6 +7,7 @@
 #include "../spn/SPN.hpp"
 #include "../spn/instance.hpp"
 #include <fstream>
+#include <string>
 
 class ImageCompletion
 {
