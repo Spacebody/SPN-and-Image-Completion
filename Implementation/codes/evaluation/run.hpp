@@ -6,9 +6,7 @@
 
 class Run
 {
-    // domain
-    static std::string DOM_OLIVETTI;
-    static std::string DOM_CALTECH;
+    
 
     // directory
     static std::string exp_dir;
@@ -20,14 +18,18 @@ class Run
     static std::string cal_rst_dir;
     static std::string cal_md_dir;
     
-    static void proc_args(int argc, char *args[]);
-    static void run_caltech();
-    static std::map<std::string, std::map<std::string, std::string> > get_caltech_info();
-    static void run_olivetti();
+    static void proc_args(int argc, char *argv[]);
 
   public:
-    static void proc(int argc, char *args[]);
-    
+    // domain
+    static std::string DOM_OLIVETTI;
+    static std::string DOM_CALTECH;
+
+    static void proc(int argc, char *argv[]);
+
+    static void run_olivetti();
+    static void run_caltech();
+    static std::map<std::string, std::map<std::string, std::string> > get_caltech_info();
 };
 
 #endif
