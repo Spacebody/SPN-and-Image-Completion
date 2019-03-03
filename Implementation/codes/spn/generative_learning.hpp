@@ -12,7 +12,7 @@ class GenerativeLearning
     GenerativeLearning() : spn(SPN()) {}
     ~GenerativeLearning() {}
 
-    SPN get_SPN();
+    SPN get_DSPN();
     void learn(std::vector<Instance> train);
     void save_model(std::string mdl_file_name);
     void learn_hard_EM(std::vector<Instance> train);

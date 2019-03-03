@@ -6,7 +6,7 @@
 #include "../common/parameter.hpp"
 #include <cmath>
 
-SPN GenerativeLearning::get_SPN()
+SPN GenerativeLearning::get_DSPN()
 {
     return this->spn;
 }

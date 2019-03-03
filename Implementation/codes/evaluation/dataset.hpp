@@ -21,8 +21,7 @@ class Dataset
     static std::string exp_dir;
     static std::string olivetti_raw_file_name;
     static std::string cal_data_dir;
-    static std::string cal_rst_dir;
-    static std::string cal_mdl_dir;
+    
     
     static int RESCALE_LEN;
 
@@ -45,6 +44,9 @@ class Dataset
     static Instance read_olivetti_instance(std::vector<std::vector<double> > faces, int pi);
 
   public:
+    static std::string cal_mdl_dir;
+    static std::string cal_rst_dir;
+
     // dataset
     std::vector<Instance> get_train();
     std::vector<Instance> get_test();

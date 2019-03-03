@@ -4,6 +4,9 @@
 #include <string.h>
 #include "../common/my_mpi.hpp"
 #include "../common/utils.hpp"
+#include "dataset.hpp"
+#include "../spn/generative_learning.hpp"
+#include "image_completion.hpp"
 
 // domain
 std::string Run::DOM_OLIVETTI = "O";
@@ -89,18 +92,39 @@ static void proc_args(int argc, char *argv[])
 
 static void run_caltech()
 {
+    int my_id = MyMPI::rank / (Parameter::num_slave_per_class + 1);
+    std::map<std::string, std::map<std::string, std::string> > cat_info = Run::get_caltech_info();
+    int num_cat = -1;
+    std::map<std::string, std::map<std::string, std::string> >::iterator iter;
+    for (iter = cat_info.begin(); iter != cat_info.end(); ++iter)
+    {
+        ++num_cat;
+        if (num_cat % Parameter::num_slave_grp != my_id)
+            continue;
+        MyMPI::set_constants_for_imgs_parallel();
 
+        Utils::println("learn " + iter->first + " num_cat=" + std::to_string(num_cat));
+        Dataset data;
+        data.load_caltech(iter->first);
+
+        // learn
+        GenerativeLearning l;
+        l.learn(data.get_train());
+        SPN dspn = l.get_DSPN();
+        if (MyMPI::my_offset == 0)
+            dspn.save_DSPN(Dataset::cal_mdl_dir + "/" + iter->first);
+        std::string log_msg = "unsup learn for completion done: " + iter->first;
+        Utils::log_time_ms(log_msg);
+
+        // complete left/bottom
+        ImageCompletion::complete_left(dspn, data.get_test(), iter->first, Dataset::cal_rst_dir);
+        ImageCompletion::complete_bottom(dspn, data.get_test(), iter->first, Dataset::cal_rst_dir);
+    }
 }
 
 static std::map<std::string, std::map<std::string, std::string> > get_caltech_info()
 {
-    int my_id = MyMPI::rank / (Parameter::num_slave_per_class + 1);
-    std::map<std::string, std::map<std::string, std::string> > cat_info = Run::get_caltech_info();
-    int num_cat = -1;
-    for (std::string cat; )
-    {
         
-    }
 }
 
 static void run_olivetti()
