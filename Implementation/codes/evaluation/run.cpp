@@ -7,6 +7,7 @@
 #include "dataset.hpp"
 #include "../spn/generative_learning.hpp"
 #include "image_completion.hpp"
+#include <dirent.h>
 
 // domain
 std::string Run::DOM_OLIVETTI = "O";
@@ -16,12 +17,12 @@ std::string Run::DOM_CALTECH = "C";
 std::string Run::Run::exp_dir = "../../../Implementation";
 
 std::string Run::olive_data_dir = Run::exp_dir + "/data/olivetti";
-std::string Run::olive_rst_data = Run::exp_dir + "/results/olivetti/completions";
-std::string Run::olive_md_data = Run::exp_dir + "/results/olivetti/models";
+std::string Run::olive_rst_dir = Run::exp_dir + "/results/olivetti/completions";
+std::string Run::olive_mdl_dir = Run::exp_dir + "/results/olivetti/models";
 
 std::string Run::cal_data_dir = Run::exp_dir + "/data/caltech";
 std::string Run::cal_rst_dir = Run::exp_dir + "results/caltech/completions";
-std::string Run::cal_md_dir = Run::exp_dir + "results/caltech/models";
+std::string Run::cal_mdl_dir = Run::exp_dir + "results/caltech/models";
 
 static void proc(int argc, char *argv[])
 {
@@ -112,22 +113,50 @@ static void run_caltech()
         l.learn(data.get_train());
         SPN dspn = l.get_DSPN();
         if (MyMPI::my_offset == 0)
-            dspn.save_DSPN(Dataset::cal_mdl_dir + "/" + iter->first);
+            dspn.save_DSPN(Run::cal_mdl_dir + "/" + iter->first);
         std::string log_msg = "unsup learn for completion done: " + iter->first;
         Utils::log_time_ms(log_msg);
 
         // complete left/bottom
-        ImageCompletion::complete_left(dspn, data.get_test(), iter->first, Dataset::cal_rst_dir);
-        ImageCompletion::complete_bottom(dspn, data.get_test(), iter->first, Dataset::cal_rst_dir);
+        ImageCompletion::complete_left(dspn, data.get_test(), iter->first, Run::cal_rst_dir);
+        ImageCompletion::complete_bottom(dspn, data.get_test(), iter->first, Run::cal_rst_dir);
     }
 }
 
 static std::map<std::string, std::map<std::string, std::string> > get_caltech_info()
 {
-        
+    // cat - <key, val>
+    std::map<std::string, std::map<std::string, std::string> > cat_info = std::map<std::string, std::map<std::string, std::string> >();
+    struct dirent *ptr;
+    DIR *dir;
+    dir = opendir(Run::cal_data_dir.c_str());
+    while ((ptr = readdir(dir)) != NULL)
+    {
+        if (ptr->d_name[0] == '.')
+            continue;
+        if (ptr->d_type == DT_DIR)
+            cat_info.insert(std::pair<std::string, std::map<std::string, std::string> >(ptr->d_name, std::map<std::string, std::string>()));
+    }
+    closedir(dir);  // close directory
+    return cat_info;
 }
 
 static void run_olivetti()
 {
+    MyMPI::set_constants_for_imgs();
+    Dataset data;
+    data.load_olivetti();
 
+    // learn
+    GenerativeLearning l;
+    l.learn(data.get_train());
+    SPN dspn = l.get_DSPN();
+    if (MyMPI::my_offset == 0)
+    {
+        dspn.save_DSPN(Run::olive_mdl_dir + "/olive");
+    }
+
+    // complete
+    ImageCompletion::complete_left(dspn, data.get_test(), "olive", Run::olive_rst_dir);
+    ImageCompletion::complete_bottom(dspn, data.get_train(), "olive", Run::olive_rst_dir);
 }
