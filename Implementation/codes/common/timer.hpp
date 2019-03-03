@@ -6,7 +6,7 @@
 class Timer
 {
   private:
-    static time_t start_timer;
+    static clock_t start, end;
 
   public:
     Timer() {}
