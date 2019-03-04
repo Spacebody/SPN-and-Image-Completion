@@ -38,8 +38,7 @@ class Utils
 
     // random
     static long seed;
-    static std::random_device rd;
-    static std::default_random_engine random_;
+    static std::default_random_engine generator;
     static int random_next_int(int bound);
 
     // trim string

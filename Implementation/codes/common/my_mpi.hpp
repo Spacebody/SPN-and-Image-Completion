@@ -11,6 +11,7 @@ class MyMPI
     MyMPI(int argc, char *argv[])
     {
         MPI_Init(&argc, &argv);
+        MyMPI::rank = MPI::COMM_WORLD.Get_rank();
     }
     ~MyMPI()
     {

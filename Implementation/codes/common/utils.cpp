@@ -77,13 +77,12 @@ double Utils::add_log(const double l1, const double l2)
 
 // random
 long Utils::seed = -1;
-std::random_device Utils::rd;
-std::default_random_engine Utils::random_(Utils::rd);
+std::default_random_engine Utils::generator(Utils::seed);
 
 int Utils::random_next_int(int bound)
 {
     std::uniform_int_distribution<int> dist(0, bound);
-    return dist(Utils::random_);
+    return dist(Utils::generator);
 }
 
 // trim string

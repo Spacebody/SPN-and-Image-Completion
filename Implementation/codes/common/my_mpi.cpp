@@ -3,7 +3,7 @@
 #include "utils.hpp"
 
 // master
-int MyMPI::rank = MPI::COMM_WORLD.Get_rank();
+int MyMPI::rank = 0;
 bool MyMPI::is_class_master = false;
 int MyMPI::master_rank = -1;
 int MyMPI::my_slave = -1;
@@ -39,15 +39,15 @@ void MyMPI::set_constants_for_imgs_parallel()
 void MyMPI::set_random_seed_by_rank()
 {
     Utils::seed = MyMPI::rank;
-    Utils::random_ = std::default_random_engine(Utils::seed);
+    Utils::generator = std::default_random_engine(Utils::seed);
 }
 
 // buffer
 int MyMPI::buf_idx = 0;
 int MyMPI::buf_size = 10000000;
-std::vector<int> buf_int(MyMPI::buf_size);
-std::vector<double> buf_double(100);
-std::vector<char> buf_char(100);
+std::vector<int> MyMPI::buf_int(MyMPI::buf_size);
+std::vector<double> MyMPI::buf_double(100);
+std::vector<char> MyMPI::buf_char(100);
 
 // MPI util
 double MyMPI::recv_double(int src, int tag)
@@ -61,6 +61,7 @@ void MyMPI::send_double(int dest, int tag, double d)
     MyMPI::buf_double[0] = d;
     MPI::COMM_WORLD.Send(&MyMPI::buf_double, 1, MPI::DOUBLE, dest, tag);
 }
+
 char MyMPI::recv_char(int src, int tag)
 {
     MPI::COMM_WORLD.Recv(&MyMPI::buf_char, 1, MPI::CHAR, src, tag);
