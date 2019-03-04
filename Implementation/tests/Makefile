@@ -65,4 +65,3 @@ test_utils: $(TP_COMMON)test_utils.cpp utils.o timer.o my_mpi.o parameter.o inst
 .PHONY:clean all
 clean:
 	rm -rf *.o *.out *.dSYM ../codes/common/*.gch ../codes/spn/*.gch ../codes/evaluation/*.gch $(TARGETS)
-
