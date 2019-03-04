@@ -7,7 +7,7 @@
 - [x] my_mpi
 - [x] parameter
 - [x] timer
-- [ ] utils
+- [x] utils
 
 ### evaluation
 
@@ -28,3 +28,21 @@
 - [ ] sum_node
 - [ ] region
 - [ ] SPN
+
+## How to Test
+
+Execute following commands to compile corresponding unit test program:
+
+**all**: `make` for compiling all unit test
+
+**module**: `make test_<module>`
+
+e.g. `make test_parameter` for `parameter` module.
+
+## Author
+
+Yilin ZHENG
+
+## License
+
+**MIT**
