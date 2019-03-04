@@ -4,7 +4,7 @@
 
 ### common
 
-- [ ] my_mpi
+- [x] my_mpi
 - [x] parameter
 - [x] timer
 - [ ] utils
