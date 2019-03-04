@@ -13,14 +13,14 @@ void Utils::log_time(std::string &msg)
 {
     long sec = Utils::timer.get_time_elapsed() / 1000;
     std::string str = std::string("<TIME> ") + msg + " " + std::to_string(sec) + std::string("s");
-    Utils::println(msg);
+    Utils::println(str);
     Utils::timer.timer_start();
 }
 void Utils::log_time_ms(std::string &msg)
 {
     long sec = Utils::timer.get_time_elapsed();
     std::string str = std::string("<TIME> ") + msg + " " + std::to_string(sec) + std::string("ms");
-    Utils::println(msg);
+    Utils::println(str);
     Utils::timer.timer_start();
 }
 
@@ -42,7 +42,7 @@ void Utils::println()
 
 std::string Utils::get_prefix()
 {
-    return std::string("[Rank=]") + std::to_string(MyMPI::rank) + std::string("]");
+    return std::string("[Rank=") + std::to_string(MyMPI::rank) + std::string("]");
 }
 
 std::string Utils::left_pad(std::string s, const int len, const char c)
