@@ -7,7 +7,8 @@
 CC	= mpic++
 FLAGS	= -g -Wall
 LFLAGS	= -lm
-OBJS	= parameter.o timer.o utils.o my_mpi.o
+OBJS	= parameter.o timer.o utils.o my_mpi.o \
+		  instance.o node.o sum_node.o prod_node.o
 TARGETS	= test_parameter test_timer test_my_mpi test_utils \
 		  test_instance test_node test_sum_node test_prod_node
 
@@ -25,8 +26,7 @@ SP_SPN = ../codes/spn/
 all: $(TARGETS)
 
 # recompile obj if edited
-edit: parameter.o timer.o utils.o my_mpi.o \
-	  instance.o node.o sum_node.o prod_node.o
+edit: $(OBJS)
 
 # compile objects
 ## for common
