@@ -22,10 +22,10 @@
 
 - [ ] decomposition
 - [ ] generative_learning
-- [ ] instance
-- [ ] node
-- [ ] prod_node
-- [ ] sum_node
+- [x] instance
+- [x] node
+- [x] prod_node
+- [x] sum_node
 - [ ] region
 - [ ] SPN
 
