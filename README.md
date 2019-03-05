@@ -70,11 +70,13 @@ TODO
 
 - [x] Documents of Code (*Jan. 31, 2019*)
 
-- [ ] Implementation of rest part(*Mar. 1, 2019*)
+- [x] Implementation of rest part(*Mar. 4, 2019*)
 
 - [ ] Reproduce of the Original Application (*Mar. 15, 2019*)
 
 - [ ] Further Exploration and Optimization (*Mar. 25, 2019*)
+
+- [ ] Interim Report (*April 4, 2019*)
 
 - [ ] Thesis (*April 15, 2019*)
 
