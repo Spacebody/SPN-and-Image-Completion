@@ -23,3 +23,7 @@ void Node::set_log_derivative(double derivative)
 {
     this->log_derivative = derivative;
 }
+
+// implement for testing
+void Node::eval() {}
+void Node::pass_derivative() {}
