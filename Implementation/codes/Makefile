@@ -6,7 +6,7 @@ CC	= mpic++
 FLAGS	= -g -Wall
 LFLAGS	= -lm
 OBJS	= parameter.o timer.o utils.o my_mpi.o \
-		  instance.o node.o sum_node.o prod_node.o
+		  instance.o node.o sum_node.o prod_node.o decomposition.o SPN.o region.o
 TARGETS	= #
 
 # src path
@@ -48,6 +48,15 @@ sum_node.o: $(SPN)sum_node.cpp $(SPN)sum_node.hpp
 
 prod_node.o: $(SPN)prod_node.cpp $(SPN)prod_node.hpp
 	$(CC) $(FLAGS) -c $(SPN)prod_node.cpp $(SPN)prod_node.hpp
+
+decomposition.o: $(SPN)decomposition.cpp $(SPN)decomposition.hpp
+	$(CC) $(FLAGS) -c $(SPN)decomposition.cpp $(SPN)decomposition.hpp
+
+SPN.o: $(SPN)SPN.cpp $(SPN)SPN.hpp
+	$(CC) $(FLAGS) -c $(SPN)SPN.cpp $(SPN)SPN.hpp
+
+region.o: $(SPN)region.cpp $(SPN)region.hpp
+	$(CC) $(FLAGS) -c $(SPN)region.cpp $(SPN)region.hpp
 
 # clean
 .PHONY:clean all
