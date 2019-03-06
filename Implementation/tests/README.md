@@ -26,8 +26,8 @@
 - [x] node
 - [x] prod_node
 - [x] sum_node
-- [ ] region
-- [ ] SPN
+- [x] region
+- [x] SPN
 
 ## How to Test
 
