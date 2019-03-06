@@ -10,7 +10,7 @@ LFLAGS	= -lm
 OBJS	= parameter.o timer.o utils.o my_mpi.o \
 		  instance.o node.o sum_node.o prod_node.o
 TARGETS	= test_parameter test_timer test_my_mpi test_utils \
-		  test_instance test_node test_sum_node test_prod_node
+		  test_instance test_node test_sum_node test_prod_node test_decomposition
 
 # test path
 TP_COMMON = ./common/
@@ -57,6 +57,9 @@ sum_node.o: $(SP_SPN)sum_node.cpp $(SP_SPN)sum_node.hpp
 prod_node.o: $(SP_SPN)prod_node.cpp $(SP_SPN)prod_node.hpp
 	$(CC) $(FLAGS) -c $(SP_SPN)prod_node.cpp $(SP_SPN)prod_node.hpp
 
+decomposition.o: $(SP_SPN)decomposition.cpp $(SP_SPN)decomposition.hpp
+	$(CC) $(FLAGS) -c $(SP_SPN)decomposition.cpp $(SP_SPN)decomposition.hpp
+
 # create/compile the individual files separately
 ## for common
 test_parameter: $(TP_COMMON)test_parameter.cpp parameter.o
@@ -86,6 +89,8 @@ test_sum_node: $(TP_SPN)test_sum_node.cpp sum_node.o node.o parameter.o utils.o 
 test_prod_node: $(TP_SPN)test_prod_node.cpp prod_node.o node.o parameter.o utils.o my_mpi.o timer.o
 	$(CC) $(FLAGS) $(TP_SPN)test_prod_node.cpp prod_node.o node.o parameter.o utils.o my_mpi.o timer.o -o test_prod_node
 
+test_decomposition: $(TP_SPN)test_decomposition.cpp decomposition.o 
+	$(CC) $(FLAGS) $(TP_SPN)test_decomposition.cpp decomposition.o -o test_decomposition
 
 # clean
 .PHONY:clean all

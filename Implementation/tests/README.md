@@ -20,7 +20,7 @@
 
 ### spn
 
-- [ ] decomposition
+- [x] decomposition
 - [ ] generative_learning
 - [x] instance
 - [x] node

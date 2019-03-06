@@ -5,12 +5,16 @@
 
 class Decomposition
 {
+  private:
+    static std::map<std::string, Decomposition> id_decomp;
+    static Decomposition blank_decomp;
+    std::string id;
+
   public:
     Decomposition() : id(""), region_id_1(-1), region_id_2(-1), type_id_1(-1), type_id_2(-1) {} //default constructor
     // constructor
-    Decomposition(std::string id, int region_id_1, int region_id_2, int type_id_1, int type_id_2) :\
-            id(id), region_id_1(region_id_1), region_id_2(region_id_2), type_id_1(type_id_1), type_id_2(type_id_2) {}
-    ~Decomposition() {}  // deconstructor
+    Decomposition(std::string id, int region_id_1, int region_id_2, int type_id_1, int type_id_2) : id(id), region_id_1(region_id_1), region_id_2(region_id_2), type_id_1(type_id_1), type_id_2(type_id_2) {}
+    ~Decomposition() {} // deconstructor
 
     int region_id_1, region_id_2, type_id_1, type_id_2;
 
@@ -22,12 +26,6 @@ class Decomposition
     static void add_id_decomp(std::pair<std::string, Decomposition> new_decomp);
     static void remove(std::string id);
     static std::string get_id_str(int region_id_1, int region_id_2, int type_id_1, int type_id_2);
-
-  private:
-    static std::map<std::string, Decomposition> id_decomp;
-    static Decomposition blank_decomp;
-    std::string id;
-
 };
 
 #endif
