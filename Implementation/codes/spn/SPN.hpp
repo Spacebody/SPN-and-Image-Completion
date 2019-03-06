@@ -2,7 +2,6 @@
 #define SPN_HPP
 
 #include <iostream>
-#include <mpi.h>
 #include <vector>
 #include "instance.hpp"
 #include "sum_node.hpp"
