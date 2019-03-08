@@ -1,21 +1,28 @@
-VERSION = 0.0.3
+VERSION = 0.0.4
 
-# TODO -- Update
+# TODO -- Incremental Update
 
 CC	= mpic++
 FLAGS	= -g -Wall
 LFLAGS	= -lm
 OBJS	= parameter.o timer.o utils.o my_mpi.o \
-		  instance.o node.o sum_node.o prod_node.o decomposition.o SPN.o region.o
-TARGETS	= #
+		  instance.o node.o sum_node.o prod_node.o decomposition.o SPN.o region.o generative_learning.o \
+		  dataset.o
+
+TARGETS	= # TODO
 
 # src path
 COMMON = ./common/
 EVAL = ./evaluation/
 SPN = ./spn/
 
+.PHONY:all clean cleanobj cleandebug cleangch alltest
 # make all test program
 all: $(TARGETS)
+
+# make all test and only left tests
+alltest: $(TARGETS)
+	rm -rf *.o *.out *.dSYM ./*/*.gch
 
 # recompile obj if edited
 edit: $(OBJS)
@@ -35,6 +42,8 @@ my_mpi.o: $(COMMON)my_mpi.cpp $(COMMON)my_mpi.hpp
 	$(CC) $(FLAGS) -c $(COMMON)my_mpi.cpp $(COMMON)my_mpi.hpp
 
 ## for evaluation
+dataset.o: $(EVAL)dataset.cpp $(EVAL)dataset.hpp
+	$(CC) $(FLAGS) -c $(EVAL)dataset.cpp $(EVAL)dataset.hpp
 
 ## for spn
 instance.o: $(SPN)instance.cpp $(SPN)instance.hpp
@@ -58,7 +67,17 @@ SPN.o: $(SPN)SPN.cpp $(SPN)SPN.hpp
 region.o: $(SPN)region.cpp $(SPN)region.hpp
 	$(CC) $(FLAGS) -c $(SPN)region.cpp $(SPN)region.hpp
 
+generative_learning.o: $(SPN)generative_learning.cpp $(SPN)generative_learning.hpp
+	$(CC) $(FLAGS) -c $(SPN)generative_learning.cpp $(SPN)generative_learning.hpp
+
 # clean
-.PHONY:clean all
 clean:
-	rm -rf *.o *.out *.dSYM ./common/*.gch ./spn/*.gch ./evaluation/*.gch
+	rm -rf *.o *.out *.dSYM ./*/*.gch
+cleanobj:
+	rm -rf *.o
+cleandebug:
+	rm -rf *.dSYM
+cleangch:
+	rm -rf ./*/*.gch
+cleanbin:
+	rm -rf $(TARGETS)
