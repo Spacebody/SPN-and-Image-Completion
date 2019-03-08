@@ -11,7 +11,7 @@
 
 ### evaluation
 
-- [ ] dataset
+- [x] dataset
 - [ ] eval_main
 - [ ] eval
 - [ ] image_completion
@@ -21,7 +21,7 @@
 ### spn
 
 - [x] decomposition
-- [ ] generative_learning
+- [x] generative_learning
 - [x] instance
 - [x] node
 - [x] prod_node

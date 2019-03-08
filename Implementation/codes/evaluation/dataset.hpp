@@ -10,6 +10,7 @@
 
 class Dataset
 {
+  private:
     /*  
         tmp
         dim1: Parameter::input_dim1,
@@ -60,9 +61,6 @@ class Dataset
     // Olivetti
     //---------------------------------------------------
     void load_olivetti();
-
-  private:
-    // nothing
 };
 
 #endif

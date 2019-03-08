@@ -5,6 +5,8 @@
 #include <sstream>
 #include <cmath>
 
+std::vector<std::vector<int> > Dataset::tmp = std::vector<std::vector<int> >(Parameter::input_dim1, std::vector<int>(Parameter::input_dim2, 0));
+
 std::string Dataset::exp_dir = "../..";
 std::string Dataset::olivetti_raw_file_name = Dataset::exp_dir + "/data/olivetti/olivetti.raw";
 std::string Dataset::cal_data_dir = Dataset::exp_dir + "/data/caltech";
@@ -51,7 +53,7 @@ void Dataset::set_instance(std::vector<std::vector<int> > buf, Instance inst)
     varf /= cf;
     inst.mean = tf;
     inst.std = sqrt(varf - tf * tf);
-    inst.vals = std::vector<std::vector<double> >();
+    inst.vals = std::vector<std::vector<double> >(Parameter::input_dim1, std::vector<double>(Parameter::input_dim2, 0.0));
     for (int i = 0; i < Parameter::input_dim1; ++i)
         for (int j = 0; j < Parameter::input_dim2; ++j)
         {
@@ -86,7 +88,7 @@ void Dataset::load_caltech(std::string dir_name)
     this->test = std::vector<Instance>();
     for (int i = 0; i < files.size(); ++i)
     {
-        Instance inst = this->read_cal_instance(dir_path + "/" + files[i]);
+        Instance inst = Dataset::read_cal_instance(dir_path + "/" + files[i]);
         if (i < max_size - test_size)
             this->train.push_back(inst);
         else
@@ -134,7 +136,7 @@ void Dataset::load_olivetti()
     std::set<int> tis = Dataset::gen_test_idx(400, Parameter::max_test_size);
     std::ifstream in;
     in.open(Dataset::olivetti_raw_file_name, std::fstream::in);
-    std::vector<std::vector<double> > faces = std::vector<std::vector<double> >();
+    std::vector<std::vector<double> > faces = std::vector<std::vector<double> >(4096, std::vector<double>(400, 0.0));
     std::string s;
     std::vector<std::string> ts;
     int idx = 0;
@@ -153,10 +155,9 @@ void Dataset::load_olivetti()
 
     this->train.clear();
     this->test.clear();
-
     for (int pi = 0; pi < 400; ++pi)
     {
-        Instance inst = this->read_olivetti_instance(faces, pi);
+        Instance inst = Dataset::read_olivetti_instance(faces, pi);
         if (tis.count(pi))
             this->test.push_back(inst);
         else

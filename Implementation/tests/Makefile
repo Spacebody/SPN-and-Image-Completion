@@ -8,10 +8,12 @@ CC	= mpic++
 FLAGS	= -g -Wall
 LFLAGS	= -lm
 OBJS	= parameter.o timer.o utils.o my_mpi.o \
-		  instance.o node.o sum_node.o prod_node.o SPN.o decomposition.o region.o
+		  instance.o node.o sum_node.o prod_node.o SPN.o decomposition.o region.o generative_learning.o \
+		  dataset.o
 
 TARGETS	= test_parameter test_timer test_my_mpi test_utils \
-		  test_instance test_node test_sum_node test_prod_node test_decomposition test_SPN test_region
+		  test_instance test_node test_sum_node test_prod_node test_decomposition test_SPN test_region test_generative_learning \
+		  test_dataset
 
 # test path
 TP_COMMON = ./common/
@@ -23,8 +25,15 @@ SP_COMMON = ../codes/common/
 SP_EVAL = ../codes/evaluation/
 SP_SPN = ../codes/spn/
 
+# PHONY
+.PHONY:all clean cleanobj cleandebug cleangch alltest
+
 # make all test program
 all: $(TARGETS)
+
+# make all test and only left tests
+alltest: $(TARGETS)
+	rm -rf *.o *.out *.dSYM ../codes/*/*.gch
 
 # recompile obj if edited
 edit: $(OBJS)
@@ -44,6 +53,8 @@ my_mpi.o: $(SP_COMMON)my_mpi.cpp $(SP_COMMON)my_mpi.hpp
 	$(CC) $(FLAGS) -c $(SP_COMMON)my_mpi.cpp $(SP_COMMON)my_mpi.hpp
 
 ## for evaluation
+dataset.o: $(SP_EVAL)dataset.cpp $(SP_EVAL)dataset.hpp
+	$(CC) $(FLAGS) -c $(SP_EVAL)dataset.cpp $(SP_EVAL)dataset.hpp
 
 ## for spn
 instance.o: $(SP_SPN)instance.cpp $(SP_SPN)instance.hpp
@@ -67,6 +78,9 @@ SPN.o: $(SP_SPN)SPN.cpp $(SP_SPN)SPN.hpp
 region.o: $(SP_SPN)region.cpp $(SP_SPN)region.hpp
 	$(CC) $(FLAGS) -c $(SP_SPN)region.cpp $(SP_SPN)region.hpp
 
+generative_learning.o: $(SP_SPN)generative_learning.cpp $(SP_SPN)generative_learning.hpp
+	$(CC) $(FLAGS) -c $(SP_SPN)generative_learning.cpp $(SP_SPN)generative_learning.hpp
+
 # create/compile the individual files separately
 ## for common
 test_parameter: $(TP_COMMON)test_parameter.cpp parameter.o
@@ -82,6 +96,8 @@ test_utils: $(TP_COMMON)test_utils.cpp utils.o timer.o my_mpi.o parameter.o inst
 	$(CC) $(FLAGS) $(TP_COMMON)test_utils.cpp utils.o timer.o my_mpi.o parameter.o instance.o -o test_utils
 
 ## for evaluation
+test_dataset: $(TP_EVAL)test_dataset.cpp dataset.o parameter.o instance.o my_mpi.o utils.o timer.o
+	$(CC) $(FLAGS) $(TP_EVAL)test_dataset.cpp dataset.o parameter.o instance.o my_mpi.o utils.o timer.o -o test_dataset
 
 ## for spn
 test_instance: $(TP_SPN)test_instance.cpp instance.o
@@ -105,7 +121,17 @@ test_SPN: $(TP_SPN)test_SPN.cpp SPN.o instance.o decomposition.o node.o sum_node
 test_region: $(TP_SPN)test_region.cpp region.o sum_node.o prod_node.o parameter.o instance.o utils.o decomposition.o my_mpi.o SPN.o node.o timer.o
 	$(CC) $(FLAGS) $(TP_SPN)test_region.cpp region.o sum_node.o prod_node.o parameter.o instance.o utils.o decomposition.o my_mpi.o SPN.o node.o timer.o -o test_region
 
-# clean
-.PHONY:clean all
+test_generative_learning: $(TP_SPN)test_generative_learning.cpp generative_learning.o SPN.o instance.o my_mpi.o utils.o parameter.o node.o sum_node.o prod_node.o region.o decomposition.o timer.o
+	$(CC) $(FLAGS) $(TP_SPN)test_generative_learning.cpp generative_learning.o SPN.o instance.o my_mpi.o utils.o parameter.o node.o sum_node.o prod_node.o region.o decomposition.o timer.o -o test_generative_learning
+
+# clean files
 clean:
-	rm -rf *.o *.out *.dSYM ../codes/common/*.gch ../codes/spn/*.gch ../codes/evaluation/*.gch $(TARGETS)
+	rm -rf *.o *.out *.dSYM ../codes/*/*.gch $(TARGETS)
+cleanobj:
+	rm -rf *.o
+cleandebug:
+	rm -rf *.dSYM
+cleangch:
+	rm -rf ../codes/*/*.gch
+cleanbin:
+	rm -rf $(TARGETS)
