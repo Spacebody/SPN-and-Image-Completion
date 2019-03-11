@@ -7,9 +7,9 @@ FLAGS	= -g -Wall
 LFLAGS	= -lm
 OBJS	= parameter.o timer.o utils.o my_mpi.o \
 		  instance.o node.o sum_node.o prod_node.o decomposition.o SPN.o region.o generative_learning.o \
-		  dataset.o image_completion.o eval.o run.o
+		  dataset.o image_completion.o eval.o run.o run_main.o eval_main
 
-TARGETS	= # TODO
+TARGETS	= run eval# TODO
 
 # src path
 COMMON = ./common/
@@ -23,9 +23,6 @@ all: $(TARGETS)
 # make all test and only left tests
 alltest: $(TARGETS)
 	rm -rf *.o *.out *.dSYM ./*/*.gch
-
-# recompile obj if edited
-edit: $(OBJS)
 
 # compile objects
 ## for common
@@ -54,6 +51,12 @@ eval.o: $(EVAL)eval.cpp $(EVAL)eval.hpp
 run.o: $(EVAL)run.cpp $(EVAL)run.hpp
 	$(CC) $(FLAGS) -c $(EVAL)run.cpp $(EVAL)run.hpp
 
+run_main.o: $(EVAL)run_main.cpp
+	$(CC) $(FLAGS) -c $(EVAL)run_main.cpp
+
+eval_main.o: $(EVAL)eval_main.cpp
+	$(CC) $(FLAGS) -c $(EVAL)eval_main.cpp
+
 ## for spn
 instance.o: $(SPN)instance.cpp $(SPN)instance.hpp
 	$(CC) $(FLAGS) -c $(SPN)instance.cpp $(SPN)instance.hpp
@@ -78,6 +81,13 @@ region.o: $(SPN)region.cpp $(SPN)region.hpp
 
 generative_learning.o: $(SPN)generative_learning.cpp $(SPN)generative_learning.hpp
 	$(CC) $(FLAGS) -c $(SPN)generative_learning.cpp $(SPN)generative_learning.hpp
+
+# target
+run: $(EVAL)run_main.cpp run.o image_completion.o generative_learning.o SPN.o node.o my_mpi.o utils.o dataset.o parameter.o sum_node.o prod_node.o timer.o decomposition.o region.o instance.o
+	$(CC) $(FLAGS) $(EVAL)run_main.cpp run.o image_completion.o generative_learning.o SPN.o node.o my_mpi.o utils.o dataset.o parameter.o sum_node.o prod_node.o timer.o decomposition.o region.o instance.o -o run
+
+eval: $(EVAL)eval_main.cpp eval.o parameter.o
+	$(CC) $(FLAGS) $(EVAL)eval_main.cpp eval.o parameter.o -o eval
 
 # clean
 clean:
