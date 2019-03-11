@@ -35,9 +35,6 @@ all: $(TARGETS)
 alltest: $(TARGETS)
 	rm -rf *.o *.out *.dSYM ../codes/*/*.gch
 
-# recompile obj if edited
-edit: $(OBJS)
-
 # compile objects
 ## for common
 parameter.o: $(SP_COMMON)parameter.cpp $(SP_COMMON)parameter.hpp
