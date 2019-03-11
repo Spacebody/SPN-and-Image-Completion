@@ -7,7 +7,7 @@ FLAGS	= -g -Wall
 LFLAGS	= -lm
 OBJS	= parameter.o timer.o utils.o my_mpi.o \
 		  instance.o node.o sum_node.o prod_node.o decomposition.o SPN.o region.o generative_learning.o \
-		  dataset.o
+		  dataset.o image_completion.o eval.o run.o
 
 TARGETS	= # TODO
 
@@ -44,6 +44,15 @@ my_mpi.o: $(COMMON)my_mpi.cpp $(COMMON)my_mpi.hpp
 ## for evaluation
 dataset.o: $(EVAL)dataset.cpp $(EVAL)dataset.hpp
 	$(CC) $(FLAGS) -c $(EVAL)dataset.cpp $(EVAL)dataset.hpp
+
+image_completion.o: $(EVAL)image_completion.cpp $(EVAL)image_completion.hpp
+	$(CC) $(FLAGS) -c $(EVAL)image_completion.cpp $(EVAL)image_completion.hpp
+
+eval.o: $(EVAL)eval.cpp $(EVAL)eval.hpp
+	$(CC) $(FLAGS) -c $(EVAL)eval.cpp $(EVAL)eval.hpp
+
+run.o: $(EVAL)run.cpp $(EVAL)run.hpp
+	$(CC) $(FLAGS) -c $(EVAL)run.cpp $(EVAL)run.hpp
 
 ## for spn
 instance.o: $(SPN)instance.cpp $(SPN)instance.hpp

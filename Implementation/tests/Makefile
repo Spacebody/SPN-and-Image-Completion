@@ -9,11 +9,11 @@ FLAGS	= -g -Wall
 LFLAGS	= -lm
 OBJS	= parameter.o timer.o utils.o my_mpi.o \
 		  instance.o node.o sum_node.o prod_node.o SPN.o decomposition.o region.o generative_learning.o \
-		  dataset.o
+		  dataset.o image_completion.o eval.o run.o
 
 TARGETS	= test_parameter test_timer test_my_mpi test_utils \
 		  test_instance test_node test_sum_node test_prod_node test_decomposition test_SPN test_region test_generative_learning \
-		  test_dataset
+		  test_dataset test_image_completion test_eval test_run
 
 # test path
 TP_COMMON = ./common/
@@ -55,6 +55,15 @@ my_mpi.o: $(SP_COMMON)my_mpi.cpp $(SP_COMMON)my_mpi.hpp
 ## for evaluation
 dataset.o: $(SP_EVAL)dataset.cpp $(SP_EVAL)dataset.hpp
 	$(CC) $(FLAGS) -c $(SP_EVAL)dataset.cpp $(SP_EVAL)dataset.hpp
+
+image_completion.o: $(SP_EVAL)image_completion.cpp $(SP_EVAL)image_completion.hpp
+	$(CC) $(FLAGS) -c $(SP_EVAL)image_completion.cpp $(SP_EVAL)image_completion.hpp
+
+eval.o: $(SP_EVAL)eval.cpp $(SP_EVAL)eval.hpp
+	$(CC) $(FLAGS) -c $(SP_EVAL)eval.cpp $(SP_EVAL)eval.hpp
+
+run.o: $(SP_EVAL)run.cpp $(SP_EVAL)run.hpp
+	$(CC) $(FLAGS) -c $(SP_EVAL)run.cpp $(SP_EVAL)run.hpp
 
 ## for spn
 instance.o: $(SP_SPN)instance.cpp $(SP_SPN)instance.hpp
@@ -98,6 +107,15 @@ test_utils: $(TP_COMMON)test_utils.cpp utils.o timer.o my_mpi.o parameter.o inst
 ## for evaluation
 test_dataset: $(TP_EVAL)test_dataset.cpp dataset.o parameter.o instance.o my_mpi.o utils.o timer.o
 	$(CC) $(FLAGS) $(TP_EVAL)test_dataset.cpp dataset.o parameter.o instance.o my_mpi.o utils.o timer.o -o test_dataset
+
+test_image_completion: $(TP_EVAL)test_image_completion.cpp image_completion.o utils.o timer.o parameter.o my_mpi.o SPN.o instance.o sum_node.o prod_node.o node.o decomposition.o region.o  
+	$(CC) $(FLAGS) $(TP_EVAL)test_image_completion.cpp image_completion.o utils.o timer.o parameter.o my_mpi.o SPN.o instance.o sum_node.o prod_node.o node.o decomposition.o region.o -o test_image_completion
+
+test_eval: $(TP_EVAL)test_eval.cpp eval.o parameter.o
+	$(CC) $(FLAGS) $(TP_EVAL)test_eval.cpp eval.o parameter.o -o test_eval
+
+test_run: $(TP_EVAL)test_run.cpp run.o parameter.o my_mpi.o utils.o timer.o dataset.o generative_learning.o image_completion.o sum_node.o prod_node.o node.o SPN.o decomposition.o region.o instance.o
+	$(CC) $(FLAGS) $(TP_EVAL)test_run.cpp run.o parameter.o my_mpi.o utils.o timer.o dataset.o generative_learning.o image_completion.o sum_node.o prod_node.o node.o SPN.o decomposition.o region.o instance.o -o test_run
 
 ## for spn
 test_instance: $(TP_SPN)test_instance.cpp instance.o

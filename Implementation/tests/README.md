@@ -12,11 +12,9 @@
 ### evaluation
 
 - [x] dataset
-- [ ] eval_main
-- [ ] eval
-- [ ] image_completion
-- [ ] run_main
-- [ ] run
+- [x] eval
+- [x] image_completion
+- [x] run
 
 ### spn
 
