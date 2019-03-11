@@ -13,6 +13,8 @@ class Eval
   public:
     static void eval_olivetti();
     static void eval_caltech();
+
+    std::string get_exp_dir();  // just for testing
 };
 
 #endif

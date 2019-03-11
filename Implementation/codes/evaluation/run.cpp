@@ -24,9 +24,9 @@ std::string Run::cal_data_dir = Run::exp_dir + "/data/caltech";
 std::string Run::cal_rst_dir = Run::exp_dir + "results/caltech/completions";
 std::string Run::cal_mdl_dir = Run::exp_dir + "results/caltech/models";
 
-static void proc(int argc, char *argv[])
+void Run::proc(int argc, char *argv[])
 {
-    Run::proc(argc, argv);
+    Run::proc_args(argc, argv);
     if (Parameter::domain == Run::DOM_OLIVETTI)
     {
         Run::run_olivetti();
@@ -38,7 +38,7 @@ static void proc(int argc, char *argv[])
     MPI::Finalize();
 }
 
-static void proc_args(int argc, char *argv[])
+void Run::proc_args(int argc, char *argv[])
 {
     for (int i = 0; i < argc; ++i)
     {
@@ -91,7 +91,7 @@ static void proc_args(int argc, char *argv[])
     }
 }
 
-static void run_caltech()
+void Run::run_caltech()
 {
     int my_id = MyMPI::rank / (Parameter::num_slave_per_class + 1);
     std::map<std::string, std::map<std::string, std::string> > cat_info = Run::get_caltech_info();
@@ -123,7 +123,7 @@ static void run_caltech()
     }
 }
 
-static std::map<std::string, std::map<std::string, std::string> > get_caltech_info()
+std::map<std::string, std::map<std::string, std::string> > Run::get_caltech_info()
 {
     // cat - <key, val>
     std::map<std::string, std::map<std::string, std::string> > cat_info = std::map<std::string, std::map<std::string, std::string> >();
@@ -141,7 +141,7 @@ static std::map<std::string, std::map<std::string, std::string> > get_caltech_in
     return cat_info;
 }
 
-static void run_olivetti()
+void Run::run_olivetti()
 {
     MyMPI::set_constants_for_imgs();
     Dataset data;

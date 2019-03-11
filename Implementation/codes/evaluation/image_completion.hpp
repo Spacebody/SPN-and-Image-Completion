@@ -25,7 +25,9 @@ class ImageCompletion
     static void complete_left(SPN spn, std::vector<Instance> test, std::string mdl_name, std::string rst_dir);
     static void complete_bottom(std::vector<Instance> test, std::string mdl_dir, std::string mdl_name, std::string rst_dir);
     static void complete_bottom(SPN spn, std::vector<Instance> test, std::string mdl_name, std::string rst_dir);
-  
+
+    int get_pad_len();  // just for testing
+
   private:
     // nothing
 };

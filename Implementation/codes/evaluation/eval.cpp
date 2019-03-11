@@ -22,7 +22,7 @@ void Eval::eval_olivetti()
 
 void Eval::eval_caltech()
 {
-    std::string caltech_dir = Eval::exp_dir + "/reports/caltech/completions";
+    std::string caltech_dir = Eval::exp_dir + "/results/caltech/completions";
     int size = 64, pad_len = 10;
     struct dirent *ptr;
     DIR *dir;
@@ -128,4 +128,9 @@ double Eval::cmp_MSE_bottom(std::string fn, int size, int pad_len)
     }
     in.close();
     return p / c;
+}
+
+std::string Eval::get_exp_dir()
+{
+    return Eval::exp_dir;
 }

@@ -143,3 +143,8 @@ void ImageCompletion::complete_bottom(SPN spn, std::vector<Instance> test, std::
         out.close();
     }
 }
+
+int ImageCompletion::get_pad_len()
+{
+    return this->PAD_LEN;
+}
