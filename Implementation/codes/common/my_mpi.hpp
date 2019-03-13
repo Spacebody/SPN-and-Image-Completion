@@ -13,8 +13,8 @@ class MyMPI
         MyMPI::rank = MPI::COMM_WORLD.Get_rank();
     }
     ~MyMPI() {}
-    MyMPI(const MyMPI &my_mpi);
-    MyMPI &operator=(const MyMPI &my_mpi);
+    MyMPI(const MyMPI &my_mpi) {}
+    MyMPI &operator=(const MyMPI &my_mpi) { return *this; }
 
     // master
     static int rank;
