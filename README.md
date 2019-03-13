@@ -58,6 +58,13 @@ This picture will show the call graph between modules of this program.
 
 ### How to Run
 
+Under folder `Implementation`, run the following commands:
+
+```sh
+make run # to run the learning process
+make eval # to do evaluation
+```
+
 TODO
 
 ### Results
@@ -80,7 +87,7 @@ TODO
 
 - [ ] Thesis (*April 15, 2019*)
 
-- [ ] Presentation and Defense (*TBD*)
+- [ ] Presentation and Defence (*TBD*)
 
 ### Author
 
@@ -96,4 +103,4 @@ Dr. Lee
 
 ### License
 
-**MIT**
+    **MIT**
