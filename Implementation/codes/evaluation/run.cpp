@@ -39,8 +39,8 @@ void Run::proc(int argc, char *argv[])
 
 void Run::proc_args(int argc, char *argv[])
 {
-    for (int i = 0; i < argc; ++i)
-    {
+    for (int i = 1; i < argc; ++i)
+    {  // first argument is the name of the program
         if (strcmp(argv[i], "-d") == 0)
         {
             Parameter::domain = argv[++i];
@@ -83,7 +83,7 @@ void Run::proc_args(int argc, char *argv[])
     {
         if (MyMPI::rank == 0)
         {
-            std::string prompt = "\n\nOptions: [-d <Domain>]\n\t\t [-sp <Sparse Prior>]\n\t\t [-br <Base Resolution>]\n\t\t [-ncv <Num Components per Var>]\n\t\t [-nsr <Num Sum per Region>]\n\t\t [-ct <Convergency Threhold>]\n\t\t [-bs <Batch Size>]\n\t\t [-ns <Num Slave per cat>]\n\t\t [-nsg <Num Slave Grp>]";
+            std::string prompt = "\n\nOptions: [-d <Domain>]\n\t [-sp <Sparse Prior>]\n\t [-br <Base Resolution>]\n\t [-ncv <Num Components per Var>]\n\t [-nsr <Num Sum per Region>]\n\t [-ct <Convergency Threhold>]\n\t [-bs <Batch Size>]\n\t [-ns <Num Slave per cat>]\n\t [-nsg <Num Slave Grp>]";
             Utils::println(prompt);
             exit(0);
         }  

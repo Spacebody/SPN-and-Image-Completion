@@ -32,7 +32,7 @@ class Dataset
     // divide train/test
     static std::set<int> gen_test_idx(int max_size, int test_size);
 
-    static void set_instance(std::vector<std::vector<int> > buf, Instance inst);
+    static void set_instance(std::vector<std::vector<int> > buf, Instance &inst);
 
     //---------------------------------------------------
     // Caltech

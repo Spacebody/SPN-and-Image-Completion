@@ -7,7 +7,7 @@
 
 std::vector<std::vector<int> > Dataset::tmp = std::vector<std::vector<int> >(Parameter::input_dim1, std::vector<int>(Parameter::input_dim2, 0));
 
-std::string Dataset::exp_dir = "../..";
+std::string Dataset::exp_dir = "..";
 std::string Dataset::olivetti_raw_file_name = Dataset::exp_dir + "/data/olivetti/olivetti.raw";
 std::string Dataset::cal_data_dir = Dataset::exp_dir + "/data/caltech";
 std::string Dataset::cal_rst_dir = Dataset::exp_dir + "/results/caltech/completions";
@@ -39,7 +39,7 @@ std::set<int> Dataset::gen_test_idx(int max_size, int test_size)
     return tis;
 }
 
-void Dataset::set_instance(std::vector<std::vector<int> > buf, Instance inst)
+void Dataset::set_instance(std::vector<std::vector<int> > buf, Instance &inst)
 {
     double tf = 0, varf = 0, cf = 0;
     for (int i = 0; i < Parameter::input_dim1; ++i)

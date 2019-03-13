@@ -1,4 +1,3 @@
-// #include "../common/my_mpi.hpp"
 #include "run.hpp"
 #include <mpi.h>
 
@@ -10,4 +9,3 @@ int main(int argc, char *argv[])
     MPI::Finalize();  // clean MPI environment
     return 0;
 }
-

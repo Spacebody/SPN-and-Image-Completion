@@ -8,5 +8,5 @@ Instance &Instance::operator=(Instance &ins)
         this->mean = ins.mean;
         this->std = ins.std;
     }
-    return ins;
+    return *this;
 }

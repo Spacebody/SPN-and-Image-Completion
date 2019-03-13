@@ -8,6 +8,19 @@
 bool SPN::is_recording_update = true;
 bool SPN::complete_by_marginal = true;
 
+SPN &SPN::operator=(SPN &spn)
+{
+    if (this != &spn)
+    {
+        this->training_set = spn.training_set;
+        this->root = spn.root;
+        this->root_region = spn.root_region;
+        this->coarse_dim1 = spn.coarse_dim1;
+        this->coarse_dim2 = spn.coarse_dim2;
+    }
+    return *this;
+}
+
 // ----------------------------------------------
 // Bottom
 // ----------------------------------------------
@@ -272,7 +285,7 @@ void SPN::init()
 
     // fine region
     for (int ca = 0; ca < this->coarse_dim1; ++ca)
-        for (int cb = 0; cb < coarse_dim2; ++cb)
+        for (int cb = 0; cb < this->coarse_dim2; ++cb)
             for (int a = 1; a <= Parameter::base_resolution; ++a)
                 for (int b = 1; b <= Parameter::base_resolution; ++b)
                 {
@@ -286,10 +299,14 @@ void SPN::init()
                             Region r = Region::get_region(ri);
                             if (a == 1 && b == 1)
                             {
+                                std::cout << "Here 8" << std::endl;  // for testing
                                 this->init_unit_region(r);
+                                std::cout << "Here 9" << std::endl;  // for testing
                             }
                             else
-                                r.reset_types(Parameter::num_sum_per_region);
+                            {
+                                r.reset_types(Parameter::num_sum_per_region); 
+                            }
                         }
                     }
                 }
@@ -351,16 +368,14 @@ void SPN::init_unit_region(Region r)
 {
     r.reset_types(Parameter::num_components_per_var);
 
-    r.means = std::vector<double>();
-    r.vars = std::vector<double>();
-    r.cnts = std::vector<double>();
+    r.means = std::vector<double>(Parameter::num_components_per_var);
+    r.vars = std::vector<double>(Parameter::num_components_per_var);
+    r.cnts = std::vector<double>(Parameter::num_components_per_var);
 
     int ttl_cnt = this->training_set.size();
-    int cnt = int(ceil(ttl_cnt * 1.0 / Parameter::num_components_per_var));
-
-    std::vector<double> vals = std::vector<double>();
-    vals.reserve(ttl_cnt);
-    for (int ii = 0; ii < training_set.size(); ++ii)
+    int cnt = (int)ceil(ttl_cnt * 1.0 / Parameter::num_components_per_var);
+    std::vector<double> vals = std::vector<double>(ttl_cnt);
+    for (int ii = 0; ii < this->training_set.size(); ++ii)
     {
         vals[ii] = this->training_set[ii].vals[r.a1][r.b1];
     }
@@ -1005,11 +1020,11 @@ void SPN::add_child(Region r, SumNode n, std::string di, double cc)
 void SPN::print_params()
 {
     Utils::println("*** Parameters ***");
-    Utils::println("\tdomain = " + Parameter::domain);
-    Utils::println("\tnum of Sum Per Region = " + std::to_string(Parameter::num_sum_per_region));
-    Utils::println("\tnum of Components Per Variable = " + std::to_string(Parameter::num_components_per_var));
-    Utils::println("\tsparse prior = " + std::to_string(Parameter::sparse_prior));
-    Utils::println("\tbase resolution = " + std::to_string(Parameter::base_resolution));
-    Utils::println("\tnum of Slave Per Class = " + std::to_string(Parameter::num_slave_per_class));
-    Utils::println("\tnum of Slave Group = " + std::to_string(Parameter::num_slave_grp));
+    Utils::println("\tDomain = " + Parameter::domain);
+    Utils::println("\tNum of Sum Per Region = " + std::to_string(Parameter::num_sum_per_region));
+    Utils::println("\tNum of Components Per Variable = " + std::to_string(Parameter::num_components_per_var));
+    Utils::println("\tSparse Prior = " + std::to_string(Parameter::sparse_prior));
+    Utils::println("\tBase Resolution = " + std::to_string(Parameter::base_resolution));
+    Utils::println("\tNum of Slave Per Class = " + std::to_string(Parameter::num_slave_per_class));
+    Utils::println("\tNum of Slave Group = " + std::to_string(Parameter::num_slave_grp));
 }
