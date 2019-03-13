@@ -35,7 +35,7 @@ TODO
    2. `parameter`: Control parameters for EM algorithm, SPN, and evaluation.
    3. `timer`: Manage the time to help calculate the time spent on computation.
    4. `utils`: Some helper functions to access time, print log, and do some numeric process.
-2. **evaluation(TODO)**
+2. **evaluation**
    1. `dataset`: Read and process data from the dataset.
    2. `eval`: Conduct evaluation over the dataset.
    3. `image_completion`: Conduct image completion, which is the application.
