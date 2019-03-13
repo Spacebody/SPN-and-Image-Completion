@@ -26,7 +26,29 @@
 
 ### About this repo
 
+#### Motivation
+
 TODO
+
+#### Target
+
+TODO
+
+#### About SPN
+
+TODO
+
+#### About Dataset
+
+Two dataset are used in this program, following the application of orginal paper[1]:
+
+- [Caltech-101](http://www.vision.caltech.edu/Image_Datasets/Caltech101/): The dataset contains 101 categories of pictures of objects, with about 40 to 800 images per category.[2]
+
+- [Olivetti](https://www.cl.cam.ac.uk/research/dtg/attarchive/facedatabase.html): The dataset contains a set of face images taken between April 1992 and April 1994 at AT&T Laboratories Cambridge with each image in size 64 x 64[3].
+
+#### About Results
+
+The models learned from the dataset will be stored in `results/<DOMAIN>/models`, which DOMAIN will either be `caltech` or `olivetti`. And the images for left and bottom completion will be output to `results/<DOMAIN>/completion`. The original and completed images will be aligned by separation with 10px gaps but no zero intensity.
 
 ### Documents of Code
 
@@ -36,7 +58,7 @@ TODO
    3. `timer`: Manage the time to help calculate the time spent on computation.
    4. `utils`: Some helper functions to access time, print log, and do some numeric process.
 2. **evaluation**
-   1. `dataset`: Read and process data from the dataset.
+   1. `dataset`: Read and process data from the dataset. Input are images and will be divided into training and test sets.
    2. `eval`: Conduct evaluation over the dataset.
    3. `image_completion`: Conduct image completion, which is the application.
    4. `run`: Control the program, which is the main function.
@@ -70,6 +92,14 @@ TODO
 ### Results
 
 TODO
+
+### Reference
+
+[1] Poon, Hoifung and Domingos, Pedro. Sum-Product Networks: A new deep architecture. In Proceedings of the Conference on Uncertainty in Artificial Intelligence (UAI), 2011. [Code](http://spn.cs.washington.edu/spn/).
+
+[2] [Caltech 101 Website](http://www.vision.caltech.edu/Image_Datasets/Caltech101/)
+
+[3] [Olivetti Faces Website](https://www.cl.cam.ac.uk/research/dtg/attarchive/facedatabase.html)
 
 ### Timeline
 
