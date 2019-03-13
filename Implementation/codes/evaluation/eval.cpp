@@ -7,7 +7,7 @@
 #include <fstream>
 #include <sstream>
 
-std::string Eval::exp_dir = "../../../Implementation";
+std::string Eval::exp_dir = "../../Implementation";
 
 void Eval::eval_olivetti()
 {
@@ -46,10 +46,10 @@ void Eval::eval_caltech()
         std::string cat = "";
         if (idx != std::string::npos)
             cat = fn.substr(0, idx);
-        if (cat == "BACKGROUND_Google")
+        if (cat == "" || cat == "BACKGROUND_Google")
             continue;
-        double lm = Eval::cmp_MSE_left(caltech_dir + "/" + "-left.dat", size, pad_len);
-        double bm = Eval::cmp_MSE_bottom(caltech_dir + "/" + "-btm.dat", size, pad_len);
+        double lm = Eval::cmp_MSE_left(caltech_dir + "/" + cat + "-left.dat", size, pad_len);
+        double bm = Eval::cmp_MSE_bottom(caltech_dir + "/" + cat + "-btm.dat", size, pad_len);
         ++num_cat;
         ttl_lt_mse += lm;
         ttl_bm_mse += bm;

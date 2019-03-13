@@ -91,7 +91,7 @@ eval: $(EVAL)eval_main.cpp eval.o parameter.o
 
 # clean
 clean:
-	rm -rf *.o *.out *.dSYM ./*/*.gch
+	rm -rf *.o *.out *.dSYM ./*/*.gch $(TARGETS)
 cleanobj:
 	rm -rf *.o
 cleandebug:
