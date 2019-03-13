@@ -3,7 +3,9 @@
 
 int main(int argc, char *argv[])
 {
-    MyMPI my_mpi(argc, argv);
+    MPI_Init(&argc, &argv);
+    MyMPI my_mpi;
     std::cout << MyMPI::rank << std::endl;
+    my_mpi.~MyMPI();
     return 0;
 }
