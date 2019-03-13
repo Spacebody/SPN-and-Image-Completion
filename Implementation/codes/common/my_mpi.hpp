@@ -8,15 +8,11 @@
 class MyMPI
 {
   public:
-    MyMPI(int argc, char *argv[])
+    MyMPI()
     {
-        MPI_Init(&argc, &argv);
         MyMPI::rank = MPI::COMM_WORLD.Get_rank();
     }
-    ~MyMPI()
-    {
-        MPI_Finalize();
-    }
+    ~MyMPI() {}
     MyMPI(const MyMPI &my_mpi);
     MyMPI &operator=(const MyMPI &my_mpi);
 
