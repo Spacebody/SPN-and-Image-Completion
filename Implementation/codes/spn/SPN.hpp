@@ -30,7 +30,6 @@ class SPN
     SPN() : coarse_dim1(Parameter::input_dim1 / Parameter::base_resolution), \
             coarse_dim2(Parameter::input_dim2 / Parameter::base_resolution) {}
     ~SPN() {}
-    SPN(const SPN &spn);
     SPN &operator=(SPN &spn);
 
     // ----------------------------------------------

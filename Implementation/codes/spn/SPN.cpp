@@ -21,18 +21,6 @@ SPN &SPN::operator=(SPN &spn)
     return *this;
 }
 
-SPN::SPN(const SPN &spn)
-{
-    if (this != &spn)
-    {
-        this->training_set = spn.training_set;
-        this->root = spn.root;
-        this->root_region = spn.root_region;
-        this->coarse_dim1 = spn.coarse_dim1;
-        this->coarse_dim2 = spn.coarse_dim2;
-    }
-}
-
 // ----------------------------------------------
 // Bottom
 // ----------------------------------------------
