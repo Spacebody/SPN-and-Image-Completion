@@ -119,9 +119,9 @@ Instance Dataset::read_cal_instance(std::string fn)
             for (int k = 0; k < Parameter::input_dim2; ++k)
             {
                 int p = (int)std::stod(ts[k + delta]);
-                tmp[true_idx][k] = p;
+                Dataset::tmp[true_idx][k] = p;
             }
-        ++idx;
+            ++idx;
     }
     in.close();
     Dataset::set_instance(Dataset::tmp, inst);

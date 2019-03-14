@@ -8,7 +8,7 @@ class Parameter
   public:
     Parameter() {}
     ~Parameter() {}
-    Parameter(const Parameter &parameter) {}
+    Parameter(const Parameter &parameter);
     Parameter &operator=(const Parameter &parameter);
 
     // EM

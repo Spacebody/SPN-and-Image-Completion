@@ -1,5 +1,15 @@
 #include "instance.hpp"
 
+Instance::Instance(const Instance &ins)
+{
+    if (this != &ins)
+    {
+        this->mean = ins.mean;
+        this->std = ins.std;
+        this->vals = ins.vals;
+    }
+}
+
 Instance &Instance::operator=(Instance &ins)
 {
     if (this != &ins)

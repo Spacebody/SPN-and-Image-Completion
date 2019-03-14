@@ -21,6 +21,18 @@ SPN &SPN::operator=(SPN &spn)
     return *this;
 }
 
+SPN::SPN(const SPN &spn)
+{
+    if (this != &spn)
+    {
+        this->training_set = spn.training_set;
+        this->root = spn.root;
+        this->root_region = spn.root_region;
+        this->coarse_dim1 = spn.coarse_dim1;
+        this->coarse_dim2 = spn.coarse_dim2;
+    }
+}
+
 // ----------------------------------------------
 // Bottom
 // ----------------------------------------------
@@ -299,9 +311,7 @@ void SPN::init()
                             Region r = Region::get_region(ri);
                             if (a == 1 && b == 1)
                             {
-                                std::cout << "Here 8" << std::endl;  // for testing
                                 this->init_unit_region(r);
-                                std::cout << "Here 9" << std::endl;  // for testing
                             }
                             else
                             {

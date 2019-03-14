@@ -46,7 +46,7 @@ Region::Region(int id, int a1, int a2, int b1, int b2)
 int Region::get_region_id(int a1, int a2, int b1, int b2)
 {
     int id = ((a1 * Parameter::input_dim1 + a2 - 1) * Parameter::input_dim2 + b1) * Parameter::input_dim2 + b2 - 1;
-    if (Region::id_regions.count(id) > 0)
+    if (Region::id_regions.count(id) == 0)
         Region::id_regions.insert(std::pair<int, Region>(id, Region(id, a1, a2, b1, b2)));
     return id;
 }
@@ -54,7 +54,7 @@ int Region::get_region_id(int a1, int a2, int b1, int b2)
 Region Region::get_region(int id)
 {
     Region r;
-    if (id_regions.count(id) > 0)
+    if (id_regions.count(id) == 0)
     {
         int b2 = id % Parameter::input_dim2 + 1;
         int x = id / Parameter::input_dim2;

@@ -2,6 +2,7 @@
 #define INSTANCE_HPP
 
 #include <vector>
+#include <iostream>
 
 class Instance
 {
@@ -14,8 +15,8 @@ class Instance
     {
         this->vals.empty();
     }
-    virtual ~Instance(){};
-    Instance(const Instance &ins) {};
+    virtual ~Instance() {}
+    Instance(const Instance &ins);
     Instance &operator=(Instance &ins);
 
 };
