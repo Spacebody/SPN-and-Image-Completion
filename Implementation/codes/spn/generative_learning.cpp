@@ -25,7 +25,7 @@ void GenerativeLearning::learn_hard_EM(std::vector<Instance> train)
 {
     this->spn.training_set = train;
     std::chrono::high_resolution_clock::time_point start_time = std::chrono::high_resolution_clock::now();
-    bool is_log = false;
+    bool is_log = true;
 
     this->spn.print_params();
     this->spn.init();
