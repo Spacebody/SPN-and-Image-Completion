@@ -4,11 +4,13 @@
 
 ## Content
 
-[About this repo](#about-this-repo)
+[About This Repo](#about-this-repo)
 
 [Documents of Code](#documents-of-code)
 
 [Callgraph of Program](#callgraph-of-program)
+
+[Set Up Environment](#set-up-environment)
 
 [How to Run](#how-to-run)
 
@@ -26,17 +28,17 @@
 
 ### About this repo
 
-#### Motivation
+#### Motivation(TODO)
 
-TODO
+The complexity of partition function is a key limiting factor in graphical model inference and learning. Sum-product network is a kind of architecture which is tractable, compared to the traditional Bayesian network.
 
-#### Target
+#### Target(TODO)
 
-TODO
+The target of this project is to reproduce the application of image completion in the original paper[1] which first proposed the SPN and build the foundation for any further research corresponding to SPN.
 
-#### About SPN
+#### About SPN(TODO)
 
-TODO
+SPNs are directed acyclic graphs with variables as leaves, sums, and products as the internal node, and weighted edges. This architecture is tractable and aims to resolve the limiting factor, the complexity of the graphical model. Any tractable graphical model can be cast into SPNs. However, SPNs are more general.
 
 #### About Dataset
 
@@ -78,13 +80,25 @@ This picture will show the call graph between modules of this program.
 
 ![Call graph of SPN](./figures/spn_callgraph.png)
 
+### Set Up Environment
+
+**openMPI** is needed to provide the parallel computing environmet. Please visit [open-mpi official website](https://www.open-mpi.org) for details if not available.
+
 ### How to Run
 
-Under folder `Implementation`, run the following commands:
+Under folder `Implementation`, run the following commands to compile the executable program:
 
 ```sh
 make run # to run the learning process
 make eval # to do evaluation
+```
+
+Run the following commands to reproduce the experiment:
+
+```sh
+mpic++ run -d C -n 51 #for caltech
+# or
+mpic++ run -d D -n 102 # for olivetti
 ```
 
 TODO
@@ -109,7 +123,7 @@ TODO
 
 - [x] Implementation of rest part(*Mar. 4, 2019*)
 
-- [ ] Reproduce of the Original Application (*Mar. 15, 2019*)
+- [x] Reproduce of the Original Application (*Mar. 15, 2019*)
 
 - [ ] Further Exploration and Optimization (*Mar. 25, 2019*)
 
