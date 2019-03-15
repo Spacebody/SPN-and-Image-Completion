@@ -7,23 +7,17 @@
 CC	= mpic++
 FLAGS	= -g -Wall
 LFLAGS	= -lm
-OBJS	= parameter.o timer.o utils.o my_mpi.o \
-		  instance.o node.o sum_node.o prod_node.o SPN.o decomposition.o region.o generative_learning.o \
-		  dataset.o image_completion.o eval.o run.o
+
+OBJ_COMMON = parameter.o timer.o utils.o my_mpi.o
+OBJ_SPN = instance.o node.o sum_node.o prod_node.o SPN.o decomposition.o region.o generative_learning.o
+OBJS	= $(OBJ_COMMON) $(OBJ_SPN) dataset.o image_completion.o eval.o run.o
 
 TARGETS	= test_parameter test_timer test_my_mpi test_utils \
 		  test_instance test_node test_sum_node test_prod_node test_decomposition test_SPN test_region test_generative_learning \
 		  test_dataset test_image_completion test_eval test_run
 
-# test path
-TP_COMMON = ./common/
-TP_EVAL = ./evaluation/
-TP_SPN = ./spn/
-
 # src path
-SP_COMMON = ../codes/common/
-SP_EVAL = ../codes/evaluation/
-SP_SPN = ../codes/spn/
+VPATH = ../codes/common:../codes/evaluation:../codes/spn:./common:./evaluation:./spn
 
 # PHONY
 .PHONY:all clean cleanobj cleandebug cleangch alltest
@@ -37,107 +31,107 @@ alltest: $(TARGETS)
 
 # compile objects
 ## for common
-parameter.o: $(SP_COMMON)parameter.cpp $(SP_COMMON)parameter.hpp
-	$(CC) $(FLAGS) -c $(SP_COMMON)parameter.cpp $(SP_COMMON)parameter.hpp
+parameter.o: parameter.cpp parameter.hpp
+	$(CC) $(FLAGS) -c $^
 
-timer.o: $(SP_COMMON)timer.cpp $(SP_COMMON)timer.hpp
-	$(CC) $(FLAGS) -c $(SP_COMMON)timer.cpp $(SP_COMMON)timer.hpp
+timer.o: timer.cpp timer.hpp
+	$(CC) $(FLAGS) -c $^
 
-utils.o: $(SP_COMMON)utils.cpp $(SP_COMMON)utils.hpp
-	$(CC) $(FLAGS) -c $(SP_COMMON)utils.cpp $(SP_COMMON)utils.hpp
+utils.o: utils.cpp utils.hpp
+	$(CC) $(FLAGS) -c $^
 
-my_mpi.o: $(SP_COMMON)my_mpi.cpp $(SP_COMMON)my_mpi.hpp
-	$(CC) $(FLAGS) -c $(SP_COMMON)my_mpi.cpp $(SP_COMMON)my_mpi.hpp
+my_mpi.o: my_mpi.cpp my_mpi.hpp
+	$(CC) $(FLAGS) -c $^
 
 ## for evaluation
-dataset.o: $(SP_EVAL)dataset.cpp $(SP_EVAL)dataset.hpp
-	$(CC) $(FLAGS) -c $(SP_EVAL)dataset.cpp $(SP_EVAL)dataset.hpp
+dataset.o: dataset.cpp dataset.hpp
+	$(CC) $(FLAGS) -c $^
 
-image_completion.o: $(SP_EVAL)image_completion.cpp $(SP_EVAL)image_completion.hpp
-	$(CC) $(FLAGS) -c $(SP_EVAL)image_completion.cpp $(SP_EVAL)image_completion.hpp
+image_completion.o: image_completion.cpp image_completion.hpp
+	$(CC) $(FLAGS) -c $^
 
-eval.o: $(SP_EVAL)eval.cpp $(SP_EVAL)eval.hpp
-	$(CC) $(FLAGS) -c $(SP_EVAL)eval.cpp $(SP_EVAL)eval.hpp
+eval.o: eval.cpp eval.hpp
+	$(CC) $(FLAGS) -c $^
 
-run.o: $(SP_EVAL)run.cpp $(SP_EVAL)run.hpp
-	$(CC) $(FLAGS) -c $(SP_EVAL)run.cpp $(SP_EVAL)run.hpp
+run.o: run.cpp run.hpp
+	$(CC) $(FLAGS) -c $^
 
 ## for spn
-instance.o: $(SP_SPN)instance.cpp $(SP_SPN)instance.hpp
-	$(CC) $(FLAGS) -c $(SP_SPN)instance.cpp $(SP_SPN)instance.hpp
+instance.o: instance.cpp instance.hpp
+	$(CC) $(FLAGS) -c $^
 
-node.o: $(SP_SPN)node.cpp $(SP_SPN)node.hpp
-	$(CC) $(FLAGS) -c $(SP_SPN)node.cpp $(SP_SPN)node.hpp
+node.o: node.cpp node.hpp
+	$(CC) $(FLAGS) -c $^
 
-sum_node.o: $(SP_SPN)sum_node.cpp $(SP_SPN)sum_node.hpp
-	$(CC) $(FLAGS) -c $(SP_SPN)sum_node.cpp $(SP_SPN)sum_node.hpp
+sum_node.o: sum_node.cpp sum_node.hpp
+	$(CC) $(FLAGS) -c $^
 
-prod_node.o: $(SP_SPN)prod_node.cpp $(SP_SPN)prod_node.hpp
-	$(CC) $(FLAGS) -c $(SP_SPN)prod_node.cpp $(SP_SPN)prod_node.hpp
+prod_node.o: prod_node.cpp prod_node.hpp
+	$(CC) $(FLAGS) -c $^
 
-decomposition.o: $(SP_SPN)decomposition.cpp $(SP_SPN)decomposition.hpp
-	$(CC) $(FLAGS) -c $(SP_SPN)decomposition.cpp $(SP_SPN)decomposition.hpp
+decomposition.o: decomposition.cpp decomposition.hpp
+	$(CC) $(FLAGS) -c $^
 
-SPN.o: $(SP_SPN)SPN.cpp $(SP_SPN)SPN.hpp
-	$(CC) $(FLAGS) -c $(SP_SPN)SPN.cpp $(SP_SPN)SPN.hpp
+SPN.o: SPN.cpp SPN.hpp
+	$(CC) $(FLAGS) -c $^
 
-region.o: $(SP_SPN)region.cpp $(SP_SPN)region.hpp
-	$(CC) $(FLAGS) -c $(SP_SPN)region.cpp $(SP_SPN)region.hpp
+region.o: region.cpp region.hpp
+	$(CC) $(FLAGS) -c $^
 
-generative_learning.o: $(SP_SPN)generative_learning.cpp $(SP_SPN)generative_learning.hpp
-	$(CC) $(FLAGS) -c $(SP_SPN)generative_learning.cpp $(SP_SPN)generative_learning.hpp
+generative_learning.o: generative_learning.cpp generative_learning.hpp
+	$(CC) $(FLAGS) -c $^
 
 # create/compile the individual files separately
 ## for common
-test_parameter: $(TP_COMMON)test_parameter.cpp parameter.o
-	$(CC) $(FLAGS) $(TP_COMMON)test_parameter.cpp parameter.o -o test_parameter
+test_parameter: test_parameter.cpp parameter.o
+	$(CC) $(FLAGS) $^ -o $@
 
-test_my_mpi: $(TP_COMMON)test_my_mpi.cpp parameter.o utils.o timer.o my_mpi.o instance.o
-	$(CC) $(FLAGS) $(TP_COMMON)test_my_mpi.cpp parameter.o utils.o timer.o my_mpi.o instance.o -o test_my_mpi
+test_my_mpi: test_my_mpi.cpp $(OBJ_COMMON) instance.o
+	$(CC) $(FLAGS) $^ -o $@
 
-test_timer: $(TP_COMMON)test_timer.cpp timer.o
-	$(CC) $(FLAGS) $(TP_COMMON)test_timer.cpp timer.o -o test_timer
+test_timer: test_timer.cpp timer.o
+	$(CC) $(FLAGS) $^ -o $@
 
-test_utils: $(TP_COMMON)test_utils.cpp utils.o timer.o my_mpi.o parameter.o instance.o 
-	$(CC) $(FLAGS) $(TP_COMMON)test_utils.cpp utils.o timer.o my_mpi.o parameter.o instance.o -o test_utils
+test_utils: test_utils.cpp $(OBJ_COMMON) instance.o 
+	$(CC) $(FLAGS) $^ -o $@
 
 ## for evaluation
-test_dataset: $(TP_EVAL)test_dataset.cpp dataset.o parameter.o instance.o my_mpi.o utils.o timer.o
-	$(CC) $(FLAGS) $(TP_EVAL)test_dataset.cpp dataset.o parameter.o instance.o my_mpi.o utils.o timer.o -o test_dataset
+test_dataset: test_dataset.cpp dataset.o instance.o $(OBJ_COMMON) 
+	$(CC) $(FLAGS) $^ -o $@
 
-test_image_completion: $(TP_EVAL)test_image_completion.cpp image_completion.o utils.o timer.o parameter.o my_mpi.o SPN.o instance.o sum_node.o prod_node.o node.o decomposition.o region.o  
-	$(CC) $(FLAGS) $(TP_EVAL)test_image_completion.cpp image_completion.o utils.o timer.o parameter.o my_mpi.o SPN.o instance.o sum_node.o prod_node.o node.o decomposition.o region.o -o test_image_completion
+test_image_completion: test_image_completion.cpp image_completion.o $(OBJ_COMMON) SPN.o instance.o sum_node.o prod_node.o node.o decomposition.o region.o  
+	$(CC) $(FLAGS) $^ -o $@
 
-test_eval: $(TP_EVAL)test_eval.cpp eval.o parameter.o
-	$(CC) $(FLAGS) $(TP_EVAL)test_eval.cpp eval.o parameter.o -o test_eval
+test_eval: test_eval.cpp eval.o parameter.o
+	$(CC) $(FLAGS) $^ -o $@
 
-test_run: $(TP_EVAL)test_run.cpp run.o parameter.o my_mpi.o utils.o timer.o dataset.o generative_learning.o image_completion.o sum_node.o prod_node.o node.o SPN.o decomposition.o region.o instance.o
-	$(CC) $(FLAGS) $(TP_EVAL)test_run.cpp run.o parameter.o my_mpi.o utils.o timer.o dataset.o generative_learning.o image_completion.o sum_node.o prod_node.o node.o SPN.o decomposition.o region.o instance.o -o test_run
+test_run: test_run.cpp run.o $(OBJ_COMMON) dataset.o image_completion.o $(OBJ_SPN)
+	$(CC) $(FLAGS) $^ -o $@
 
 ## for spn
-test_instance: $(TP_SPN)test_instance.cpp instance.o
-	$(CC) $(FLAGS) $(TP_SPN)test_instance.cpp instance.o -o test_instance
+test_instance: test_instance.cpp instance.o
+	$(CC) $(FLAGS) $^ -o $@
 
-test_node: $(TP_SPN)test_node.cpp node.o
-	$(CC) $(FLAGS) $(TP_SPN)test_node.cpp node.o -o test_node
+test_node: test_node.cpp node.o
+	$(CC) $(FLAGS) $^ -o $@
 
-test_sum_node: $(TP_SPN)test_sum_node.cpp sum_node.o node.o parameter.o utils.o my_mpi.o timer.o
-	$(CC) $(FLAGS) $(TP_SPN)test_sum_node.cpp sum_node.o node.o parameter.o utils.o my_mpi.o timer.o -o test_sum_node
+test_sum_node: test_sum_node.cpp sum_node.o node.o $(OBJ_COMMON)
+	$(CC) $(FLAGS) $^ -o $@
 
-test_prod_node: $(TP_SPN)test_prod_node.cpp prod_node.o node.o parameter.o utils.o my_mpi.o timer.o
-	$(CC) $(FLAGS) $(TP_SPN)test_prod_node.cpp prod_node.o node.o parameter.o utils.o my_mpi.o timer.o -o test_prod_node
+test_prod_node: test_prod_node.cpp prod_node.o node.o $(OBJ_COMMON)
+	$(CC) $(FLAGS) $^ -o $@
 
-test_decomposition: $(TP_SPN)test_decomposition.cpp decomposition.o 
-	$(CC) $(FLAGS) $(TP_SPN)test_decomposition.cpp decomposition.o -o test_decomposition
+test_decomposition: test_decomposition.cpp decomposition.o 
+	$(CC) $(FLAGS) $^ -o $@
 
-test_SPN: $(TP_SPN)test_SPN.cpp SPN.o instance.o decomposition.o node.o sum_node.o prod_node.o region.o parameter.o utils.o my_mpi.o timer.o 
-	$(CC) $(FLAGS) $(TP_SPN)test_SPN.cpp SPN.o instance.o decomposition.o node.o sum_node.o prod_node.o region.o parameter.o utils.o my_mpi.o timer.o -o test_SPN
+test_SPN: test_SPN.cpp SPN.o instance.o decomposition.o node.o sum_node.o prod_node.o region.o $(OBJ_COMMON) 
+	$(CC) $(FLAGS) $^ -o $@
 
-test_region: $(TP_SPN)test_region.cpp region.o sum_node.o prod_node.o parameter.o instance.o utils.o decomposition.o my_mpi.o SPN.o node.o timer.o
-	$(CC) $(FLAGS) $(TP_SPN)test_region.cpp region.o sum_node.o prod_node.o parameter.o instance.o utils.o decomposition.o my_mpi.o SPN.o node.o timer.o -o test_region
+test_region: test_region.cpp region.o sum_node.o prod_node.o instance.o decomposition.o SPN.o node.o $(OBJ_COMMON)
+	$(CC) $(FLAGS) $^ -o $@
 
-test_generative_learning: $(TP_SPN)test_generative_learning.cpp generative_learning.o SPN.o instance.o my_mpi.o utils.o parameter.o node.o sum_node.o prod_node.o region.o decomposition.o timer.o
-	$(CC) $(FLAGS) $(TP_SPN)test_generative_learning.cpp generative_learning.o SPN.o instance.o my_mpi.o utils.o parameter.o node.o sum_node.o prod_node.o region.o decomposition.o timer.o -o test_generative_learning
+test_generative_learning: test_generative_learning.cpp $(OBJ_SPN) $(OBJ_COMMON)
+	$(CC) $(FLAGS) $^ -o $@
 
 # clean files
 clean:
