@@ -143,7 +143,7 @@ E-mail: 11510506@mail.sustc.edu.cn
 
 Prof. He & Prof. Tang
 
-Dr. Lee
+PhD. Lee
 
 ### License
 
