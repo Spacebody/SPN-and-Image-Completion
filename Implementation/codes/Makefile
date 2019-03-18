@@ -1,7 +1,7 @@
-VERSION = 1.0.1
+VERSION = 1.0.2
 
-CC	= /share/apps/openmpi/intel/3.1.2/bin/mpic++
-FLAGS	= -Wall -qopenmp
+CXX	= mpic++
+FLAGS	= -Wall -std=c++11 
 LFLAGS	= -lm
 
 OBJ_COMMON = parameter.o timer.o utils.o my_mpi.o
@@ -24,67 +24,67 @@ alltest: $(TARGETS)
 # compile objects
 ## for common
 parameter.o: parameter.cpp parameter.hpp
-	$(CC) $(FLAGS) -c $^
+	$(CXX) $(FLAGS) -c $^
 
 timer.o: timer.cpp timer.hpp
-	$(CC) $(FLAGS) -c $^
+	$(CXX) $(FLAGS) -c $^
 
 utils.o: utils.cpp utils.hpp
-	$(CC) $(FLAGS) -c $^
+	$(CXX) $(FLAGS) -c $^
 
 my_mpi.o: my_mpi.cpp my_mpi.hpp
-	$(CC) $(FLAGS) -c $^
+	$(CXX) $(FLAGS) -c $^
 
 ## for evaluation
 dataset.o: dataset.cpp dataset.hpp
-	$(CC) $(FLAGS) -c $^
+	$(CXX) $(FLAGS) -c $^
 
 image_completion.o: image_completion.cpp image_completion.hpp
-	$(CC) $(FLAGS) -c $^
+	$(CXX) $(FLAGS) -c $^
 
 eval.o: eval.cpp eval.hpp
-	$(CC) $(FLAGS) -c $^
+	$(CXX) $(FLAGS) -c $^
 
 run.o: run.cpp run.hpp
-	$(CC) $(FLAGS) -c $^
+	$(CXX) $(FLAGS) -c $^
 
 run_main.o: run_main.cpp
-	$(CC) $(FLAGS) -c $^
+	$(CXX) $(FLAGS) -c $^
 
 eval_main.o: eval_main.cpp
-	$(CC) $(FLAGS) -c $^
+	$(CXX) $(FLAGS) -c $^
 
 ## for spn
 instance.o: instance.cpp instance.hpp
-	$(CC) $(FLAGS) -c $^
+	$(CXX) $(FLAGS) -c $^
 
 node.o: node.cpp node.hpp
-	$(CC) $(FLAGS) -c $^
+	$(CXX) $(FLAGS) -c $^
 
 sum_node.o: sum_node.cpp sum_node.hpp
-	$(CC) $(FLAGS) -c $^
+	$(CXX) $(FLAGS) -c $^
 
 prod_node.o: prod_node.cpp prod_node.hpp
-	$(CC) $(FLAGS) -c $^
+	$(CXX) $(FLAGS) -c $^
 
 decomposition.o: decomposition.cpp decomposition.hpp
-	$(CC) $(FLAGS) -c $^
+	$(CXX) $(FLAGS) -c $^
 
 SPN.o: SPN.cpp SPN.hpp
-	$(CC) $(FLAGS) -c $^
+	$(CXX) $(FLAGS) -c $^
 
 region.o: region.cpp region.hpp
-	$(CC) $(FLAGS) -c $^
+	$(CXX) $(FLAGS) -c $^
 
 generative_learning.o: generative_learning.cpp generative_learning.hpp
-	$(CC) $(FLAGS) -c $^
+	$(CXX) $(FLAGS) -c $^
 
 # target
 run: run_main.cpp run.o image_completion.o dataset.o $(OBJ_COMMON) $(OBJ_SPN)
-	$(CC) $(FLAGS) $^ -o $@
+	$(CXX) $(FLAGS) $^ -o $@
 
 eval: eval_main.cpp eval.o parameter.o
-	$(CC) $(FLAGS) $^ -o $@
+	$(CXX) $(FLAGS) $^ -o $@
 
 # clean
 clean:
