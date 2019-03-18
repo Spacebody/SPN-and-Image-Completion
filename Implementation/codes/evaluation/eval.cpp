@@ -7,7 +7,7 @@
 #include <fstream>
 #include <sstream>
 
-std::string Eval::exp_dir = "../../Implementation";
+std::string Eval::exp_dir = "/data/cse-zhengyl";
 
 void Eval::eval_olivetti()
 {
