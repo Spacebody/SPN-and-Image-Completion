@@ -1,5 +1,7 @@
 # Undergraduate-thesis
 
+This is the version which I tested on cluster.
+
 *Sum-product network* (**SPN**) implementation and its application on image completion and gene dataset.
 
 ## Content
