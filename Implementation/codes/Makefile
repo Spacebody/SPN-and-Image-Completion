@@ -1,7 +1,7 @@
-VERSION = 1.0.0
+VERSION = 1.0.1
 
 CC	= mpic++
-FLAGS	= -g -Wall
+FLAGS	= -Wall
 LFLAGS	= -lm
 
 OBJ_COMMON = parameter.o timer.o utils.o my_mpi.o
@@ -13,13 +13,13 @@ TARGETS	= run eval# TODO
 # src path
 VPATH = ./common:./evaluation:./spn
 
-.PHONY:all clean cleanobj cleandebug cleangch alltest
+.PHONY:all clean cleanobj cleangch alltest
 # make all test program
 all: $(TARGETS)
 
 # make all test and only left tests
 alltest: $(TARGETS)
-	rm -rf *.o *.out *.dSYM ./*/*.gch
+	rm -rf *.o *.out ./*/*.gch
 
 # compile objects
 ## for common
@@ -88,11 +88,9 @@ eval: eval_main.cpp eval.o parameter.o
 
 # clean
 clean:
-	rm -rf *.o *.out *.dSYM ./*/*.gch $(TARGETS)
+	rm -rf *.o *.out ./*/*.gch $(TARGETS)
 cleanobj:
 	rm -rf *.o
-cleandebug:
-	rm -rf *.dSYM
 cleangch:
 	rm -rf ./*/*.gch
 cleanbin:
