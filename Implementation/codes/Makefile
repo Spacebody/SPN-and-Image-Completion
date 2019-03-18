@@ -1,6 +1,6 @@
 VERSION = 1.0.1
 
-CC	= mpic++
+CC	= /share/apps/openmpi/intel/3.1.2/bin/mpic++
 FLAGS	= -Wall -qopenmp
 LFLAGS	= -lm
 
