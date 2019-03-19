@@ -14,7 +14,7 @@ std::string Run::DOM_OLIVETTI = "O";
 std::string Run::DOM_CALTECH = "C";
 
 // directory
-std::string Run::Run::exp_dir = "../../Implementation";
+std::string Run::Run::exp_dir = "/scratch/cse-zhengyl";
 
 std::string Run::olive_data_dir = Run::exp_dir + "/data/olivetti";
 std::string Run::olive_rst_dir = Run::exp_dir + "/results/olivetti/completions";

@@ -1,11 +1,10 @@
-#BSUB -J image_completion  ### set job name
+#BSUB -J img_comp  ### set job name
 #BSUB -q debug
-#BSUB -n 102  ### number of cores
-#BSUB -o ./output/stdout_%J.out  ### standard output
-#BSUB -e ./errors/stderr_%J.err  ### standard error
+#BSUB -o ../output/stdout_caltech.out  ### standard output
+#BSUB -e ../errors/stderr_caltech.err  ### standard error
 
 ### load module
 module load mpi/openmpi/3.1.2_intel
 
 ### run program
-mpirun -np 42 ./run -d C
+mpirun -np 102 ./run -d C
