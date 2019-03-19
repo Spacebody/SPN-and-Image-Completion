@@ -1,10 +1,11 @@
 #BSUB -J img_comp  ### set job name
-#BSUB -q debug
-#BSUB -o ../output/stdout_caltech.out  ### standard output
-#BSUB -e ../errors/stderr_caltech.err  ### standard error
+#BSUB -q debug  ## submit job into debug queue
+#BUSB -n 4  ## number of cores
+#BSUB -oo ../output/stdout_caltech.out  ### standard output, rewrite every run
+#BSUB -eo ../errors/stderr_caltech.err  ### standard error, rewrite every run
 
 ### load module
 module load mpi/openmpi/3.1.2_intel
 
 ### run program
-mpirun -np 102 ./run -d C
+mpirun -np $LSB_DJOB_NUMPROC ./run -d C
