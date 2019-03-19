@@ -88,24 +88,40 @@ This picture will show the call graph between modules of this program.
 
 ### How to Run
 
-Under folder `Implementation`, run the following commands to compile the executable program:
+Code is under folder `Implementation/codes`.
+
+### File Path
+
+To make the program read files correctly, please modify the file path in `dataset.cpp`, `eval.cpp`, and `run.cpp` to correct path before compiling.
+
+For TaiYi(SUSTech), **data** and results should be put in `/scratch/user-name`, **Code** should be put in `/work/user-name`.
+
+### Compilation
+
+Run the following commands to compile the executable program on compilation node:
 
 ```sh
 make run # to run the learning process
 make eval # to do evaluation
+# or
+make  # compile both caltech and olivetti
 ```
 
-Run the following commands to reproduce the experiment:
+#### Submit Jobs
+
+Run the following commands to submit jobs on TaiYi(SUSTech):
 
 ```sh
-mpic++ run -d C -n 51 #for caltech
+bsub < run_caltech.lsf  # for caltech
 # or
-mpic++ run -d D -n 102 # for olivetti
+bsub < run_olivetti.lsf  # for olivetti
 ```
 
-TODO
+In `*.lsf`, standard output and standard error are defined to stored in `output` and `errors` respectively in the position where `codes` are stored.
 
 ### Results
+
+Results will be stored temporally under `/scratch/user-name`, please move `results` to `/data/user-name` after jobs done.
 
 TODO
 
@@ -125,7 +141,7 @@ TODO
 
 - [x] Implementation of rest part(*Mar. 4, 2019*)
 
-- [x] Reproduce of the Original Application (*Mar. 15, 2019*)
+- [x] Reproduce of the Original Application (*Mar. 20, 2019*)
 
 - [ ] Further Exploration and Optimization (*Mar. 25, 2019*)
 
@@ -139,7 +155,7 @@ TODO
 
 Yilin ZHENG  
 
-E-mail: 11510506@mail.sustc.edu.cn
+E-mail: 11510506@mail.sustech.edu.cn
 
 ### Acknowledgement
 
