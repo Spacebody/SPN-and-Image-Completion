@@ -1,0 +1,11 @@
+#BSUB -J olivetti  ### set job name
+#BSUB -n 80  ## number of cores
+#BSUB –R "span[ptile=40]"
+#BSUB -oo ../output/stdout_olivetti.out  ### standard output, rewrite every run
+#BSUB -eo ../errors/stderr_olivetti.err  ### standard error, rewrite every run
+
+### load module
+module load mpi/openmpi/3.1.2_intel
+
+### run program
+mpirun -np $LSB_DJOB_NUMPROC ./run -d O
