@@ -1,4 +1,5 @@
 #BSUB -J image_completion  ### set job name
+#BSUB -q debug
 #BSUB -n 102  ### number of cores
 #BSUB -o ./output/stdout_%J.out  ### standard output
 #BSUB -e ./errors/stderr_%J.err  ### standard error
@@ -7,4 +8,4 @@
 module load mpi/openmpi/3.1.2_intel
 
 ### run program
-mpirun -n 82 ./run -d C
+mpirun -np 42 ./run -d C
