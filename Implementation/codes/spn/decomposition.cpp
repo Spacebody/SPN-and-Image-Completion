@@ -1,5 +1,6 @@
 #include "decomposition.hpp"
 #include <string>
+#include <cstring>
 
 std::map<std::string, Decomposition> Decomposition::id_decomp = std::map<std::string, Decomposition>();
 Decomposition Decomposition::blank_decomp = Decomposition("", -1, -1, -1, -1);

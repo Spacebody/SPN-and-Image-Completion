@@ -50,14 +50,20 @@ void ImageCompletion::output_rst_to_img(std::ofstream &out, int inst_idx, Instan
 
 void ImageCompletion::send_img(int dest)
 {
-    MPI::COMM_WORLD.Send(&MyMPI::buf_int, 0, MPI::INT, dest, 0);
+    // MPI::COMM_WORLD.Send(&MyMPI::buf_int, 0, MPI::INT, dest, 0);
+    MPI_Send(&MyMPI::buf_int, 0, MPI_INT, dest, 0, MPI_COMM_WORLD);
 }
 
 int ImageCompletion::recv_img(int src)
 {
-    MPI::Status status;
-    MPI::COMM_WORLD.Recv(&MyMPI::buf_int, 0, MPI::INT, src, 0, status);
-    return status.Get_count(MPI::INT);
+    // MPI::Status status;
+    MPI_Status status;
+    // MPI::COMM_WORLD.Recv(&MyMPI::buf_int, 0, MPI::INT, src, 0, status);
+    MPI_Recv(&MyMPI::buf_int, 0, MPI_INT, src, 0, MPI_COMM_WORLD ,&status);
+    // return status.Get_count(MPI::INT);
+    int count;
+    MPI_Get_count(&status, MPI_INT, &count);
+    return count;
 }
 
 void ImageCompletion::complete_left(std::vector<Instance> test, std::string mdl_dir, std::string mdl_name, std::string rst_dir)

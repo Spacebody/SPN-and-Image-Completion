@@ -12,7 +12,7 @@ class Timer
     Timer() {}
     ~Timer() {}
     Timer(const Timer &timer) {}
-    Timer &operator=(const Timer &timer) { return *this; }
+    // Timer &operator=(const Timer &timer) { return *this; }
 
     static void timer_start();      // start timer
     static long get_time_elapsed(); // get elapsed time

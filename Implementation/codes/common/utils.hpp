@@ -15,7 +15,7 @@ class Utils
     }
     ~Utils() {}
     Utils(const Utils &utils) {}
-    Utils &operator=(const Utils &utils) { return *this; }
+    // Utils &operator=(const Utils &utils) { return *this; }
 
     // time
     static int get_int_val(const Instance &ins, const double p);

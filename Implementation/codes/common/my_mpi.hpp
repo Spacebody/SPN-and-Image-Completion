@@ -10,11 +10,12 @@ class MyMPI
   public:
     MyMPI()
     {
-        MyMPI::rank = MPI::COMM_WORLD.Get_rank();
+        // MyMPI::rank = MPI::COMM_WORLD.Get_rank();
+        MPI_Comm_rank(MPI_COMM_WORLD, &MyMPI::rank);
     }
     ~MyMPI() {}
-    MyMPI(const MyMPI &my_mpi) {}
-    MyMPI &operator=(const MyMPI &my_mpi) { return *this; }
+    // MyMPI(const MyMPI &my_mpi) {}
+    // MyMPI &operator=(const MyMPI &my_mpi) { return *this; }
 
     // master
     static int rank;
