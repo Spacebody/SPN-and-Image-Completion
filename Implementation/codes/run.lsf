@@ -1,4 +1,3 @@
-#!bin/bash
 #BSUB -J image_completion  ### set job name
 #BSUB -n 102  ### number of cores
 #BSUB -o ./output/stdout_%J.out  ### standard output
@@ -8,4 +7,4 @@
 module load mpi/openmpi/3.1.2_intel
 
 ### run program
-mpirun -n 102 ./run -d C
+mpirun -n 82 ./run -d C
