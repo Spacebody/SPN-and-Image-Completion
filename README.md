@@ -96,9 +96,9 @@ make eval # to do evaluation
 Run the following commands to reproduce the experiment:
 
 ```sh
-mpic++ run -d C -n 51 #for caltech
+mpic++ run -d C -n 102  #for caltech
 # or
-mpic++ run -d D -n 102 # for olivetti
+mpic++ run -d D -n 51 # for olivetti
 ```
 
 TODO
@@ -123,7 +123,7 @@ TODO
 
 - [x] Implementation of rest part(*Mar. 4, 2019*)
 
-- [x] Reproduce of the Original Application (*Mar. 15, 2019*)
+- [x] Reproduce of the Original Application (*Mar. 19, 2019*)
 
 - [ ] Further Exploration and Optimization (*Mar. 25, 2019*)
 
@@ -137,7 +137,7 @@ TODO
 
 Yilin ZHENG  
 
-E-mail: 11510506@mail.sustc.edu.cn
+E-mail: 11510506@mail.sustech.edu.cn
 
 ### Acknowledgement
 
