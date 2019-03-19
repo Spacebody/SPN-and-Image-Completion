@@ -9,7 +9,7 @@
 
 std::vector<std::vector<int> > Dataset::tmp = std::vector<std::vector<int> >(Parameter::input_dim1, std::vector<int>(Parameter::input_dim2, 0));
 
-std::string Dataset::exp_dir = "/data/cse-zhengyl";
+std::string Dataset::exp_dir = "/scratch/cse-zhengyl";
 std::string Dataset::olivetti_raw_file_name = Dataset::exp_dir + "/data/olivetti/olivetti.raw";
 std::string Dataset::cal_data_dir = Dataset::exp_dir + "/data/caltech";
 std::string Dataset::cal_rst_dir = Dataset::exp_dir + "/results/caltech/completions";
