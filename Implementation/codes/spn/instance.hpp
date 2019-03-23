@@ -16,8 +16,6 @@ class Instance
         this->vals.empty();
     }
     virtual ~Instance() {}
-    // Instance(const Instance &ins);
-    // Instance &operator=(Instance &ins);
 
 };
 

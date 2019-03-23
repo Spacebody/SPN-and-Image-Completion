@@ -1,23 +1,6 @@
 #include "prod_node.hpp"
 #include "../common/utils.hpp"
 
-// ProdNode &ProdNode::operator=(const ProdNode &prod_node)
-// {
-//     if (this != &prod_node)
-//     {
-//         this->children = prod_node.children;
-//     }
-//     return *this;
-// }
-
-// ProdNode::ProdNode(const ProdNode &prod_node)
-// {
-//     if (this != &prod_node)
-//     {
-//         this->children = prod_node.children;
-//     }
-// }
-
 void ProdNode::pass_derivative()
 {
     if (this->get_log_derivative() == Node::zero_log_val) return;
