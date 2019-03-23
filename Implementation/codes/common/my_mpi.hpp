@@ -10,8 +10,6 @@ class MyMPI
   public:
     MyMPI() {}
     ~MyMPI() {}
-    // MyMPI(const MyMPI &my_mpi) {}
-    // MyMPI &operator=(const MyMPI &my_mpi) { return *this; }
 
     // master
     static int rank;

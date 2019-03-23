@@ -14,8 +14,6 @@ class SumNode: public Node
         this->child_cnts.empty();
     }
     ~SumNode() {}
-    // SumNode(const SumNode &sum_node);
-    // SumNode &operator=(SumNode &sum_node);
 
     void eval();
     void pass_derivative();

@@ -4,25 +4,6 @@
 
 double Node::zero_log_val = (std::numeric_limits<double>::min)();
 
-// Node &Node::operator=(const Node &node)
-// {
-//     if (this != &node)
-//     {
-//         this->log_val = node.log_val;
-//         this->zero_log_val = node.log_derivative;
-//     }
-//     return *this;
-// }
-
-// Node::Node(const Node &node)
-// {
-//     if (this != &node)
-//     {
-//         this->log_val = node.log_val;
-//         this->zero_log_val = node.log_derivative;
-//     }
-// }
-
 double Node::get_log_val()
 {
     return this->log_val;

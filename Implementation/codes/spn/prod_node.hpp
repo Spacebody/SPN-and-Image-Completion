@@ -12,8 +12,6 @@ class ProdNode : public Node
         this->children.empty();
     }
     ~ProdNode() {}
-    // ProdNode(const ProdNode &prod_node);
-    // ProdNode &operator=(const ProdNode &prod_node);
 
     void pass_derivative();
     void eval();
