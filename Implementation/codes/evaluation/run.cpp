@@ -33,9 +33,7 @@ void Run::proc(int argc, char *argv[])
     }
     else if (Parameter::domain == Run::DOM_CALTECH)
     {
-        std::cout << "Begin to learn in caltech..." << std::endl;
         Run::run_caltech();
-        std::cout << "Learn caltech finished." << std::endl;
     }
 }
 
@@ -107,12 +105,9 @@ void Run::run_caltech()
 
         Utils::println("learn " + iter->first + " num_cat=" + std::to_string(num_cat));
         Dataset data;
-        std::cout << "Loading data..." << iter->first << std::endl;
         data.load_caltech(iter->first);
-        std::cout << "Data loaded." << std::endl;
         // learn
         GenerativeLearning l;
-        std::cout << "Begin to learn data from " << iter->first << std::endl;
         l.learn(data.get_train());
         std::cout << "Finish learning." << std::endl;
         SPN dspn = l.get_DSPN();

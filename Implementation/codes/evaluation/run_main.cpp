@@ -1,6 +1,7 @@
 #include "run.hpp"
 #include <mpi.h>
 #include "../common/my_mpi.hpp"
+#include <iostream>
 
 int main(int argc, char *argv[])
 {
