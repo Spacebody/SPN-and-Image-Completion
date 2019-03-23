@@ -717,25 +717,13 @@ void SPN::send_update(int dest)
 {
     if (MyMPI::buf_idx >= MyMPI::buf_size)
         Utils::println("ERR: buffer overflow to" + std::to_string(dest));
-<<<<<<< HEAD
-    // MPI::COMM_WORLD.Send(&MyMPI::buf_int, MyMPI::buf_idx, MPI::INT, dest, 0);
-=======
->>>>>>> origin/master
     MPI_Send(&MyMPI::buf_int, MyMPI::buf_idx, MPI_INT, dest, 0, MPI_COMM_WORLD);
 }
 
 void SPN::recv_update(int src)
 {
-<<<<<<< HEAD
-    // MPI::Status status;
-    MPI_Status status;
-    // MPI::COMM_WORLD.Recv(&MyMPI::buf_int, MyMPI::buf_idx, MPI::INT, src, 0, status);
-    MPI_Recv(&MyMPI::buf_int, MyMPI::buf_idx, MPI_INT, src, 0, MPI_COMM_WORLD, &status);
-    // MyMPI::buf_idx += status.Get_count(MPI::INT);
-=======
     MPI_Status status;
     MPI_Recv(&MyMPI::buf_int, MyMPI::buf_idx, MPI_INT, src, 0, MPI_COMM_WORLD, &status);
->>>>>>> origin/master
     int count;
     MPI_Get_count(&status, MPI_INT, &count);
     MyMPI::buf_idx += count;
