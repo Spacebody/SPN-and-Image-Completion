@@ -28,8 +28,8 @@ void MyMPI::set_constants_for_imgs_parallel()
 
     // slave
     MyMPI::my_offset = (MyMPI::rank - 1) % (Parameter::num_slave_per_class + 1); // slave
-    MyMPI::my_start = MyMPI::rank + 1;
-    MyMPI::my_slave = 1;
+    MyMPI::my_start = MyMPI::rank - MyMPI::my_offset;
+    MyMPI::master_rank = MyMPI::rank - MyMPI::my_offset - 1;
 
     // master
     MyMPI::my_slave = MyMPI::rank + 1;
