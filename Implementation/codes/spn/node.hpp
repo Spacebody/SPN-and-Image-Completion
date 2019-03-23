@@ -10,8 +10,8 @@ class Node
         this->log_derivative = Node::zero_log_val;
     }
     virtual ~Node() {}
-    Node(const Node &node);
-    virtual Node &operator=(const Node &node);
+    // Node(const Node &node);
+    // virtual Node &operator=(const Node &node);
 
     static double zero_log_val;
 

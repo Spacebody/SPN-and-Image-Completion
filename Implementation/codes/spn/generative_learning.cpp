@@ -13,7 +13,9 @@ SPN GenerativeLearning::get_DSPN()
 
 void GenerativeLearning::learn(std::vector<Instance> train)
 {
+    std::cout << "Learning hard EM..." << std::endl;
     this->learn_hard_EM(train);
+    std::cout << "Hard EM learned." << std::endl;
 }
 
 void GenerativeLearning::save_model(std::string mdl_file_name)
@@ -51,6 +53,7 @@ void GenerativeLearning::learn_hard_EM(std::vector<Instance> train)
             // master: aggregate update and pass on
             if (MyMPI::is_class_master)
             {
+                std::cout << "I am master." << std::endl;
                 // recv clear-parse
                 MyMPI::buf_idx = 0;
                 for (int i = 0; i < Parameter::num_slave_per_class; ++i)
@@ -60,6 +63,7 @@ void GenerativeLearning::learn_hard_EM(std::vector<Instance> train)
                         if (is_log)
                             Utils::println("recv clear update from" + std::to_string((MyMPI::my_slave + i)));
                         this->spn.recv_update(MyMPI::my_slave + i);
+                        std::cout << "Received clear-parse." << std::endl;
                     }
                 }
 
@@ -68,6 +72,7 @@ void GenerativeLearning::learn_hard_EM(std::vector<Instance> train)
                     if (is_log)
                         Utils::println("send clear update from" + std::to_string((MyMPI::my_slave + i)));
                     this->spn.send_update(MyMPI::my_slave + i);
+                    std::cout << "Sent clear update." << std::endl;
                 }
 
                 // recv parse from slaves
@@ -79,6 +84,7 @@ void GenerativeLearning::learn_hard_EM(std::vector<Instance> train)
                         if (is_log)
                             Utils::println("recv parse update from" + std::to_string((MyMPI::my_slave + i)));
                         this->spn.recv_update(MyMPI::my_slave + i);
+                        std::cout << "Received parse." << std::endl;
                     }
                 }
 
@@ -87,10 +93,12 @@ void GenerativeLearning::learn_hard_EM(std::vector<Instance> train)
                     if (is_log)
                         Utils::println("send parse update from" + std::to_string((MyMPI::my_slave + i)));
                     this->spn.send_update(MyMPI::my_slave + i);
+                    std::cout << "Sent parse update." << std::endl;
                 }
             }
             else  // slave
             {
+                std::cout << "I am slave." << std::endl;
                 int k = MyMPI::my_offset;
                 if (k * num_inst_per_slave < Parameter::batch_size && bi + k*num_inst_per_slave < train.size())
                 {

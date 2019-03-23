@@ -3,26 +3,26 @@
 #include <cmath>
 #include "../common/utils.hpp"
 
-SumNode &SumNode::operator=(SumNode &sum_node)
-{
-    if (this != &sum_node)
-    {
-        this->children = sum_node.children;
-        this->child_cnts = sum_node.child_cnts;
-        this->cnt = sum_node.cnt;
-    }
-    return *this;
-}
+// SumNode &SumNode::operator=(SumNode &sum_node)
+// {
+//     if (this != &sum_node)
+//     {
+//         this->children = sum_node.children;
+//         this->child_cnts = sum_node.child_cnts;
+//         this->cnt = sum_node.cnt;
+//     }
+//     return *this;
+// }
 
-SumNode::SumNode(const SumNode &sum_node)
-{
-    if (this != &sum_node)
-    {
-        this->children = sum_node.children;
-        this->child_cnts = sum_node.child_cnts;
-        this->cnt = sum_node.cnt;
-    }
-}
+// SumNode::SumNode(const SumNode &sum_node)
+// {
+//     if (this != &sum_node)
+//     {
+//         this->children = sum_node.children;
+//         this->child_cnts = sum_node.child_cnts;
+//         this->cnt = sum_node.cnt;
+//     }
+// }
 
 void SumNode::eval()
 {
