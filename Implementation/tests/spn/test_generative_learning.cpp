@@ -6,7 +6,7 @@ int main(int argc, char *argv[])
 {
     GenerativeLearning gl;
     std::cout << "coarse_dim1: " << gl.get_DSPN().coarse_dim1 << std::endl;
-    MPI::Init(argc, argv);
+    MPI_Init(NULL, NULL);
     MyMPI my_mpi;
     gl.send_msg_OK(0);
     std::cout << "send_msg_OK okay." << std::endl;
@@ -14,6 +14,6 @@ int main(int argc, char *argv[])
     gl.send_llh(0, 0.5);
     std::cout << "send_llh okay." << std::endl;
     std::cout << gl.recv_llh(0) << std::endl;
-    MPI::Finalize();
+    MPI_Finalize();
     return 0;
 }
