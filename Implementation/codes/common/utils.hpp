@@ -11,13 +11,14 @@ class Utils
   public:
     Utils()
     {
-        timer.timer_start();
+        // timer.timer_start();
     }
     ~Utils() {}
 
+    // return intensity value in gray scale
+    static int get_int_val(const Instance inst, const double p);
+    
     // time
-    static int get_int_val(const Instance &ins, const double p);
-
     static Timer timer;
     static void log_time(std::string msg);
     static void log_time_ms(std::string msg);
@@ -40,7 +41,7 @@ class Utils
     static int random_next_int(int bound);
 
     // trim string
-    static std::string trim(const std::string &str);
+    static std::string trim(std::string str);
 };
 
 #endif

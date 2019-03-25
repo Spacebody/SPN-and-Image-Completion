@@ -11,7 +11,7 @@ void SumNode::eval()
     std::map<std::string, Node>::iterator iter;
     for (iter = this->children.begin(); iter != this->children.end(); ++iter)
     {
-        double l = this->children[iter->first].get_log_val();
+        double l = this->children[iter->first].log_val;
         if (l == Node::zero_log_val)
             continue;
         if (max_i == "" || max_l == l)
@@ -29,7 +29,7 @@ void SumNode::eval()
     {
         if(!this->children.count(iter->first))
             continue;
-        double l = this->children[iter->first].get_log_val();
+        double l = this->children[iter->first].log_val;
         if(l == Node::zero_log_val)
             continue;
         v += SumNode::get_child_cnt(iter->first) * exp(l - max_l);
@@ -39,17 +39,17 @@ void SumNode::eval()
 
 void SumNode::pass_derivative()
 {
-    if (SumNode::get_log_derivative() == Node::zero_log_val)
+    if (SumNode::log_derivative == Node::zero_log_val)
         return;
     std::map<std::string, Node>::iterator iter;
     for (iter = this->children.begin(); iter != this->children.end(); ++iter)
     {
         Node n = this->children[iter->first];
-        double l = SumNode::get_log_derivative() + log(SumNode::get_child_cnt(iter->first) / this->cnt);
-        if (n.get_log_derivative() == Node::zero_log_val)
+        double l = SumNode::log_derivative + log(SumNode::get_child_cnt(iter->first) / this->cnt);
+        if (n.log_derivative == Node::zero_log_val)
             n.set_log_derivative(l);
         else
-            n.set_log_derivative(Utils::add_log(l, n.get_log_derivative()));
+            n.set_log_derivative(Utils::add_log(l, n.log_derivative));
     }
 }
 

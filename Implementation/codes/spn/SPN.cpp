@@ -192,17 +192,17 @@ double SPN::cmp_marginal(Region r)
     for (int i = 0; i < r.types.size(); ++i)
     {
         SumNode n = r.types[i];
-        if (n.get_log_derivative() == Node::zero_log_val)
+        if (n.log_derivative == Node::zero_log_val)
             continue;
-        if (md == 100 || n.get_log_derivative() > md)
-            md = n.get_log_derivative();
+        if (md == 100 || n.log_derivative > md)
+            md = n.log_derivative;
     }
     for (int i = 0; i < r.types.size(); ++i)
     {
         SumNode n = r.types[i];
-        if (n.get_log_derivative() == Node::zero_log_val)
+        if (n.log_derivative == Node::zero_log_val)
             continue;
-        double p = exp(n.get_log_derivative() - md);
+        double p = exp(n.log_derivative - md);
         d += r.means[i] * p;
         t += p;
     }
@@ -620,11 +620,11 @@ void SPN::infer_MAP_for_learning(int ii, Instance inst)
 
     //fine region
     for (int ca = 0; ca < this->coarse_dim1; ++ca)
-        for (int cb = 1; cb <= this->coarse_dim2; ++cb)
+        for (int cb = 0; cb <= this->coarse_dim2; ++cb)
             for (int a = 1; a <= Parameter::base_resolution; ++a)
                 for (int b = 1; b <= Parameter::base_resolution; ++b)
                 {
-                    if (ca == 1 && cb == 1)
+                    if (a == 1 && b == 1)
                         continue;
                     for (int a1 = ca * Parameter::base_resolution; a1 <= (ca + 1) * Parameter::base_resolution - a; ++a1)
                     {
@@ -727,7 +727,7 @@ double SPN::llh(Instance inst)
 {
     this->set_input(inst);
     this->eval();
-    return this->root.get_log_val();
+    return this->root.log_val;
 }
 
 // set dspn input

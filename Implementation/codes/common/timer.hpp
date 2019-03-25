@@ -6,10 +6,10 @@
 class Timer
 {
   private:
-    static clock_t start, end;
+    static clock_t start_time;
 
   public:
-    Timer() {}
+    Timer();
     ~Timer() {}
 
     static void timer_start();      // start timer

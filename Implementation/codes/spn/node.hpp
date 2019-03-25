@@ -12,9 +12,9 @@ class Node
     virtual ~Node() {}
 
     static double zero_log_val;
+    double log_val;
+    double log_derivative;
 
-    double get_log_val();
-    double get_log_derivative();
     void set_log_val(double value);
     void set_log_derivative(double derivative);
 
@@ -26,10 +26,6 @@ class Node
 
     // propagate derivative to children
     virtual void pass_derivative();
-
-  private:
-    double log_val;
-    double log_derivative;
 };
 
 #endif

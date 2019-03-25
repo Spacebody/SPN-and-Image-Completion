@@ -126,10 +126,10 @@ void Region::set_Gauss_base(double v)
     {
         SumNode n = this->types[i];
         n.set_log_val(this->cmp_Gauss(v, this->means[i]));
-        if (this->def_map_type_idx == -1 || n.get_log_val() > mp)
+        if (this->def_map_type_idx == -1 || n.log_val > mp)
         {
             this->def_map_type_idx = i;
-            mp = n.get_log_val();
+            mp = n.log_val;
         }
     }
 }
@@ -173,7 +173,7 @@ void Region::infer_MAP(int inst_idx, Instance inst)
              iter2 != n.get_children().end(); ++iter2)
         {
             Node c = n.get_children()[iter2->first];
-            double m = (c.get_log_val() == Node::zero_log_val) ? Node::zero_log_val : c.get_log_val() + log(n.get_child_cnt(iter2->first));
+            double m = (c.log_val == Node::zero_log_val) ? Node::zero_log_val : c.log_val + log(n.get_child_cnt(iter2->first));
 
             if (map_decomp_opt.empty() || m > max_child_prob)
             {
@@ -244,10 +244,10 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance inst)
         SumNode n2 = r2.types[r2.def_map_type_idx];
         double lp;
 
-        if (n1.get_log_val() == Node::zero_log_val || n2.get_log_val() == Node::zero_log_val)
+        if (n1.log_val == Node::zero_log_val || n2.log_val == Node::zero_log_val)
             lp = Node::zero_log_val;
         else
-            lp = n1.get_log_val() + n2.get_log_val();
+            lp = n1.log_val + n2.log_val;
 
         if (def_map_decomp_opts.empty() || lp > this->def_map_prod_prob)
         {
@@ -271,10 +271,10 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance inst)
         SumNode n2 = r2.types[r2.def_map_type_idx];
         double lp;
 
-        if (n1.get_log_val() == Node::zero_log_val || n2.get_log_val() == Node::zero_log_val)
+        if (n1.log_val == Node::zero_log_val || n2.log_val == Node::zero_log_val)
             lp = Node::zero_log_val;
         else
-            lp = n1.get_log_val() + n2.get_log_val();
+            lp = n1.log_val + n2.log_val;
 
         if (def_map_decomp_opts.empty() || lp > this->def_map_prod_prob)
         {
@@ -317,8 +317,8 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance inst)
                 iter != n.get_children().end(); ++iter)
         {
             Node c = n.get_children()[iter->first];
-            double l = n.get_log_val() + log(n.get_cnt());
-            double m = c.get_log_val();
+            double l = n.log_val + log(n.get_cnt());
+            double m = c.log_val;
             double nl;
 
             if (l > m) 
@@ -344,9 +344,9 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance inst)
         if (n.get_children().count(def_map_decomp) == 0)
         {
             double nl = this->def_map_prod_prob;
-            if (n.get_log_val() != Node::zero_log_val)
+            if (n.log_val != Node::zero_log_val)
             {
-                nl = log(n.get_cnt()) + n.get_log_val();
+                nl = log(n.get_cnt()) + n.log_val;
                 if (this->def_map_prod_prob > nl)
                 {
                     nl = this->def_map_prod_prob + log(1 + exp(nl - this->def_map_prod_prob));
@@ -372,12 +372,12 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance inst)
         this->map_decomps[ti] = map_decomp_opt[Utils::random_next_int(map_decomp_opt.size())];
         map_decomp_opt.clear();
 
-        if (map_types.empty() || n.get_log_val() > this->def_map_sum_prob)
+        if (map_types.empty() || n.log_val > this->def_map_sum_prob)
         {
-            this->def_map_sum_prob = n.get_log_val();
+            this->def_map_sum_prob = n.log_val;
             map_types.clear();
         }
-        if (n.get_log_val() == this->def_map_sum_prob)
+        if (n.log_val == this->def_map_sum_prob)
         {
             map_types.push_back(ti);
         }
@@ -389,9 +389,9 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance inst)
         n.set_log_val(this->def_map_prod_prob - log(n.get_cnt() + 1) - Parameter::sparse_prior);
         map_decomps[chosen_blank_idx] = def_map_decomp;
 
-        if (map_types.empty() || n.get_log_val() > this->def_map_sum_prob)
+        if (map_types.empty() || n.log_val > this->def_map_sum_prob)
         {
-            this->def_map_sum_prob = n.get_log_val();
+            this->def_map_sum_prob = n.log_val;
             map_types.clear();
             map_types.push_back(chosen_blank_idx);
         }
