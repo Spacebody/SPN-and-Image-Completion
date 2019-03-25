@@ -29,8 +29,7 @@ void GenerativeLearning::learn_hard_EM(std::vector<Instance> train)
 
     this->spn.print_params();
     this->spn.init();
-    std::string msg = "init";
-    Utils::log_time_ms(msg);
+    Utils::log_time_ms("init");
 
     //------------------------------------------------------
     //-----process each mini-batch, find map, update weights
@@ -116,10 +115,7 @@ void GenerativeLearning::learn_hard_EM(std::vector<Instance> train)
                 this->spn.clear_cur_parse_from_buf();
 
                 if (is_log)
-                {
-                    std::string msg = "clear parse";
-                    Utils::log_time_ms(msg);
-                }
+                    Utils::log_time_ms("clear parse");
 
                 if (k * num_inst_per_slave < Parameter::batch_size && bi + k * num_inst_per_slave < train.size())
                 {
@@ -127,7 +123,7 @@ void GenerativeLearning::learn_hard_EM(std::vector<Instance> train)
                     for (int i = k * num_inst_per_slave; i < (k + 1) * num_inst_per_slave && bi + i < train.size(); ++i)
                     {
                         // map -> update cnt
-                        this->spn.infer_MAP_for_learning(bi + i, train[bi+i]);
+                        this->spn.infer_MAP_for_learning(bi + i, train[bi + i]);
                         this->spn.set_cur_parse_to_MAP(bi + i);
                     }
                     if (is_log)
@@ -136,24 +132,17 @@ void GenerativeLearning::learn_hard_EM(std::vector<Instance> train)
                 }
 
                 if (is_log)
-                {
-                    std::string msg = "cmp map ...";
-                    Utils::log_time_ms(msg);
-                }
+                    Utils::log_time_ms("cmp map ...");
 
                 MyMPI::buf_idx = 0;
                 this->spn.recv_update(MyMPI::master_rank);
                 this->spn.set_cur_parse_from_buf();
 
                 if (is_log)
-                {
-                    std::string msg = "update weight";
-                    Utils::log_time_ms(msg);
-                }
+                    Utils::log_time_ms("update weight");
             }
         }
-        std::string msg = "finish iter " + std::to_string(iter);
-        Utils::log_time_ms(msg);
+        Utils::log_time_ms("finish iter " + std::to_string(iter));
 
         if(!MyMPI::is_class_master)
             this->spn.clear_unused_in_SPN();
@@ -168,8 +157,7 @@ void GenerativeLearning::learn_hard_EM(std::vector<Instance> train)
                 llh += this->recv_llh(rank);
             }
             llh /= train.size();
-            std::string msg = "[iter=" + std::to_string(iter) + "] llh=" + std::to_string(llh) + " ollh=" + std::to_string(ollh);
-            Utils::log_time_ms(msg);
+            Utils::log_time_ms("[iter=" + std::to_string(iter) + "] llh=" + std::to_string(llh) + " ollh=" + std::to_string(ollh));
             if (iter == 1)
                 ollh = llh;
             else
@@ -210,10 +198,7 @@ void GenerativeLearning::learn_hard_EM(std::vector<Instance> train)
         }
 
         if (is_log)
-        {
-            std::string msg = "done with convergence test";
-            Utils::log_time_ms(msg);
-        }            
+            Utils::log_time_ms("done with convergence test");         
     }
 
     // time

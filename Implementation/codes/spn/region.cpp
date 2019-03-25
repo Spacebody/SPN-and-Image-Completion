@@ -196,15 +196,16 @@ void Region::infer_MAP(int inst_idx, Instance inst)
 void Region::infer_MAP_for_learning(int inst_idx, Instance inst)
 {
     std::vector<std::string> def_map_decomp_opts = std::vector<std::string>();
-    std::string def_map_decomp = NULL;
+    std::string def_map_decomp = "";
     if (this->map_decomps.empty())
         this->map_decomps.reserve(this->types.size());
-    
+
     this->def_map_type_idx = -1;
     this->def_map_sum_prob = 100;
     this->def_map_prod_prob = 100;
     def_map_decomp_opts.clear();
 
+    // sum: choose a previous unused node
     std::vector<int> blanks = std::vector<int>();
     for (int i = 0; i < this->types.size(); ++i)
     {
@@ -231,6 +232,7 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance inst)
         blanks.clear();
     }
 
+    // find MAP decomposition
     for (int i = this->a1 + this->interval; i < this->a2; i += this->interval)
     {
         int ri1 = Region::get_region_id(this->a1, i, this->b1, this->b2);
@@ -246,7 +248,7 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance inst)
             lp = Node::zero_log_val;
         else
             lp = n1.get_log_val() + n2.get_log_val();
-        
+
         if (def_map_decomp_opts.empty() || lp > this->def_map_prod_prob)
         {
             this->def_map_prod_prob = lp;

@@ -19,12 +19,12 @@ class Utils
     static int get_int_val(const Instance &ins, const double p);
 
     static Timer timer;
-    static void log_time(std::string &msg);
-    static void log_time_ms(std::string &msg);
+    static void log_time(std::string msg);
+    static void log_time_ms(std::string msg);
 
     // logging
-    static void print(const std::string &s);
-    static void println(const std::string &s);
+    static void print(const std::string s);
+    static void println(const std::string s);
     static void println();
     static std::string get_prefix();
     static std::string left_pad(std::string s, const int len, const char c);

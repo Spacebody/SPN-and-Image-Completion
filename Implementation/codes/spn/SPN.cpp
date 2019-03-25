@@ -13,19 +13,16 @@ bool SPN::complete_by_marginal = true;
 // ----------------------------------------------
 void SPN::complete_bottom_img(Instance inst)
 {
-    std::string msg = "before comolete bottom half";
-    Utils::log_time_ms(msg);
+    Utils::log_time_ms("before comolete bottom half");
     if (this->complete_by_marginal) 
     {
         this->cmp_MAP_bottom_half_marginal(inst);
-        std::string msg2 = "Complete bottom by Marginal";
-        Utils::log_time(msg2);
+        Utils::log_time("Complete bottom by Marginal");
     }
     else
     {
         this->cmp_MAP_bottom_half(inst);
-        std::string msg3 = "Complete bottom by MPE";
-        Utils::log_time(msg3);
+        Utils::log_time("Complete bottom by MPE");
     }
 }
 
@@ -139,19 +136,16 @@ void SPN::set_MAP_bottom_to_buf(int inst_idx, Instance inst)
 // ----------------------------------------------
 void SPN::complete_left_img(Instance inst)
 {
-    std::string msg = "before comolete left half";
-    Utils::log_time_ms(msg);
+    Utils::log_time_ms("before comolete left half");
     if (this->complete_by_marginal)
     {
         this->cmp_MAP_left_half_marginal(inst);
-        std::string msg2 = "Complete left by Marginal";
-        Utils::log_time(msg2);
+        Utils::log_time("Complete left by Marginal");
     }
     else
     {
         this->cmp_MAP_left_half(inst);
-        std::string msg3 = "Complete left by MPE";
-        Utils::log_time(msg3);
+        Utils::log_time("Complete left by MPE");
     }
 }
 
@@ -256,9 +250,10 @@ void SPN::init()
                 for (int b1 = 0; b1 <= Parameter::input_dim2 - cb * Parameter::base_resolution; b1 += Parameter::base_resolution)
                 {
                     int b2 = b1 + cb * Parameter::base_resolution;
+                    // coarse regions
                     int ri = Region::get_region_id(a1, a2, b1, b2);
-                    Region r = Region::get_region(ri);
-                    if (ca == this->coarse_dim1 && this->coarse_dim2)
+                    Region r = Region::get_region(ri);  // one sum node as root
+                    if (ca == this->coarse_dim1 && cb == this->coarse_dim2)
                     {
                         r.reset_types(1);
                         this->root_region = r;
@@ -289,9 +284,7 @@ void SPN::init()
                                 this->init_unit_region(r);
                             }
                             else
-                            {
                                 r.reset_types(Parameter::num_sum_per_region); 
-                            }
                         }
                     }
                 }

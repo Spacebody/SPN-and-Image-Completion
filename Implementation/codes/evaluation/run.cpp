@@ -113,8 +113,7 @@ void Run::run_caltech()
         SPN dspn = l.get_DSPN();
         if (MyMPI::my_offset == 0)
             dspn.save_DSPN(Run::cal_mdl_dir + "/" + iter->first);
-        std::string log_msg = "unsup learn for completion done: " + iter->first;
-        Utils::log_time_ms(log_msg);
+        Utils::log_time_ms("unsup learn for completion done: " + iter->first);
 
         // complete left/bottom
         ImageCompletion::complete_left(dspn, data.get_test(), iter->first, Run::cal_rst_dir);
