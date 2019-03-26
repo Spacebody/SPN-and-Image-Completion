@@ -15,6 +15,12 @@ std::string Dataset::cal_mdl_dir = Dataset::exp_dir +"/results/caltech/models";
 
 int Dataset::RESCALE_LEN = 100;
 
+Dataset::Dataset()
+{
+    this->train = std::vector<Instance>();
+    this->test = std::vector<Instance>();
+}
+
 // dataset
 std::vector<Instance> Dataset::get_train()
 {

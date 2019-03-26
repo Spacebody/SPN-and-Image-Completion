@@ -13,6 +13,9 @@ class ImageCompletion
 {
     static int PAD_LEN;
 
+    ImageCompletion() {}
+    ~ImageCompletion() {}
+
     //-------------------------------------------------------------
     // Completion
     //-------------------------------------------------------------
