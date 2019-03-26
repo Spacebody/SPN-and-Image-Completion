@@ -5,10 +5,7 @@
 class Node
 {
   public:
-    Node()
-    {
-        this->log_derivative = Node::zero_log_val;
-    }
+    Node();
     virtual ~Node() {}
 
     static double zero_log_val;
@@ -16,7 +13,6 @@ class Node
     double log_derivative;
 
     void set_log_val(double value);
-    void set_log_derivative(double derivative);
 
     /*
         the two pure virtual function should be implemented in subclasses

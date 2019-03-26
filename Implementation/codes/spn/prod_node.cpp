@@ -1,6 +1,11 @@
 #include "prod_node.hpp"
 #include "../common/utils.hpp"
 
+ProdNode::ProdNode()
+{
+    this->children = std::vector<Node>();
+}
+
 void ProdNode::pass_derivative()
 {
     if (this->log_derivative == Node::zero_log_val) return;
@@ -33,34 +38,35 @@ void ProdNode::pass_derivative()
 
                 l += this->log_derivative;
                 if (iter1->log_derivative == Node::zero_log_val)
-                    iter1->set_log_derivative(l);
+                    iter1->log_derivative = l;
                 else
-                    iter1->set_log_derivative(Utils::add_log(iter1->log_derivative, l));
+                    iter1->log_derivative = Utils::add_log(iter1->log_derivative, l);
             }
         }
         else if (this->log_val != Node::zero_log_val)
         {
             double l = this->log_derivative + this->log_val - iter1->log_val;
             if (iter1->log_derivative == Node::zero_log_val)
-                iter1->set_log_derivative(l);
+                iter1->log_derivative = l;
             else
-                iter1->set_log_derivative(Utils::add_log(iter1->log_derivative, l));
+                iter1->log_derivative = Utils::add_log(iter1->log_derivative, l);
         }
     }
 }
 
 void ProdNode::eval()
 {
-    this->set_log_val(0);
+    this->log_val = 0;
     for (std::vector<Node>::iterator iter = this->children.begin(); \
             iter != this->children.end(); ++iter)
     {
         double v = iter->log_val;
         if (v == Node::zero_log_val)
         {
-            this->set_log_val(Node::zero_log_val);
+            this->log_val = Node::zero_log_val;
             return;
         }
+        this->log_val += v;
     }
 }
 

@@ -8,12 +8,12 @@
 class SumNode: public Node
 {
   public:
-    SumNode() : cnt(Parameter::smooth_sum_cnt)
-    {
-        this->children.empty();
-        this->child_cnts.empty();
-    }
+    SumNode();
     ~SumNode() {}
+
+    std::map<std::string, Node> children;
+    std::map<std::string, double> child_cnts;
+    double cnt;
 
     void eval();
     void pass_derivative();
@@ -21,16 +21,6 @@ class SumNode: public Node
     void set_child_cnt(std::string di, double cnt);
     void add_child_only(std::string decomp_idx, double cnt, Node n);
     void remove_child_only(std::string decomp_idx, double cnt);
-
-    std::map<std::string, Node> get_children();
-    double get_cnt();
-    void set_cnt(double cnt);
-    void add_child_only(std::string di, Node n);
-
-  private:
-    std::map<std::string, Node> children;
-    std::map<std::string, double> child_cnts;
-    double cnt;
 };
 
 #endif

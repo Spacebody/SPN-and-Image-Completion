@@ -9,10 +9,7 @@
 class Utils
 {
   public:
-    Utils()
-    {
-        // timer.timer_start();
-    }
+    Utils() {}
     ~Utils() {}
 
     // return intensity value in gray scale

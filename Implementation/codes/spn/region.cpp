@@ -31,13 +31,14 @@ Region::Region(int id, int a1, int a2, int b1, int b2)
             this->interval = Parameter::base_resolution;
     }
 
-    this->ttl_cnts = 0;
+    this->ttl_cnt = 0;
+
     this->inst_type = std::unordered_map<int, int>();
     this->inst_decomp = std::unordered_map<int, std::string>();
     this->decomp_prod = std::unordered_map<std::string, ProdNode>();
 
     this->types = std::vector<SumNode>();
-
+    
     this->map_decomps = std::vector<std::string>();
 
     this->invar = sqrt(20);
@@ -80,8 +81,9 @@ std::string Region::my_str()
     return s;
 }
 
+// initialization
 void Region::reset_types(int num_types)
-{
+{   // clean up
     this->types.clear();
     this->inst_type.clear();
     this->inst_decomp.clear();
@@ -107,9 +109,10 @@ void Region::set_types(int num_types)
     }
 }
 
+// set value for input layer
 void Region::set_base(double val)
 {
-    this->set_Gauss_base(val);
+    this->set_base_Gauss(val);
 }
 
 double Region::cmp_Gauss(double v, double mean)
@@ -118,14 +121,14 @@ double Region::cmp_Gauss(double v, double mean)
     return -(m * m / 2);
 }
 
-void Region::set_Gauss_base(double v)
+void Region::set_base_Gauss(double v)
 {
     this->def_map_type_idx = -1;
     double mp = 0;
     for (int i = 0; i < this->types.size(); ++i)
     {
         SumNode n = this->types[i];
-        n.set_log_val(this->cmp_Gauss(v, this->means[i]));
+        n.log_val = this->cmp_Gauss(v, this->means[i]);
         if (this->def_map_type_idx == -1 || n.log_val > mp)
         {
             this->def_map_type_idx = i;
@@ -140,7 +143,7 @@ void Region::set_base_for_sum_out()
     for (int i = 0; i < Parameter::num_components_per_var; ++i)
     {
         SumNode n = this->types[i];
-        n.set_log_val(0);
+        n.log_val =0;
     }
 }
 
@@ -161,7 +164,7 @@ void Region::infer_MAP(int inst_idx, Instance inst)
     // evaluate children for sum nodes
     for (int ti = 0; ti < this->types.size(); ++ti)
     {
-        if (this->types[ti].get_children().size() == 0)
+        if (this->types[ti].children.size() == 0)
             continue;
 
         SumNode n = this->types[ti];
@@ -169,10 +172,10 @@ void Region::infer_MAP(int inst_idx, Instance inst)
 
         double max_child_prob = 0;
         std::vector<std::string> map_decomp_opt = std::vector<std::string>();
-        for (std::map<std::string, Node>::iterator iter2 = n.get_children().begin();
-             iter2 != n.get_children().end(); ++iter2)
+        for (std::map<std::string, Node>::iterator iter2 = n.children.begin();
+             iter2 != n.children.end(); ++iter2)
         {
-            Node c = n.get_children()[iter2->first];
+            Node c = n.children[iter2->first];
             double m = (c.log_val == Node::zero_log_val) ? Node::zero_log_val : c.log_val + log(n.get_child_cnt(iter2->first));
 
             if (map_decomp_opt.empty() || m > max_child_prob)
@@ -210,7 +213,7 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance inst)
     for (int i = 0; i < this->types.size(); ++i)
     {
         SumNode n = this->types[i];
-        if (n.get_children().size() == 0)
+        if (n.children.size() == 0)
         {
             // if (blanks.empty())
                 // blanks = std::vector<int>();
@@ -305,7 +308,7 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance inst)
     std::vector<int> map_types = std::vector<int>();
     for (int ti = 0; ti < this->types.size(); ++ti)
     {
-        if (this->types[ti].get_children().size() == 0)
+        if (this->types[ti].children.size() == 0)
             continue;
         SumNode n = this->types[ti];
         n.eval();
@@ -313,11 +316,11 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance inst)
         double max_sum_prob = 0;
         std::vector<std::string> map_decomp_opt = std::vector<std::string>();
 
-        for (std::map<std::string, Node>::iterator iter = n.get_children().begin();
-                iter != n.get_children().end(); ++iter)
+        for (std::map<std::string, Node>::iterator iter = n.children.begin();
+                iter != n.children.end(); ++iter)
         {
-            Node c = n.get_children()[iter->first];
-            double l = n.log_val + log(n.get_cnt());
+            Node c = n.children[iter->first];
+            double l = n.log_val + log(n.cnt);
             double m = c.log_val;
             double nl;
 
@@ -341,12 +344,12 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance inst)
             }
         }
 
-        if (n.get_children().count(def_map_decomp) == 0)
+        if (n.children.count(def_map_decomp) == 0)
         {
             double nl = this->def_map_prod_prob;
             if (n.log_val != Node::zero_log_val)
             {
-                nl = log(n.get_cnt()) + n.log_val;
+                nl = log(n.cnt) + n.log_val;
                 if (this->def_map_prod_prob > nl)
                 {
                     nl = this->def_map_prod_prob + log(1 + exp(nl - this->def_map_prod_prob));
@@ -366,7 +369,7 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance inst)
             }
         }
 
-        n.set_log_val(max_sum_prob - log(n.get_cnt() + 1));
+        n.log_val = max_sum_prob - log(n.cnt + 1);
 
         // randomly break tie
         this->map_decomps[ti] = map_decomp_opt[Utils::random_next_int(map_decomp_opt.size())];
@@ -386,7 +389,7 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance inst)
     if (chosen_blank_idx >= 0)
     {
         SumNode n = this->types[chosen_blank_idx];
-        n.set_log_val(this->def_map_prod_prob - log(n.get_cnt() + 1) - Parameter::sparse_prior);
+        n.log_val = this->def_map_prod_prob - log(n.cnt + 1) - Parameter::sparse_prior;
         map_decomps[chosen_blank_idx] = def_map_decomp;
 
         if (map_types.empty() || n.log_val > this->def_map_sum_prob)
@@ -409,17 +412,17 @@ void Region::set_cur_parse_to_MAP(int inst_idx)
 
     // type node
     if (this->types.size() == 1)
-        this->inst_type.insert(std::pair<int, int>(inst_idx, 0));
+        this->inst_type[inst_idx] = 0;  // only one choice
     int chosen_type = this->inst_type[inst_idx];
     std::string di = this->map_decomps[chosen_type];
 
-    this->inst_decomp.insert(std::pair<int, std::string>(inst_idx, di));
+    this->inst_decomp[inst_idx] = di;
     Decomposition d = Decomposition::get_decomposition(di);
     Region r1 = Region::get_region(d.region_id_1);
     Region r2 = Region::get_region(d.region_id_2);
 
-    r1.inst_type.insert(std::pair<int, int>(inst_idx, d.type_id_1));
-    r2.inst_type.insert(std::pair<int, int>(inst_idx, d.type_id_2));
+    r1.inst_type[inst_idx] = d.type_id_1;
+    r2.inst_type[inst_idx] = d.type_id_2;
 
     // record update if slave
     if (!MyMPI::is_class_master && SPN::is_recording_update)
@@ -445,6 +448,7 @@ void Region::set_cur_parse_to_MAP(int inst_idx)
     r2.set_cur_parse_to_MAP(inst_idx);
 }
 
+// clear an existing parse for incremental EM
 void Region::clear_cur_parse(int inst_idx)
 {
     if (this->inst_type.count(inst_idx) == 0)
@@ -496,9 +500,10 @@ void Region::set_cur_parse_from_buf(int chosen_type, int ri1, int ri2, int ti1, 
     Decomposition d = Decomposition::get_decomposition(di);
 
     // if prod node not created, create it now
-    ProdNode np = ProdNode();
+    ProdNode np;
     if (this->decomp_prod.count(di) == 0)
     {
+        np = ProdNode();
         Region r1 = Region::get_region(d.region_id_1);
         Region r2 = Region::get_region(d.region_id_2);
 
@@ -507,5 +512,7 @@ void Region::set_cur_parse_from_buf(int chosen_type, int ri1, int ri2, int ti1, 
 
         this->decomp_prod.insert(std::pair<std::string, ProdNode>(di, np));
     }
+    else
+        np = this->decomp_prod[di];
     n.add_child_only(di, 1, np);
 }

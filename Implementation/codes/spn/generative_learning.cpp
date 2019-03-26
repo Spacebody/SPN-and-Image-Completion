@@ -77,9 +77,7 @@ void GenerativeLearning::learn_hard_EM(std::vector<Instance> train)
                     {
                         if (is_log)
                             Utils::println("recv parse update from " + std::to_string((MyMPI::my_slave + i)));
-                        std::cout << "slave rank: " << MyMPI::my_slave + i << std::endl;
                         this->spn.recv_update(MyMPI::my_slave + i);
-                        std::cout << "Received parse." << std::endl;
                     }
                 }
 
@@ -88,7 +86,6 @@ void GenerativeLearning::learn_hard_EM(std::vector<Instance> train)
                     if (is_log)
                         Utils::println("send parse update to " + std::to_string((MyMPI::my_slave + i)));
                     this->spn.send_update(MyMPI::my_slave + i);
-                    std::cout << "Sent parse update." << std::endl;
                 }
             }
             else  // slave

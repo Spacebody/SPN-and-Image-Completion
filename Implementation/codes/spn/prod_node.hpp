@@ -7,10 +7,7 @@
 class ProdNode : public Node
 {
   public:
-    ProdNode()
-    {
-        this->children.empty();
-    }
+    ProdNode();
     ~ProdNode() {}
 
     void pass_derivative();

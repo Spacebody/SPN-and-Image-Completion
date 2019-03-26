@@ -11,12 +11,8 @@ class Instance
     double mean;
     double std;
 
-    Instance():mean(0), std(1)
-    {
-        this->vals.empty();
-    }
+    Instance();
     virtual ~Instance() {}
-
 };
 
 #endif
