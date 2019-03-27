@@ -25,11 +25,12 @@ Region::Region(int id, int a1, int a2, int b1, int b2)
                     std::to_string(a1) + ", " + std::to_string(a2) + ", " + std::to_string(b1) + ", " + std::to_string(b2));
             exit(-1);
         }
-        if(this->a <= Parameter::base_resolution && this->b <= Parameter::base_resolution)
-            this->interval = 1;
-        else
-            this->interval = Parameter::base_resolution;
     }
+
+    if (this->a <= Parameter::base_resolution && this->b <= Parameter::base_resolution)
+        this->interval = 1;
+    else
+        this->interval = Parameter::base_resolution;
 
     this->ttl_cnt = 0;
 
@@ -261,7 +262,7 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance &inst)
             def_map_decomp_opts.push_back(di);
         }
     }
-    for (int i = this->b1 + this->interval; i < b2; i += this->interval)
+    for (int i = this->b1 + this->interval; i < this->b2; i += this->interval)
     {
         int ri1 = Region::get_region_id(this->a1, this->a2, this->b1, i);
         int ri2 = Region::get_region_id(this->a1, this->a2, i, this->b2);
