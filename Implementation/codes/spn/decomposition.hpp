@@ -19,7 +19,7 @@ class Decomposition
     static Decomposition blank_decomp;
     int region_id_1, region_id_2, type_id_1, type_id_2;
 
-    static Decomposition get_decomposition(int region_id_1, int region_id_2, int type_id_1, int type_id_2);
+    static Decomposition &get_decomposition(int region_id_1, int region_id_2, int type_id_1, int type_id_2);
     static Decomposition get_decomposition(std::string id);
     std::string get_id();
     static void remove(std::string id);

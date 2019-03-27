@@ -49,7 +49,7 @@ class Region
     static std::unordered_map<int, Region> id_regions;
    
     static int get_region_id(int a1, int a2, int b1, int b2);
-    static Region get_region(int id);
+    static Region &get_region(int id);
     int get_id();
     std::string my_str();
     void reset_types(int num_types);
@@ -58,8 +58,8 @@ class Region
     double cmp_Gauss(double v, double mean);
     void set_base_Gauss(double v);
     void set_base_for_sum_out();
-    void infer_MAP(int inst_idx, Instance inst);
-    void infer_MAP_for_learning(int inst_idx, Instance inst);
+    void infer_MAP(int inst_idx, Instance &inst);
+    void infer_MAP_for_learning(int inst_idx, Instance &inst);
     void set_cur_parse_to_MAP(int inst_idx);
     void clear_cur_parse(int inst_idx);
     void clear_cur_parse_from_buf(int chosen_type, int ri1, int ri2, int ti1, int ti2);

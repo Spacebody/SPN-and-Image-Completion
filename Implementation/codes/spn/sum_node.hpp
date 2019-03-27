@@ -19,7 +19,7 @@ class SumNode: public Node
     void pass_derivative();
     double get_child_cnt(std::string di);
     void set_child_cnt(std::string di, double cnt);
-    void add_child_only(std::string decomp_idx, double cnt, Node n);
+    void add_child_only(std::string decomp_idx, double cnt, Node &n);
     void remove_child_only(std::string decomp_idx, double cnt);
 };
 

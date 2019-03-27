@@ -6,6 +6,7 @@
 
 class Run
 {
+  private:
     static void proc_args(int argc, char *argv[]);
 
   public:
