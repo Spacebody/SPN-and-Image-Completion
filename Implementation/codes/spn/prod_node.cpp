@@ -70,7 +70,7 @@ void ProdNode::eval()
     }
 }
 
-void ProdNode::add_child(Node n)
+void ProdNode::add_child(Node &n)
 {
     this->children.push_back(n);
 }

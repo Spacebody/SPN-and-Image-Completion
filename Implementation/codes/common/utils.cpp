@@ -3,7 +3,7 @@
 #include <cmath>
 
 //time
-int Utils::get_int_val(const Instance inst, const double p)
+int Utils::get_int_val(const Instance &inst, const double p)
 {
     return (int)(p * inst.std + inst.mean);
 }

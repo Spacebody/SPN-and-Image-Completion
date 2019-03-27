@@ -7,15 +7,12 @@
 std::map<std::string, Decomposition> Decomposition::id_decomp = std::map<std::string, Decomposition>();
 Decomposition Decomposition::blank_decomp = Decomposition("", -1, -1, -1, -1);
 
-Decomposition Decomposition::get_decomposition(int region_id_1, int region_id_2, int type_id_1, int type_id_2)
+Decomposition &Decomposition::get_decomposition(int region_id_1, int region_id_2, int type_id_1, int type_id_2)
 {
     std::string id = Decomposition::get_id_str(region_id_1, region_id_2, type_id_1, type_id_2);
-    Decomposition d;
     if (Decomposition::id_decomp.count(id) == 0)
         Decomposition::id_decomp.insert(std::pair<std::string, Decomposition>(id, Decomposition()));
-    else
-        d = Decomposition::id_decomp[id];
-    return d;
+    return Decomposition::id_decomp[id];
 }
 
 Decomposition Decomposition::get_decomposition(std::string id)

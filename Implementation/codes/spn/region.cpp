@@ -25,11 +25,12 @@ Region::Region(int id, int a1, int a2, int b1, int b2)
                     std::to_string(a1) + ", " + std::to_string(a2) + ", " + std::to_string(b1) + ", " + std::to_string(b2));
             exit(-1);
         }
-        if(this->a <= Parameter::base_resolution && this->b <= Parameter::base_resolution)
-            this->interval = 1;
-        else
-            this->interval = Parameter::base_resolution;
     }
+
+    if (this->a <= Parameter::base_resolution && this->b <= Parameter::base_resolution)
+        this->interval = 1;
+    else
+        this->interval = Parameter::base_resolution;
 
     this->ttl_cnt = 0;
 
@@ -48,13 +49,12 @@ int Region::get_region_id(int a1, int a2, int b1, int b2)
 {
     int id = ((a1 * Parameter::input_dim1 + a2 - 1) * Parameter::input_dim2 + b1) * Parameter::input_dim2 + b2 - 1;
     if (Region::id_regions.count(id) == 0)
-        Region::id_regions.insert(std::pair<int, Region>(id, Region(id, a1, a2, b1, b2)));
+        Region::id_regions.insert(std::pair<int, Region>(id, Region(id, a1, a2, b1, b2)));  // mark
     return id;
 }
 
-Region Region::get_region(int id)
+Region &Region::get_region(int id)
 {
-    Region r;
     if (id_regions.count(id) == 0)
     {
         int b2 = id % Parameter::input_dim2 + 1;
@@ -63,11 +63,10 @@ Region Region::get_region(int id)
         x = x / Parameter::input_dim2;
         int a2 = x % Parameter::input_dim1 + 1;
         int a1 = x / Parameter::input_dim1;
-        r = Region::get_region(Region::get_region_id(a1, a2, b1, b2));
+        return Region::get_region(Region::get_region_id(a1, a2, b1, b2));
     }
     else
-        r = Region::id_regions[id];
-    return r;
+        return Region::id_regions[id];
 }
 
 int Region::get_id() 
@@ -127,7 +126,7 @@ void Region::set_base_Gauss(double v)
     double mp = 0;
     for (int i = 0; i < this->types.size(); ++i)
     {
-        SumNode n = this->types[i];
+        SumNode &n = this->types[i];
         n.log_val = this->cmp_Gauss(v, this->means[i]);
         if (this->def_map_type_idx == -1 || n.log_val > mp)
         {
@@ -142,13 +141,13 @@ void Region::set_base_for_sum_out()
     this->def_map_type_idx = -1;
     for (int i = 0; i < Parameter::num_components_per_var; ++i)
     {
-        SumNode n = this->types[i];
-        n.log_val =0;
+        SumNode &n = this->types[i];
+        n.log_val = 0;
     }
 }
 
 // compute MAP state at inference time
-void Region::infer_MAP(int inst_idx, Instance inst)
+void Region::infer_MAP(int inst_idx, Instance &inst)
 {
     if (this->map_decomps.empty())
         this->map_decomps.reserve(this->types.size());
@@ -157,7 +156,7 @@ void Region::infer_MAP(int inst_idx, Instance inst)
     for (std::unordered_map<std::string, ProdNode>::iterator iter = this->decomp_prod.begin();
          iter != this->decomp_prod.end(); ++iter)
     {
-        ProdNode n = this->decomp_prod[iter->first];
+        ProdNode &n = this->decomp_prod[iter->first];
         n.eval();
     }
 
@@ -167,7 +166,7 @@ void Region::infer_MAP(int inst_idx, Instance inst)
         if (this->types[ti].children.size() == 0)
             continue;
 
-        SumNode n = this->types[ti];
+        SumNode &n = this->types[ti];
         n.eval();
 
         double max_child_prob = 0;
@@ -175,7 +174,7 @@ void Region::infer_MAP(int inst_idx, Instance inst)
         for (std::map<std::string, Node>::iterator iter2 = n.children.begin();
              iter2 != n.children.end(); ++iter2)
         {
-            Node c = n.children[iter2->first];
+            Node &c = n.children[iter2->first];
             double m = (c.log_val == Node::zero_log_val) ? Node::zero_log_val : c.log_val + log(n.get_child_cnt(iter2->first));
 
             if (map_decomp_opt.empty() || m > max_child_prob)
@@ -196,7 +195,7 @@ void Region::infer_MAP(int inst_idx, Instance inst)
 }
 
 // compute MAP state at learning time: could tap a previous unused node
-void Region::infer_MAP_for_learning(int inst_idx, Instance inst)
+void Region::infer_MAP_for_learning(int inst_idx, Instance &inst)
 {
     std::vector<std::string> def_map_decomp_opts = std::vector<std::string>();
     std::string def_map_decomp = "";
@@ -212,7 +211,7 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance inst)
     std::vector<int> blanks = std::vector<int>();
     for (int i = 0; i < this->types.size(); ++i)
     {
-        SumNode n = this->types[i];
+        SumNode &n = this->types[i];
         if (n.children.size() == 0)
         {
             // if (blanks.empty())
@@ -240,11 +239,11 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance inst)
     {
         int ri1 = Region::get_region_id(this->a1, i, this->b1, this->b2);
         int ri2 = Region::get_region_id(i, this->a2, this->b1, this->b2);
-        Region r1 = Region::get_region(ri1);
-        Region r2 = Region::get_region(ri2);
+        Region &r1 = Region::get_region(ri1);
+        Region &r2 = Region::get_region(ri2);
 
-        SumNode n1 = r1.types[r1.def_map_type_idx];
-        SumNode n2 = r2.types[r2.def_map_type_idx];
+        SumNode &n1 = r1.types[r1.def_map_type_idx];
+        SumNode &n2 = r2.types[r2.def_map_type_idx];
         double lp;
 
         if (n1.log_val == Node::zero_log_val || n2.log_val == Node::zero_log_val)
@@ -263,15 +262,15 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance inst)
             def_map_decomp_opts.push_back(di);
         }
     }
-    for (int i = this->b1 + this->interval; i < b2; i += this->interval)
+    for (int i = this->b1 + this->interval; i < this->b2; i += this->interval)
     {
         int ri1 = Region::get_region_id(this->a1, this->a2, this->b1, i);
         int ri2 = Region::get_region_id(this->a1, this->a2, i, this->b2);
-        Region r1 = Region::get_region(ri1);
-        Region r2 = Region::get_region(ri2);
+        Region &r1 = Region::get_region(ri1);
+        Region &r2 = Region::get_region(ri2);
 
-        SumNode n1 = r1.types[r1.def_map_type_idx];
-        SumNode n2 = r2.types[r2.def_map_type_idx];
+        SumNode &n1 = r1.types[r1.def_map_type_idx];
+        SumNode &n2 = r2.types[r2.def_map_type_idx];
         double lp;
 
         if (n1.log_val == Node::zero_log_val || n2.log_val == Node::zero_log_val)
@@ -300,7 +299,7 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance inst)
     for (std::unordered_map<std::string, ProdNode>::iterator iter = this->decomp_prod.begin();
             iter != this->decomp_prod.end(); ++iter)
     {
-        ProdNode n = this->decomp_prod[iter->first];
+        ProdNode &n = this->decomp_prod[iter->first];
         n.eval();
     }
 
@@ -310,7 +309,7 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance inst)
     {
         if (this->types[ti].children.size() == 0)
             continue;
-        SumNode n = this->types[ti];
+        SumNode &n = this->types[ti];
         n.eval();
 
         double max_sum_prob = 0;
@@ -319,7 +318,7 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance inst)
         for (std::map<std::string, Node>::iterator iter = n.children.begin();
                 iter != n.children.end(); ++iter)
         {
-            Node c = n.children[iter->first];
+            Node &c = n.children[iter->first];
             double l = n.log_val + log(n.cnt);
             double m = c.log_val;
             double nl;
@@ -388,7 +387,7 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance inst)
 
     if (chosen_blank_idx >= 0)
     {
-        SumNode n = this->types[chosen_blank_idx];
+        SumNode &n = this->types[chosen_blank_idx];
         n.log_val = this->def_map_prod_prob - log(n.cnt + 1) - Parameter::sparse_prior;
         map_decomps[chosen_blank_idx] = def_map_decomp;
 
@@ -418,8 +417,8 @@ void Region::set_cur_parse_to_MAP(int inst_idx)
 
     this->inst_decomp[inst_idx] = di;
     Decomposition d = Decomposition::get_decomposition(di);
-    Region r1 = Region::get_region(d.region_id_1);
-    Region r2 = Region::get_region(d.region_id_2);
+    Region &r1 = Region::get_region(d.region_id_1);
+    Region &r2 = Region::get_region(d.region_id_2);
 
     r1.inst_type[inst_idx] = d.type_id_1;
     r2.inst_type[inst_idx] = d.type_id_2;
@@ -473,9 +472,9 @@ void Region::clear_cur_parse(int inst_idx)
         MyMPI::buf_int[MyMPI::buf_idx++] = d.type_id_2;
     }
 
-    Region r1 = Region::get_region(d.region_id_1);
+    Region &r1 = Region::get_region(d.region_id_1);
     r1.clear_cur_parse(inst_idx);
-    Region r2 = Region::get_region(d.region_id_2);
+    Region &r2 = Region::get_region(d.region_id_2);
     r2.clear_cur_parse(inst_idx);
 }
 
@@ -486,7 +485,7 @@ void Region::clear_cur_parse_from_buf(int chosen_type, int ri1, int ri2, int ti1
         return;
 
     std::string di = Decomposition::get_id_str(ri1, ri2, ti1, ti2);
-    SumNode n = this->types[chosen_type];
+    SumNode &n = this->types[chosen_type];
     n.remove_child_only(di, 1);
 }
 
@@ -496,7 +495,7 @@ void Region::set_cur_parse_from_buf(int chosen_type, int ri1, int ri2, int ti1, 
         return;
 
     std::string di = Decomposition::get_id_str(ri1, ri2, ti1, ti2);
-    SumNode n = this->types[chosen_type];
+    SumNode &n = this->types[chosen_type];
     Decomposition d = Decomposition::get_decomposition(di);
 
     // if prod node not created, create it now
@@ -504,8 +503,8 @@ void Region::set_cur_parse_from_buf(int chosen_type, int ri1, int ri2, int ti1, 
     if (this->decomp_prod.count(di) == 0)
     {
         np = ProdNode();
-        Region r1 = Region::get_region(d.region_id_1);
-        Region r2 = Region::get_region(d.region_id_2);
+        Region &r1 = Region::get_region(d.region_id_1);
+        Region &r2 = Region::get_region(d.region_id_2);
 
         np.add_child(r1.types[d.type_id_1]);
         np.add_child(r2.types[d.type_id_2]);

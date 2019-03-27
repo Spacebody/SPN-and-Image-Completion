@@ -13,7 +13,7 @@ class Utils
     ~Utils() {}
 
     // return intensity value in gray scale
-    static int get_int_val(const Instance inst, const double p);
+    static int get_int_val(const Instance &inst, const double p);
     
     // time
     static Timer timer;
