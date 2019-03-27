@@ -100,7 +100,7 @@ void Dataset::load_caltech(std::string dir_name)
         else
             this->test.push_back(inst);
     }
-    if (MyMPI::is_class_master && MyMPI::my_offset == 0)
+    if (!MyMPI::is_class_master && MyMPI::my_offset == 0)
         Utils::println(dir_name + ": train.size=" + std::to_string(this->train.size()) + " test.size=" + std::to_string(this->test.size()));
 }
 
