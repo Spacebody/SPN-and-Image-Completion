@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <sstream>
+#include <iterator>
 
 std::map<std::string, Decomposition> Decomposition::id_decomp = std::map<std::string, Decomposition>();
 Decomposition Decomposition::blank_decomp = Decomposition("", -1, -1, -1, -1);
