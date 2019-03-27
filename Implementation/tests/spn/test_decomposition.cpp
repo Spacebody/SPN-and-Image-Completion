@@ -6,7 +6,7 @@ int main(int argc, char *argv[])
     Decomposition decomp("Test", 1, 2, 1, 2);
     std::cout << decomp.get_id() << std::endl;
     std::cout << "get_id okay." << std::endl;
-    Decomposition::get_blank_decomp();
+    Decomposition::blank_decomp.get_id();
     std::cout << "get_blank_decomp okay." << std::endl;
     std::cout << Decomposition::get_decomposition(1, 2, 1, 2).get_id() << std::endl;
     std::cout << "get_decomposition(ri1, ri2, type1, type2) okay." << std::endl;

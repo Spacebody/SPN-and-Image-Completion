@@ -17,6 +17,12 @@ std::string Dataset::cal_mdl_dir = Dataset::exp_dir +"/results/caltech/models";
 
 int Dataset::RESCALE_LEN = 100;
 
+Dataset::Dataset()
+{
+    this->train = std::vector<Instance>();
+    this->test = std::vector<Instance>();
+}
+
 // dataset
 std::vector<Instance> Dataset::get_train()
 {
@@ -96,7 +102,7 @@ void Dataset::load_caltech(std::string dir_name)
         else
             this->test.push_back(inst);
     }
-    if (MyMPI::is_class_master && MyMPI::my_offset == 0)
+    if (!MyMPI::is_class_master && MyMPI::my_offset == 0)
         Utils::println(dir_name + ": train.size=" + std::to_string(this->train.size()) + " test.size=" + std::to_string(this->test.size()));
 }
 

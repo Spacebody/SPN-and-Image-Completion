@@ -6,11 +6,11 @@
 int MyMPI::rank = 0;
 bool MyMPI::is_class_master = false;
 int MyMPI::master_rank = -1;
-int MyMPI::my_slave = -1;
+int MyMPI::my_slave = -1;  // class master
 
 // slave
-int MyMPI::my_offset = -1;
-int MyMPI::my_start = -1;
+int MyMPI::my_offset = -1;  // slave
+int MyMPI::my_start = -1;   // slave
 
 void MyMPI::set_constants_for_imgs()
 {
@@ -20,6 +20,8 @@ void MyMPI::set_constants_for_imgs()
     MyMPI::my_offset = MyMPI::rank - 1; // slave
     MyMPI::my_start = 1;                // slave
     MyMPI::my_slave = 1;                // class master
+
+    set_random_seed_by_rank();
 }
 
 void MyMPI::set_constants_for_imgs_parallel()
@@ -27,7 +29,7 @@ void MyMPI::set_constants_for_imgs_parallel()
     MyMPI::is_class_master = (MyMPI::rank % (Parameter::num_slave_per_class + 1) == 0);
 
     // slave
-    MyMPI::my_offset = (MyMPI::rank - 1) % (Parameter::num_slave_per_class + 1); // slave
+    MyMPI::my_offset = (MyMPI::rank - 1) % (Parameter::num_slave_per_class + 1);
     MyMPI::my_start = MyMPI::rank - MyMPI::my_offset;
     MyMPI::master_rank = MyMPI::rank - MyMPI::my_offset - 1;
 
@@ -45,9 +47,9 @@ void MyMPI::set_random_seed_by_rank()
 // buffer
 int MyMPI::buf_idx = 0;
 int MyMPI::buf_size = 10000000;
-std::vector<int> MyMPI::buf_int(MyMPI::buf_size);
-std::vector<double> MyMPI::buf_double(100);
-std::vector<char> MyMPI::buf_char(100);
+std::vector<int> MyMPI::buf_int = std::vector<int>(MyMPI::buf_size);
+std::vector<double> MyMPI::buf_double = std::vector<double>(100);
+std::vector<char> MyMPI::buf_char = std::vector<char>(100);
 
 // MPI util
 double MyMPI::recv_double(int src, int tag)

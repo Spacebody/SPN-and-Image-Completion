@@ -73,9 +73,7 @@ double Eval::cmp_MSE_left(std::string fn, int size, int pad_len)
         if (idx == size + pad_len)
             idx = 0;
         else if (idx > size)
-        {
             continue;
-        }
         else
         {
             std::vector<std::string> ts;
@@ -109,17 +107,15 @@ double Eval::cmp_MSE_bottom(std::string fn, int size, int pad_len)
         if (idx == size + pad_len)
             idx = 0;
         else if (idx > size)
-        {
             continue;
-        }
-        else
+        else if (idx > size / 2)
         {
             std::vector<std::string> ts;
             std::stringstream ss(s);
             ts.clear();
             while (std::getline(ss, s, ','))
                 ts.push_back(s); // split by ','
-            for (int i = 0; i < size / 2; ++i)
+            for (int i = 0; i < size; ++i)
             {
                 double q1 = std::stod(ts[i]), q2 = std::stod(ts[i + (size + pad_len)]);
                 p += (q1 - q2) * (q1 - q2);

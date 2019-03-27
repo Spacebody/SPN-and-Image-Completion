@@ -12,9 +12,6 @@
 
 class Region
 {
-  private:
-    
-
   public:
     int id;
     int a1, a2, b1, b2;
@@ -22,14 +19,14 @@ class Region
     int interval; // coarse resolution
 
     Region() {} // default constructor
-    Region(int id, int a1, int a2, int b1, int b2);
+    Region(int id, int a1, int a2, int b1, int b2); // todo: test for private
     ~Region() {}
 
     // pixel region only: gaussian units
     std::vector<double> means;
     std::vector<double> vars;
     std::vector<double> cnts;
-    double ttl_cnts;
+    double ttl_cnt;
 
     // data structure for a parse
     std::unordered_map<int, int> inst_type;
@@ -59,7 +56,7 @@ class Region
     void set_types(int num_types);
     void set_base(double val);
     double cmp_Gauss(double v, double mean);
-    void set_Gauss_base(double v);
+    void set_base_Gauss(double v);
     void set_base_for_sum_out();
     void infer_MAP(int inst_idx, Instance inst);
     void infer_MAP_for_learning(int inst_idx, Instance inst);

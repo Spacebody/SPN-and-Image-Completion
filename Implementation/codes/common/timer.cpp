@@ -1,15 +1,18 @@
 #include "timer.hpp"
 
-clock_t Timer::start = 0;
-clock_t Timer::end = 0;
+clock_t Timer::start_time = 0;
+
+Timer::Timer()
+{
+    Timer::timer_start();
+}
 
 void Timer::timer_start()
 {
-    Timer::start = clock();
+    Timer::start_time = clock();
 }
 
 long Timer::get_time_elapsed()
 {
-    Timer::end = clock();
-    return Timer::end - Timer::start;
+    return clock() - Timer::start_time;
 }

@@ -16,6 +16,7 @@ class MyMPI
     static bool is_class_master;
     static int master_rank;
     static int my_slave;
+    
     // slave
     static int my_offset;
     static int my_start;

@@ -14,11 +14,11 @@ class SPN
 {
   public:
     // learning
-    static bool is_recording_update;
+    static bool is_recording_update;  // record update in clear_parse/set_cur_parse
     std::vector<Instance> training_set;
 
     // completion
-    static bool complete_by_marginal;
+    static bool complete_by_marginal;  // complete pixel by marginal
 
     // root
     SumNode root;

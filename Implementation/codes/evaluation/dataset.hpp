@@ -45,6 +45,9 @@ class Dataset
     static Instance read_olivetti_instance(std::vector<std::vector<double> > faces, int pi);
 
   public:
+    Dataset();
+    ~Dataset() {}
+
     static std::string cal_mdl_dir;
     static std::string cal_rst_dir;
 
