@@ -281,7 +281,7 @@ void SPN::init()
                                 this->init_unit_region(r);
                             }
                             else
-                                r.reset_types(Parameter::num_sum_per_region); 
+                                r.reset_types(Parameter::num_sum_per_region);
                         }
                     }
                 }
