@@ -619,7 +619,7 @@ void SPN::infer_MAP_for_learning(int ii, Instance &inst)
 
     //fine region
     for (int ca = 0; ca < this->coarse_dim1; ++ca)
-        for (int cb = 0; cb <= this->coarse_dim2; ++cb)
+        for (int cb = 0; cb < this->coarse_dim2; ++cb) 
             for (int a = 1; a <= Parameter::base_resolution; ++a)
                 for (int b = 1; b <= Parameter::base_resolution; ++b)
                 {

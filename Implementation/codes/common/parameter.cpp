@@ -6,7 +6,7 @@ int Parameter::batch_size = 40;  //50
 double Parameter::sparse_prior = 1;
 
 int Parameter::num_sum_per_region = 20;
-int Parameter::input_dim1 = 64;
+int Parameter::input_dim1 = 100;
 int Parameter::input_dim2 = 64;
 int Parameter::base_resolution = 4;
 double Parameter::smooth_sum_cnt = 0.01;
