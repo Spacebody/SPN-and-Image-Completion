@@ -109,7 +109,6 @@ void Run::run_caltech()
         // learn
         GenerativeLearning l;
         l.learn(data.get_train());
-        std::cout << "Finish learning." << std::endl;
         SPN dspn = l.get_DSPN();
         if (MyMPI::my_offset == 0)
             dspn.save_DSPN(Run::cal_mdl_dir + "/" + iter->first);
