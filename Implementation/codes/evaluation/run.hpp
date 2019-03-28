@@ -10,8 +10,8 @@ class Run
     static void proc_args(int argc, char *argv[]);
 
   public:
-    Run() {};
-    ~Run() {};
+    Run() {}
+    ~Run() {}
 
     // directory
     static std::string exp_dir;
