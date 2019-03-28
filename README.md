@@ -112,15 +112,9 @@ make  # compile both caltech and olivetti
 Run the following commands to submit jobs on TaiYi(SUSTech):
 
 ```sh
-<<<<<<< HEAD
 bsub < run_caltech.lsf  # for caltech
 # or
 bsub < run_olivetti.lsf  # for olivetti
-=======
-mpic++ run -d C -n 102  #for caltech
-# or
-mpic++ run -d D -n 51 # for olivetti
->>>>>>> origin/master
 ```
 
 In `*.lsf`, standard output and standard error are defined to stored in `output` and `errors` respectively in the position where `codes` are stored.
