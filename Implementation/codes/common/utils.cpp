@@ -75,7 +75,7 @@ std::default_random_engine Utils::generator(Utils::seed);
 
 int Utils::random_next_int(int bound)
 {
-    std::uniform_int_distribution<int> dist(0, bound);
+    std::uniform_int_distribution<int> dist(0, bound - 1);
     return dist(Utils::generator);
 }
 
