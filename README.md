@@ -141,11 +141,7 @@ TODO
 
 - [x] Implementation of rest part(*Mar. 4, 2019*)
 
-<<<<<<< HEAD
 - [x] Reproduce of the Original Application (*Mar. 20, 2019*)
-=======
-- [x] Reproduce of the Original Application (*Mar. 19, 2019*)
->>>>>>> origin/master
 
 - [ ] Further Exploration and Optimization (*Mar. 25, 2019*)
 
