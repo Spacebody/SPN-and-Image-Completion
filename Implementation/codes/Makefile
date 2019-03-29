@@ -1,7 +1,7 @@
 VERSION = 1.0.2
 
 CXX	= mpic++
-FLAGS	= -Wall -std=c++11 
+FLAGS	= -Wall -std=c++11
 LFLAGS	= -lm
 
 OBJ_COMMON = parameter.o timer.o utils.o my_mpi.o

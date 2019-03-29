@@ -57,7 +57,7 @@ void GenerativeLearning::learn_hard_EM(std::vector<Instance> train)
                     if (i * num_inst_per_slave < Parameter::batch_size && bi + i * num_inst_per_slave < train.size())
                     {
                         if (is_log)
-                            Utils::println("recv clear update from " + std::to_string(MyMPI::my_slave + i));
+                            Utils::println("Rank " + std::to_string(MyMPI::rank)+ " recv clear update from " + std::to_string(MyMPI::my_slave + i));
                         this->spn.recv_update(MyMPI::my_slave + i);
                     }
                 }
@@ -65,7 +65,7 @@ void GenerativeLearning::learn_hard_EM(std::vector<Instance> train)
                 for (int i = 0; i < Parameter::num_slave_per_class; ++i)
                 {
                     if (is_log)
-                        Utils::println("send clear update to " + std::to_string(MyMPI::my_slave + i));
+                        Utils::println("Rank " + std::to_string(MyMPI::rank) + " send clear update to " + std::to_string(MyMPI::my_slave + i));
                     this->spn.send_update(MyMPI::my_slave + i);
                 }
 
@@ -76,7 +76,7 @@ void GenerativeLearning::learn_hard_EM(std::vector<Instance> train)
                     if (i * num_inst_per_slave < Parameter::batch_size && bi + i * num_inst_per_slave < train.size())
                     {
                         if (is_log)
-                            Utils::println("recv parse update from " + std::to_string(MyMPI::my_slave + i));
+                            Utils::println("Rank " + std::to_string(MyMPI::rank) + " recv parse update from " + std::to_string(MyMPI::my_slave + i));
                         this->spn.recv_update(MyMPI::my_slave + i);
                     }
                 }
@@ -84,7 +84,7 @@ void GenerativeLearning::learn_hard_EM(std::vector<Instance> train)
                 for (int i = 0; i < Parameter::num_slave_per_class; ++i)
                 {
                     if (is_log)
-                        Utils::println("send parse update to " + std::to_string(MyMPI::my_slave + i));
+                        Utils::println("Rank " + std::to_string(MyMPI::rank) + " send parse update to " + std::to_string(MyMPI::my_slave + i));
                     this->spn.send_update(MyMPI::my_slave + i);
                 }
             }
@@ -100,12 +100,12 @@ void GenerativeLearning::learn_hard_EM(std::vector<Instance> train)
                         this->spn.clear_cur_parse(bi + i);
                     }
                     if (is_log)
-                        Utils::println("send clear update to " + std::to_string(MyMPI::master_rank));
+                        Utils::println("Rank " + std::to_string(MyMPI::rank) + " send clear update to " + std::to_string(MyMPI::master_rank));
                     this->spn.send_update(MyMPI::master_rank);
                 }
 
                 if (is_log)
-                    Utils::println("recv clear update from " + std::to_string(MyMPI::master_rank));
+                    Utils::println("Rank " + std::to_string(MyMPI::rank) + " recv clear update from " + std::to_string(MyMPI::master_rank));
 
                 MyMPI::buf_idx = 0;
                 this->spn.recv_update(MyMPI::master_rank);
@@ -124,7 +124,7 @@ void GenerativeLearning::learn_hard_EM(std::vector<Instance> train)
                         this->spn.set_cur_parse_to_MAP(bi + i);
                     }
                     if (is_log)
-                        Utils::println("send parse update to " + std::to_string(MyMPI::master_rank));
+                        Utils::println("Rank " + std::to_string(MyMPI::rank) + " send parse update to " + std::to_string(MyMPI::master_rank));
                     this->spn.send_update(MyMPI::master_rank);
                 }
 
