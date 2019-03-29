@@ -8,7 +8,7 @@ OBJ_COMMON = parameter.o timer.o utils.o my_mpi.o
 OBJ_SPN = instance.o node.o sum_node.o prod_node.o SPN.o decomposition.o region.o generative_learning.o
 OBJS	= $(OBJ_COMMON) $(OBJ_SPN) dataset.o image_completion.o eval.o run.o run_main.o eval_main
 
-TARGETS	= run eval# TODO
+TARGETS	= run eval
 
 # src path
 VPATH = ./common:./evaluation:./spn
