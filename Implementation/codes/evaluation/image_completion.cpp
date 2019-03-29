@@ -51,13 +51,13 @@ void ImageCompletion::output_rst_to_img(std::fstream &out, int inst_idx, Instanc
 
 void ImageCompletion::send_img(int dest)
 {
-    MPI_Send(&MyMPI::buf_int, 0, MPI_INT, dest, 0, MPI_COMM_WORLD);
+    MPI_Send(&MyMPI::buf_int, MyMPI::buf_idx, MPI_INT, dest, 0, MPI_COMM_WORLD);
 }
 
 int ImageCompletion::recv_img(int src)
 {
     MPI_Status status;
-    MPI_Recv(&MyMPI::buf_int, 0, MPI_INT, src, 0, MPI_COMM_WORLD, &status);
+    MPI_Recv(&MyMPI::buf_int, MyMPI::buf_size, MPI_INT, src, 0, MPI_COMM_WORLD, &status);
     int count;
     MPI_Get_count(&status, MPI_INT, &count);
     return count;
