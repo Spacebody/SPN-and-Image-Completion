@@ -5,7 +5,7 @@
 #include <chrono> // for getting system time in milliseconds
 #include "../common/parameter.hpp"
 #include <cmath>
-
+#include <unistd.h>
 SPN GenerativeLearning::get_DSPN()
 {
     return this->spn;
