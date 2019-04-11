@@ -150,7 +150,7 @@ void Region::set_base_for_sum_out()
 void Region::infer_MAP(int inst_idx, Instance &inst)
 {
     if (this->map_decomps.empty())
-        this->map_decomps.reserve(this->types.size());
+        this->map_decomps.resize(this->types.size());
     
     // compute prod values
     for (std::unordered_map<std::string, ProdNode>::iterator iter = this->decomp_prod.begin();
@@ -200,7 +200,7 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance &inst)
     std::vector<std::string> def_map_decomp_opts = std::vector<std::string>();
     std::string def_map_decomp = "";
     if (this->map_decomps.empty())
-        this->map_decomps.reserve(this->types.size());
+        this->map_decomps.resize(this->types.size());
 
     this->def_map_type_idx = -1;
     this->def_map_sum_prob = 100;
