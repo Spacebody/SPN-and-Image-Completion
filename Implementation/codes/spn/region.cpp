@@ -389,7 +389,7 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance &inst)
     {
         SumNode &n = this->types[chosen_blank_idx];
         n.log_val = this->def_map_prod_prob - log(n.cnt + 1) - Parameter::sparse_prior;
-        map_decomps[chosen_blank_idx] = def_map_decomp;
+        this->map_decomps[chosen_blank_idx] = def_map_decomp;
 
         if (map_types.empty() || n.log_val > this->def_map_sum_prob)
         {
