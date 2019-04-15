@@ -124,12 +124,14 @@ Instance Dataset::read_cal_instance(std::string fn)
         ts = std::vector<std::string>((std::istream_iterator<std::string>(ss)), std::istream_iterator<std::string>());
         int true_idx = idx - delta;
         if (true_idx >= 0 && true_idx < Parameter::input_dim1)
+        {
             for (int k = 0; k < Parameter::input_dim2; ++k)
             {
                 int p = (int)std::stod(ts[k + delta]);
                 Dataset::tmp[true_idx][k] = p;
             }
-            ++idx;
+        }
+        ++idx;
     }
     in.close();
     Dataset::set_instance(Dataset::tmp, inst);

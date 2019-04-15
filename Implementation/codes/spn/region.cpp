@@ -189,7 +189,7 @@ void Region::infer_MAP(int inst_idx, Instance &inst)
         }
 
         // randomly break tie
-        this->map_decomps[ti] = map_decomp_opt[Utils::random_next_int(map_decomp_opt.size())];
+        this->map_decomps[ti] = map_decomp_opt[Utils::random_next_int((signed int)map_decomp_opt.size())];
         map_decomp_opt.clear();
     }
 }
@@ -226,7 +226,7 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance &inst)
     {
         if (blanks.size() > 1)
         {
-            int ci = Utils::random_next_int(blanks.size());
+            int ci = Utils::random_next_int((signed int)blanks.size());
             chosen_blank_idx = blanks[ci];
         }
         else
@@ -292,7 +292,7 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance &inst)
     }
 
     // random break ties for a previously unused node
-    def_map_decomp = def_map_decomp_opts[Utils::random_next_int(def_map_decomp_opts.size())];
+    def_map_decomp = def_map_decomp_opts[Utils::random_next_int((signed int)def_map_decomp_opts.size())];
     def_map_decomp_opts.clear();
 
     // evaluate product nodes
@@ -371,7 +371,7 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance &inst)
         n.log_val = max_sum_prob - log(n.cnt + 1);
 
         // randomly break tie
-        this->map_decomps[ti] = map_decomp_opt[Utils::random_next_int(map_decomp_opt.size())];
+        this->map_decomps[ti] = map_decomp_opt[Utils::random_next_int((signed int)map_decomp_opt.size())];
         map_decomp_opt.clear();
 
         if (map_types.empty() || n.log_val > this->def_map_sum_prob)
@@ -399,16 +399,18 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance &inst)
         }
     }
 
-    this->def_map_type_idx = map_types[Utils::random_next_int(map_types.size())];
+    this->def_map_type_idx = map_types[Utils::random_next_int((signed int)map_types.size())];
     map_types.clear();
 }
 
 // downward track-back step
 void Region::set_cur_parse_to_MAP(int inst_idx)
 {
+    // if (this->inst_type.count(inst_idx) == 0)
+    //     return;
     if (this->a == 1 && this->b == 1)
         return;
-
+    std::cout << "hello 2" << std::endl;
     // type node
     if (this->types.size() == 1)
         this->inst_type[inst_idx] = 0;  // only one choice
