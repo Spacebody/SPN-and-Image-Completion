@@ -114,10 +114,10 @@ void GenerativeLearning::learn_hard_EM(std::vector<Instance> train)
                 if (is_log)
                     Utils::log_time_ms("clear parse");
 
-                if (k * num_inst_per_slave < Parameter::batch_size && bi + k * num_inst_per_slave < train.size())
+                if (k * num_inst_per_slave < Parameter::batch_size && bi + k * num_inst_per_slave < (signed int)train.size())
                 {
                     MyMPI::buf_idx = 0;
-                    for (int i = k * num_inst_per_slave; i < (k + 1) * num_inst_per_slave && bi + i < train.size(); ++i)
+                    for (int i = k * num_inst_per_slave; i < (k + 1) * num_inst_per_slave && bi + i < (signed int)train.size(); ++i)
                     {
                         // map -> update cnt
                         this->spn.infer_MAP_for_learning(bi + i, train[bi + i]);

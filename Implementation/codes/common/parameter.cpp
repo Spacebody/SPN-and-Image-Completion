@@ -1,8 +1,8 @@
 #include "parameter.hpp"
 
-int Parameter::max_iter = 30;
+int Parameter::max_iter = 5;
 double Parameter::threshold_LLHChg = 0.1;
-int Parameter::batch_size = 1;  //50
+int Parameter::batch_size = 10;  //50
 double Parameter::sparse_prior = 1;
 
 int Parameter::num_sum_per_region = 20;

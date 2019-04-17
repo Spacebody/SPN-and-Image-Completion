@@ -6,7 +6,7 @@
 SumNode::SumNode()
 {
     this->cnt = Parameter::smooth_sum_cnt;
-    this->children = std::map<std::string, Node>();
+    this->children = std::map<std::string, std::shared_ptr<Node> >();
     this->child_cnts = std::map<std::string, double>();
 }
 
@@ -15,10 +15,10 @@ void SumNode::eval()
     double v = 0;
     std::string max_i = "";
     double max_l = 0;
-    std::map<std::string, Node>::iterator iter;
+    std::map<std::string, std::shared_ptr<Node> >::iterator iter;
     for (iter = this->children.begin(); iter != this->children.end(); ++iter)
     {
-        double l = this->children[iter->first].log_val;
+        double l = this->children[iter->first]->log_val;
         if (l == Node::zero_log_val)
             continue;
         if (max_i == "" || max_l < l)
@@ -36,7 +36,7 @@ void SumNode::eval()
     {
         if(this->children.count(iter->first) == 0)
             continue;
-        double l = this->children[iter->first].log_val;
+        double l = this->children[iter->first]->log_val;
         if(l == Node::zero_log_val)
             continue;
         v += SumNode::get_child_cnt(iter->first) * exp(l - max_l);
@@ -48,10 +48,10 @@ void SumNode::pass_derivative()
 {
     if (this->log_derivative == Node::zero_log_val)
         return;
-    std::map<std::string, Node>::iterator iter;
+    std::map<std::string, std::shared_ptr<Node> >::iterator iter;
     for (iter = this->children.begin(); iter != this->children.end(); ++iter)
     {
-        Node n = this->children[iter->first];
+        Node &n = *(this->children[iter->first]);
         double l = this->log_derivative + log(this->get_child_cnt(iter->first) / this->cnt);
         if (n.log_derivative == Node::zero_log_val)
             n.log_derivative = l;
@@ -70,10 +70,10 @@ void SumNode::set_child_cnt(std::string di, double cnt_)
     this->child_cnts[di] = cnt_;
 }
 
-void SumNode::add_child_only(std::string decomp_idx, double cnt_, Node &n)
+void SumNode::add_child_only(std::string decomp_idx, double cnt_, std::shared_ptr<Node> n)
 {
     if (this->children.count(decomp_idx) == 0)
-        this->children.insert(std::pair<std::string, Node>(decomp_idx, n));
+        this->children.insert(std::pair<std::string, std::shared_ptr<Node> >(decomp_idx, n));
     if (this->child_cnts.count(decomp_idx) == 0)
         this->child_cnts.insert(std::pair<std::string, double>(decomp_idx, cnt_));
     else

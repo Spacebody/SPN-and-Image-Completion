@@ -9,6 +9,7 @@
 #include "../common/parameter.hpp"
 #include <string>
 #include <fstream>
+#include <memory>
 
 class SPN
 {
@@ -21,8 +22,8 @@ class SPN
     static bool complete_by_marginal;  // complete pixel by marginal
 
     // root
-    SumNode root;
-    Region root_region;
+    std::shared_ptr<SumNode> root;
+    std::shared_ptr<Region> root_region;
 
     // coarser resolution for larger regions
     int coarse_dim1, coarse_dim2;

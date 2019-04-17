@@ -47,11 +47,8 @@ void MyMPI::set_random_seed_by_rank()
 // buffer
 int MyMPI::buf_idx = 0;
 int MyMPI::buf_size = 10000000;
-// std::vector<int> MyMPI::buf_int = std::vector<int>(MyMPI::buf_size);
-int MyMPI::buf_int[10000000] = {0};
-// std::vector<double> MyMPI::buf_double = std::vector<double>(100);
-double MyMPI::buf_double[100] = {0.0};
-// std::vector<char> MyMPI::buf_char = std::vector<char>(100);
+int MyMPI::buf_int[10000000];
+double MyMPI::buf_double[100];
 char MyMPI::buf_char[100];
 
 // MPI util
