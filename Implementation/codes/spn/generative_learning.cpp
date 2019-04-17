@@ -45,7 +45,7 @@ void GenerativeLearning::learn_hard_EM(std::vector<Instance> train)
         if (iter <= 10)
             Parameter::sparse_prior = ori_prior * iter / 10;
 
-        for (int bi = 0; bi < train.size(); bi += Parameter::batch_size)
+        for (int bi = 0; bi < (int)train.size(); bi += Parameter::batch_size)
         {
             // master: aggregate update and pass on
             if (MyMPI::is_class_master)
@@ -54,7 +54,7 @@ void GenerativeLearning::learn_hard_EM(std::vector<Instance> train)
                 MyMPI::buf_idx = 0;
                 for (int i = 0; i < Parameter::num_slave_per_class; ++i)
                 {
-                    if (i * num_inst_per_slave < Parameter::batch_size && bi + i * num_inst_per_slave < train.size())
+                    if (i * num_inst_per_slave < Parameter::batch_size && bi + i * num_inst_per_slave < (int)train.size())
                     {
                         if (is_log)
                             Utils::println("Rank " + std::to_string(MyMPI::rank)+ " recv clear update from " + std::to_string(MyMPI::my_slave + i));
@@ -73,7 +73,7 @@ void GenerativeLearning::learn_hard_EM(std::vector<Instance> train)
                 MyMPI::buf_idx = 0;
                 for (int i = 0; i < Parameter::num_slave_per_class; ++i)
                 {
-                    if (i * num_inst_per_slave < Parameter::batch_size && bi + i * num_inst_per_slave < train.size())
+                    if (i * num_inst_per_slave < Parameter::batch_size && bi + i * num_inst_per_slave < (int)train.size())
                     {
                         if (is_log)
                             Utils::println("Rank " + std::to_string(MyMPI::rank) + " recv parse update from " + std::to_string(MyMPI::my_slave + i));
@@ -91,10 +91,10 @@ void GenerativeLearning::learn_hard_EM(std::vector<Instance> train)
             else  // slave
             {
                 int k = MyMPI::my_offset;
-                if (k * num_inst_per_slave < Parameter::batch_size && bi + k * num_inst_per_slave < train.size())
+                if (k * num_inst_per_slave < Parameter::batch_size && bi + k * num_inst_per_slave < (int)train.size())
                 {
                     MyMPI::buf_idx = 0;
-                    for (int i = k * num_inst_per_slave; i < (k + 1) * num_inst_per_slave && bi + i < train.size(); ++i)
+                    for (int i = k * num_inst_per_slave; i < (k + 1) * num_inst_per_slave && bi + i < (int)train.size(); ++i)
                     {
                         // map -> update cnt
                         this->spn.clear_cur_parse(bi + i);
@@ -114,10 +114,10 @@ void GenerativeLearning::learn_hard_EM(std::vector<Instance> train)
                 if (is_log)
                     Utils::log_time_ms("clear parse");
 
-                if (k * num_inst_per_slave < Parameter::batch_size && bi + k * num_inst_per_slave < (signed int)train.size())
+                if (k * num_inst_per_slave < Parameter::batch_size && bi + k * num_inst_per_slave < (int)train.size())
                 {
                     MyMPI::buf_idx = 0;
-                    for (int i = k * num_inst_per_slave; i < (k + 1) * num_inst_per_slave && bi + i < (signed int)train.size(); ++i)
+                    for (int i = k * num_inst_per_slave; i < (k + 1) * num_inst_per_slave && bi + i < (int)train.size(); ++i)
                     {
                         // map -> update cnt
                         this->spn.infer_MAP_for_learning(bi + i, train[bi + i]);
@@ -153,7 +153,7 @@ void GenerativeLearning::learn_hard_EM(std::vector<Instance> train)
                 int rank = i + MyMPI::my_slave;
                 llh += this->recv_llh(rank);
             }
-            llh /= train.size();
+            llh /= (double)train.size();
             Utils::log_time_ms("[iter=" + std::to_string(iter) + "] llh=" + std::to_string(llh) + " ollh=" + std::to_string(ollh));
             if (iter == 1)
                 ollh = llh;
@@ -180,8 +180,8 @@ void GenerativeLearning::learn_hard_EM(std::vector<Instance> train)
         {
             // slave: compute llh, send to class master
             double llh = 0.0;
-            int size = (int)ceil(train.size() * 1.0 / Parameter::num_slave_per_class);
-            for (int i = MyMPI::my_offset * size; i < (MyMPI::my_offset + 1) * size && i < train.size(); i++)
+            int size = (int)ceil((int)train.size() * 1.0 / Parameter::num_slave_per_class);
+            for (int i = MyMPI::my_offset * size; i < (MyMPI::my_offset + 1) * size && i < (int)train.size(); i++)
             {
                 Instance inst = train[i];
                 llh += this->spn.llh(inst);

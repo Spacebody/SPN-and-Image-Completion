@@ -7,7 +7,7 @@ int ImageCompletion::PAD_LEN = 10;
 void ImageCompletion::output_rst_to_img(std::fstream &out, int inst_idx, Instance &inst)
 {
     // output original and completed images size by size
-    int dim1 = inst.vals.size(), dim2 = inst.vals[0].size();
+    int dim1 = (int)inst.vals.size(), dim2 = (int)inst.vals[0].size();
     int sz = dim1 * dim2;
     for (int ri = 0; ri < dim1; ++ri)
     {
@@ -73,13 +73,13 @@ void ImageCompletion::complete_left(std::vector<Instance> test, std::string mdl_
 void ImageCompletion::complete_left(SPN spn, std::vector<Instance> test, std::string mdl_name, std::string rst_dir)
 {
     Utils::println("---> complete left half and output " + rst_dir + "/" + mdl_name + "-left.dat");
-    int size = (int)ceil(test.size() * 1.0 / Parameter::num_slave_per_class);
+    int size = (int)ceil((int)test.size() * 1.0 / Parameter::num_slave_per_class);
 
     if (!MyMPI::is_class_master)
     {
         int master = MyMPI::master_rank;
         MyMPI::buf_idx = 0;
-        for (int i = MyMPI::my_offset * size; i < test.size() && i < (MyMPI::my_offset + 1) * size; ++i)
+        for (int i = MyMPI::my_offset * size; i < (int)test.size() && i < (MyMPI::my_offset + 1) * size; ++i)
         {
             Instance &inst = test[i];
             spn.complete_left_img(inst);
@@ -94,7 +94,7 @@ void ImageCompletion::complete_left(SPN spn, std::vector<Instance> test, std::st
             int src = si + MyMPI::rank;
             recv_img(src);
             MyMPI::buf_idx = 0;
-            for (int i = (si - 1) * size; i < test.size() && i < si * size; ++i)
+            for (int i = (si - 1) * size; i < (int)test.size() && i < si * size; ++i)
             {
                 Instance &inst = test[i];
                 ImageCompletion::output_rst_to_img(out, i, inst);
@@ -114,13 +114,13 @@ void ImageCompletion::complete_bottom(std::vector<Instance> test, std::string md
 void ImageCompletion::complete_bottom(SPN spn, std::vector<Instance> test, std::string mdl_name, std::string rst_dir)
 {
     Utils::println("---> complete bottom half and output " + rst_dir + "/" + mdl_name + "-btm.dat");
-    int size = (int)ceil(test.size() * 1.0 / Parameter::num_slave_per_class);
+    int size = (int)ceil((int)test.size() * 1.0 / Parameter::num_slave_per_class);
 
     if (!MyMPI::is_class_master)
     {
         int master = MyMPI::master_rank;
         MyMPI::buf_idx = 0;
-        for (int i = MyMPI::my_offset * size; i < test.size() && i < (MyMPI::my_offset + 1) * size; ++i)
+        for (int i = MyMPI::my_offset * size; i < (int)test.size() && i < (MyMPI::my_offset + 1) * size; ++i)
         {
             Instance &inst = test[i];
             spn.complete_bottom_img(inst);
@@ -135,7 +135,7 @@ void ImageCompletion::complete_bottom(SPN spn, std::vector<Instance> test, std::
             int src = si + MyMPI::rank;
             recv_img(src);
             MyMPI::buf_idx = 0;
-            for (int i = (si - 1) * size; i < test.size() && i < si * size; ++i)
+            for (int i = (si - 1) * size; i < (int)test.size() && i < si * size; ++i)
             {
                 Instance &inst = test[i];
                 ImageCompletion::output_rst_to_img(out, i, inst);

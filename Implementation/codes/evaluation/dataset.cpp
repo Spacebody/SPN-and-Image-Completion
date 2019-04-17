@@ -41,7 +41,7 @@ std::set<int> Dataset::gen_test_idx(int max_size, int test_size)
     for (int i = max_size - test_size; i < max_size; ++i)
     {
         tis.insert(i);
-        if (tis.size() == test_size)
+        if ((int)tis.size() == test_size)
             break;
     }
     return tis;
@@ -88,13 +88,13 @@ void Dataset::load_caltech(std::string dir_name)
     }
     closedir(dir);  // close directory
     std::sort(files.begin(), files.end()); // sort in alphabet
-    int max_size = files.size();
+    int max_size = (int)files.size();
     int test_size = max_size / 3;
     if (test_size > Parameter::max_test_size)
         test_size = Parameter::max_test_size;
     this->train = std::vector<Instance>();
     this->test = std::vector<Instance>();
-    for (int i = 0; i < files.size(); ++i)
+    for (int i = 0; i < (int)files.size(); ++i)
     {
         Instance inst = Dataset::read_cal_instance(dir_path + "/" + files[i]);
         if (i < max_size - test_size)
@@ -103,7 +103,7 @@ void Dataset::load_caltech(std::string dir_name)
             this->test.push_back(inst);
     }
     if (!MyMPI::is_class_master && MyMPI::my_offset == 0)
-        Utils::println(dir_name + ": train.size=" + std::to_string(this->train.size()) + " test.size=" + std::to_string(this->test.size()));
+        Utils::println(dir_name + ": train.size=" + std::to_string((int)this->train.size()) + " test.size=" + std::to_string((int)this->test.size()));
 }
 
 Instance Dataset::read_cal_instance(std::string fn)

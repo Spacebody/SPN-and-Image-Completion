@@ -109,14 +109,14 @@ void Run::run_caltech()
         // learn
         GenerativeLearning l;
         l.learn(data.get_train());
-        SPN dspn = l.get_DSPN();
-        if (MyMPI::my_offset == 0)
-            dspn.save_DSPN(Run::cal_mdl_dir + "/" + iter->first);
-        Utils::log_time_ms("unsup learn for completion done: " + iter->first);
+        // SPN dspn = l.get_DSPN();
+        // if (MyMPI::my_offset == 0)
+        //     dspn.save_DSPN(Run::cal_mdl_dir + "/" + iter->first);
+        // Utils::log_time_ms("unsup learn for completion done: " + iter->first);
 
-        // complete left/bottom
-        ImageCompletion::complete_left(dspn, data.get_test(), iter->first, Run::cal_rst_dir);
-        ImageCompletion::complete_bottom(dspn, data.get_test(), iter->first, Run::cal_rst_dir);
+        // // complete left/bottom
+        // ImageCompletion::complete_left(dspn, data.get_test(), iter->first, Run::cal_rst_dir);
+        // ImageCompletion::complete_bottom(dspn, data.get_test(), iter->first, Run::cal_rst_dir);
     }
 }
 
