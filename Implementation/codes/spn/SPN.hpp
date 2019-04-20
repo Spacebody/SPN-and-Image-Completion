@@ -31,11 +31,7 @@ class SPN
     SPN() : root(nullptr), root_region(nullptr), \
             coarse_dim1(Parameter::input_dim1 / Parameter::base_resolution), \
             coarse_dim2(Parameter::input_dim2 / Parameter::base_resolution) {}
-    ~SPN() 
-    { 
-        this->root_region = nullptr;
-        this->root = nullptr;
-    }
+    ~SPN();
 
     // ----------------------------------------------
     // Bottom

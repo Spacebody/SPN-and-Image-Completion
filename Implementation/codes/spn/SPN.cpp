@@ -10,6 +10,12 @@
 bool SPN::is_recording_update = true;
 bool SPN::complete_by_marginal = true;
 
+SPN::~SPN()
+{
+    this->root_region = nullptr;
+    this->root = nullptr;
+}
+
 // ----------------------------------------------
 // Bottom
 // ----------------------------------------------
