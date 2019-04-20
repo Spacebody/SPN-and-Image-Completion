@@ -1,4 +1,4 @@
-VERSION = 1.0.0
+VERSION = 1.0.2
 
 CC	= mpic++
 FLAGS	= -g -Wall -std=c++11
@@ -88,7 +88,7 @@ eval: eval_main.cpp eval.o parameter.o
 
 # clean
 clean:
-	rm -rf *.o *.out *.dSYM ./*/*.gch $(TARGETS)
+	rm -rf *.o *.out *.dSYM ./*/*.gch $(TARGETS) *.tmp
 cleanobj:
 	rm -rf *.o
 cleandebug:
