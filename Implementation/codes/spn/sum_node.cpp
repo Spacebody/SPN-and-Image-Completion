@@ -51,7 +51,7 @@ void SumNode::pass_derivative()
     std::map<std::string, Node>::iterator iter;
     for (iter = this->children.begin(); iter != this->children.end(); ++iter)
     {
-        Node n = this->children[iter->first];
+        Node &n = this->children[iter->first];
         double l = this->log_derivative + log(this->get_child_cnt(iter->first) / this->cnt);
         if (n.log_derivative == Node::zero_log_val)
             n.log_derivative = l;

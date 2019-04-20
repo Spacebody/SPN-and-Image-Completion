@@ -40,7 +40,7 @@ void Eval::eval_caltech()
     double ttl_lt_mse = 0, ttl_bm_mse = 0;
     int num_cat = 0;
     std::cout << "CAT\tLeft\tBottom" << std::endl;
-    for (int di = 0; di < files.size(); ++di)
+    for (int di = 0; di < (int)files.size(); ++di)
     {
         std::string fn = files[di];
         std::string::size_type idx = fn.find("-left.dat", 0);

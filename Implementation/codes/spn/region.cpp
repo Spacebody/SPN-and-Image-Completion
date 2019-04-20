@@ -49,7 +49,7 @@ int Region::get_region_id(int a1, int a2, int b1, int b2)
 {
     int id = ((a1 * Parameter::input_dim1 + a2 - 1) * Parameter::input_dim2 + b1) * Parameter::input_dim2 + b2 - 1;
     if (Region::id_regions.count(id) == 0)
-        Region::id_regions.insert(std::pair<int, Region>(id, Region(id, a1, a2, b1, b2)));  // mark
+        Region::id_regions.insert(std::make_pair(id, Region(id, a1, a2, b1, b2)));  // mark
     return id;
 }
 
@@ -96,12 +96,12 @@ void Region::reset_types(int num_types)
 
 void Region::set_types(int num_types)
 {
-    if (num_types < this->types.size())
+    if (num_types < (int)this->types.size())
     {
         this->reset_types(num_types);
         return;
     }
-    int nn = num_types - this->types.size();
+    int nn = num_types - (int)this->types.size();
     for (int i = 0; i < nn; ++i)
     {
         this->types.push_back(SumNode());
@@ -124,7 +124,7 @@ void Region::set_base_Gauss(double v)
 {
     this->def_map_type_idx = -1;
     double mp = 0;
-    for (int i = 0; i < this->types.size(); ++i)
+    for (int i = 0; i < (int)this->types.size(); ++i)
     {
         SumNode &n = this->types[i];
         n.log_val = this->cmp_Gauss(v, this->means[i]);
@@ -150,8 +150,8 @@ void Region::set_base_for_sum_out()
 void Region::infer_MAP(int inst_idx, Instance &inst)
 {
     if (this->map_decomps.empty())
-        this->map_decomps.reserve(this->types.size());
-    
+        this->map_decomps.resize((int)this->types.size());
+
     // compute prod values
     for (std::unordered_map<std::string, ProdNode>::iterator iter = this->decomp_prod.begin();
          iter != this->decomp_prod.end(); ++iter)
@@ -161,9 +161,9 @@ void Region::infer_MAP(int inst_idx, Instance &inst)
     }
 
     // evaluate children for sum nodes
-    for (int ti = 0; ti < this->types.size(); ++ti)
+    for (int ti = 0; ti < (int)this->types.size(); ++ti)
     {
-        if (this->types[ti].children.size() == 0)
+        if ((int)this->types[ti].children.size() == 0)
             continue;
 
         SumNode &n = this->types[ti];
@@ -189,7 +189,7 @@ void Region::infer_MAP(int inst_idx, Instance &inst)
         }
 
         // randomly break tie
-        this->map_decomps[ti] = map_decomp_opt[Utils::random_next_int(map_decomp_opt.size())];
+        this->map_decomps[ti] = map_decomp_opt[Utils::random_next_int((int)map_decomp_opt.size())];
         map_decomp_opt.clear();
     }
 }
@@ -200,7 +200,7 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance &inst)
     std::vector<std::string> def_map_decomp_opts = std::vector<std::string>();
     std::string def_map_decomp = "";
     if (this->map_decomps.empty())
-        this->map_decomps.reserve(this->types.size());
+        this->map_decomps.resize((int)this->types.size());
 
     this->def_map_type_idx = -1;
     this->def_map_sum_prob = 100;
@@ -209,10 +209,10 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance &inst)
 
     // sum: choose a previous unused node
     std::vector<int> blanks = std::vector<int>();
-    for (int i = 0; i < this->types.size(); ++i)
+    for (int i = 0; i < (int)this->types.size(); ++i)
     {
         SumNode &n = this->types[i];
-        if (n.children.size() == 0)
+        if ((int)n.children.size() == 0)
         {
             // if (blanks.empty())
                 // blanks = std::vector<int>();
@@ -224,9 +224,9 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance &inst)
 
     if (!blanks.empty())
     {
-        if (blanks.size() > 1)
+        if ((int)blanks.size() > 1)
         {
-            int ci = Utils::random_next_int(blanks.size());
+            int ci = Utils::random_next_int((int)blanks.size());
             chosen_blank_idx = blanks[ci];
         }
         else
@@ -292,7 +292,7 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance &inst)
     }
 
     // random break ties for a previously unused node
-    def_map_decomp = def_map_decomp_opts[Utils::random_next_int(def_map_decomp_opts.size())];
+    def_map_decomp = def_map_decomp_opts[Utils::random_next_int((int)def_map_decomp_opts.size())];
     def_map_decomp_opts.clear();
 
     // evaluate product nodes
@@ -305,9 +305,9 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance &inst)
 
     // evaluate existing sum nodes and children
     std::vector<int> map_types = std::vector<int>();
-    for (int ti = 0; ti < this->types.size(); ++ti)
+    for (int ti = 0; ti < (int)this->types.size(); ++ti)
     {
-        if (this->types[ti].children.size() == 0)
+        if ((int)this->types[ti].children.size() == 0)
             continue;
         SumNode &n = this->types[ti];
         n.eval();
@@ -371,7 +371,7 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance &inst)
         n.log_val = max_sum_prob - log(n.cnt + 1);
 
         // randomly break tie
-        this->map_decomps[ti] = map_decomp_opt[Utils::random_next_int(map_decomp_opt.size())];
+        this->map_decomps[ti] = map_decomp_opt[Utils::random_next_int((int)map_decomp_opt.size())];
         map_decomp_opt.clear();
 
         if (map_types.empty() || n.log_val > this->def_map_sum_prob)
@@ -389,7 +389,7 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance &inst)
     {
         SumNode &n = this->types[chosen_blank_idx];
         n.log_val = this->def_map_prod_prob - log(n.cnt + 1) - Parameter::sparse_prior;
-        map_decomps[chosen_blank_idx] = def_map_decomp;
+        this->map_decomps[chosen_blank_idx] = def_map_decomp;
 
         if (map_types.empty() || n.log_val > this->def_map_sum_prob)
         {
@@ -399,7 +399,7 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance &inst)
         }
     }
 
-    this->def_map_type_idx = map_types[Utils::random_next_int(map_types.size())];
+    this->def_map_type_idx = map_types[Utils::random_next_int((int)map_types.size())];
     map_types.clear();
 }
 
@@ -410,7 +410,7 @@ void Region::set_cur_parse_to_MAP(int inst_idx)
         return;
 
     // type node
-    if (this->types.size() == 1)
+    if ((int)this->types.size() == 1)
         this->inst_type[inst_idx] = 0;  // only one choice
     int chosen_type = this->inst_type[inst_idx];
     std::string di = this->map_decomps[chosen_type];

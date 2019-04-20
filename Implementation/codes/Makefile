@@ -88,7 +88,7 @@ eval: eval_main.cpp eval.o parameter.o
 
 # clean
 clean:
-	rm -rf *.o *.out ./*/*.gch $(TARGETS)
+	rm -rf *.o *.out ./*/*.gch $(TARGETS) *.tmp
 cleanobj:
 	rm -rf *.o
 cleangch:

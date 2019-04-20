@@ -57,8 +57,8 @@ void ProdNode::pass_derivative()
 void ProdNode::eval()
 {
     this->log_val = 0;
-    for (std::vector<Node>::iterator iter = this->children.begin(); \
-            iter != this->children.end(); ++iter)
+    for (std::vector<Node>::iterator iter = this->children.begin();
+         iter != this->children.end(); ++iter)
     {
         double v = iter->log_val;
         if (v == Node::zero_log_val)

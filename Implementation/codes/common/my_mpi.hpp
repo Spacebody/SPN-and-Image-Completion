@@ -28,9 +28,9 @@ class MyMPI
     // buffer
     static int buf_idx;
     static int buf_size;
-    static std::vector<int> buf_int;
-    static std::vector<double> buf_double;
-    static std::vector<char> buf_char;
+    static int buf_int[10000000];
+    static double buf_double[100];
+    static char buf_char[100];
 
     // MPI util
     static double recv_double(int src, int tag);

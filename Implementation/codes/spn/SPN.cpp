@@ -10,13 +10,19 @@
 bool SPN::is_recording_update = true;
 bool SPN::complete_by_marginal = true;
 
+SPN::~SPN()
+{
+    this->root_region = nullptr;
+    this->root = nullptr;
+}
+
 // ----------------------------------------------
 // Bottom
 // ----------------------------------------------
 void SPN::complete_bottom_img(Instance &inst)
 {
     Utils::log_time_ms("before comolete bottom half");
-    if (this->complete_by_marginal) 
+    if (this->complete_by_marginal)
     {
         this->cmp_MAP_bottom_half_marginal(inst);
         Utils::log_time("Complete bottom by Marginal");
@@ -188,7 +194,7 @@ double SPN::cmp_marginal(Region &r)
     double t = 0, d = 0;
     double md = 100;
 
-    for (int i = 0; i < r.types.size(); ++i)
+    for (int i = 0; i < (int)r.types.size(); ++i)
     {
         SumNode &n = r.types[i];
         if (n.log_derivative == Node::zero_log_val)
@@ -196,7 +202,7 @@ double SPN::cmp_marginal(Region &r)
         if (md == 100 || n.log_derivative > md)
             md = n.log_derivative;
     }
-    for (int i = 0; i < r.types.size(); ++i)
+    for (int i = 0; i < (int)r.types.size(); ++i)
     {
         SumNode &n = r.types[i];
         if (n.log_derivative == Node::zero_log_val)
@@ -251,12 +257,12 @@ void SPN::init()
                     int b2 = b1 + cb * Parameter::base_resolution;
                     // coarse regions
                     int ri = Region::get_region_id(a1, a2, b1, b2);
-                    Region &r = Region::get_region(ri);  // one sum node as root
+                    Region &r = Region::get_region(ri); // one sum node as root
                     if (ca == this->coarse_dim1 && cb == this->coarse_dim2)
                     {
                         r.reset_types(1);
-                        this->root_region = r;
-                        this->root = r.types[0];
+                        this->root_region = &r;
+                        this->root = &(r.types[0]);
                     }
                     else
                         r.reset_types(Parameter::num_sum_per_region);
@@ -304,11 +310,11 @@ void SPN::clear_unused_in_SPN()
                 {
                     int b2 = b1 + cb * Parameter::base_resolution;
                     int ri = Region::get_region_id(a1, a2, b1, b2);
-                    Region &r = Region::get_region(ri);
+                    Region r = Region::get_region(ri);
                     std::set<std::string> decomps = std::set<std::string>();
                     for (std::vector<SumNode>::iterator iter = r.types.begin(); iter != r.types.end(); ++iter)
                     {
-                        if (iter->children.size() > 0)
+                        if ((int)(iter->children.size()) > 0)
                         {
                             double tc = 0;
                             for (std::map<std::string, Node>::iterator iter2 = iter->children.begin(); iter2 != iter->children.end(); ++iter2)
@@ -349,7 +355,7 @@ void SPN::init_unit_region(Region &r)
     r.vars = std::vector<double>(Parameter::num_components_per_var);
     r.cnts = std::vector<double>(Parameter::num_components_per_var);
 
-    int ttl_cnt = this->training_set.size();
+    int ttl_cnt = (int)this->training_set.size();
     int cnt = (int)ceil(ttl_cnt * 1.0 / Parameter::num_components_per_var);
     std::vector<double> vals = std::vector<double>(ttl_cnt);
     for (int ii = 0; ii < this->training_set.size(); ++ii)
@@ -381,11 +387,11 @@ void SPN::cmp_derivative()
 {
     this->init_derviative();
 
-    this->root.log_derivative = 0;
-    this->root.pass_derivative();
-    for (std::map<std::string, Node>::iterator iter = this->root.children.begin(); iter != this->root.children.end(); ++iter)
+    this->root->log_derivative = 0;
+    this->root->pass_derivative();
+    for (std::map<std::string, Node>::iterator iter = this->root->children.begin(); iter != this->root->children.end(); ++iter)
     {
-        Node &n = this->root.children[iter->first];
+        Node &n = this->root->children[iter->first];
         n.pass_derivative();
     }
 
@@ -482,7 +488,7 @@ void SPN::eval()
 
 void SPN::cmp_derivative(Region &r)
 {
-    for (int i = 0; i < r.types.size(); ++i)
+    for (int i = 0; i < (int)r.types.size(); ++i)
     {
         r.types[i].pass_derivative();
     }
@@ -502,7 +508,7 @@ void SPN::eval(Region &r)
     }
     for (std::vector<SumNode>::iterator iter2 = r.types.begin(); iter2 != r.types.end(); ++iter2)
     {
-        if (iter2->children.size() > 0)
+        if ((int)(iter2->children.size()) > 0)
             iter2->eval();
         else
             iter2->log_val = Node::zero_log_val;
@@ -661,12 +667,12 @@ void SPN::infer_MAP_for_learning(int ii, Instance &inst)
 // clear/set parse
 void SPN::clear_cur_parse(int ii)
 {
-    this->root_region.clear_cur_parse(ii);
+    this->root_region->clear_cur_parse(ii);
 }
 
 void SPN::set_cur_parse_to_MAP(int ii)
 {
-    this->root_region.set_cur_parse_to_MAP(ii);
+    this->root_region->set_cur_parse_to_MAP(ii);
 }
 
 void SPN::set_cur_parse_from_buf()
@@ -707,13 +713,13 @@ void SPN::send_update(int dest)
 {
     if (MyMPI::buf_idx >= MyMPI::buf_size)
         Utils::println("ERR: buffer overflow to " + std::to_string(dest));
-    MPI_Send(&MyMPI::buf_int, MyMPI::buf_idx, MPI_INT, dest, 0, MPI_COMM_WORLD);
+    MPI_Send(MyMPI::buf_int, MyMPI::buf_idx, MPI_INT, dest, 0, MPI_COMM_WORLD);
 }
 
 void SPN::recv_update(int src)
 {
     MPI_Status status;
-    MPI_Recv(&MyMPI::buf_int, MyMPI::buf_idx, MPI_INT, src, 0, MPI_COMM_WORLD, &status);
+    MPI_Recv(MyMPI::buf_int, MyMPI::buf_size, MPI_INT, src, 0, MPI_COMM_WORLD, &status);
     int count;
     MPI_Get_count(&status, MPI_INT, &count);
     MyMPI::buf_idx += count;
@@ -726,7 +732,7 @@ double SPN::llh(Instance &inst)
 {
     this->set_input(inst);
     this->eval();
-    return this->root.log_val;
+    return this->root->log_val;
 }
 
 // set dspn input
@@ -839,8 +845,8 @@ void SPN::save_region(Region &r, std::fstream &out)
 
     // type -> decomp / cnt
     out << "<TYPE>\n";
-    out << std::to_string(r.types.size()) + "\n";
-    for (int i = 0; i < r.types.size(); ++i)
+    out << std::to_string((int)r.types.size()) + "\n";
+    for (int i = 0; i < (int)r.types.size(); ++i)
     {
         SumNode n = r.types[i];
         s = std::to_string(n.cnt) + "";
@@ -856,11 +862,11 @@ void SPN::save_region(Region &r, std::fstream &out)
     if (r.a == 1 && r.b == 1)
     {
         out << "<MEAN>" + std::to_string(r.a1) + " " + std::to_string(r.b1) + ":";
-        for (int i = 0; i < r.means.size(); ++i)
+        for (int i = 0; i < (int)r.means.size(); ++i)
             out << " " + std::to_string(r.means[i]);
         out << "\n";
         out << "<CNT> " + std::to_string(r.a1) + " " + std::to_string(r.b1) + ":";
-        for (int i = 0; i < r.cnts.size(); ++i)
+        for (int i = 0; i < (int)r.cnts.size(); ++i)
             out << " " + std::to_string(r.cnts[i]);
         out << "\n";
     }
@@ -882,11 +888,11 @@ SPN SPN::load_DSPN(std::string mdl_name)
             t = std::vector<std::string>();
         else if (s == "</REGION>")
         {
-            Region r = SPN::load_region(t);
-            if (r.types.size() == 1)
+            Region &r = SPN::load_region(t);
+            if ((int)r.types.size() == 1)
             {
-                dspn.root_region = r;
-                dspn.root = r.types[0];
+                dspn.root_region = &r;
+                dspn.root = &(r.types[0]);
                 t.clear();
             }
         }
@@ -901,7 +907,7 @@ SPN SPN::load_DSPN(std::string mdl_name)
     return dspn;
 }
 
-Region SPN::load_region(std::vector<std::string> t)
+Region &SPN::load_region(std::vector<std::string> t)
 {
     int a1, a2, b1, b2;
     std::string s;
@@ -914,7 +920,7 @@ Region SPN::load_region(std::vector<std::string> t)
     a2 = std::stoi(ts[1]);
     b1 = std::stoi(ts[2]);
     b2 = std::stoi(ts[3]);
-    Region r = Region::get_region(Region::get_region_id(a1, a2, b1, b2));
+    Region &r = Region::get_region(Region::get_region_id(a1, a2, b1, b2));
 
     // type
     s = t[idx++];  // <TYPE>
@@ -928,9 +934,9 @@ Region SPN::load_region(std::vector<std::string> t)
         ts.clear();
         while (std::getline(ss, s, ':'))
             ts.push_back(s); // split by ':'
-        SumNode n = r.types[i];
+        SumNode &n = r.types[i];
         n.cnt = std::stod(ts[0]);
-        for (int j = 1; j < ts.size(); j += 2)
+        for (int j = 1; j < (int)ts.size(); j += 2)
         {
             std::string di = ts[j];
             di = di.substr(1, di.length() - 1);
@@ -941,7 +947,7 @@ Region SPN::load_region(std::vector<std::string> t)
     s = t[idx++]; // </TYPE>
 
     // unit
-    if (idx < t.size())
+    if (idx < (int)t.size())
     {
         s = t[idx++];
         if (s.find("<MEAN>") != std::string::npos)
@@ -953,8 +959,8 @@ Region SPN::load_region(std::vector<std::string> t)
         ts.clear();
         std::stringstream ss(s); // split by ' '
         ts = std::vector<std::string>((std::istream_iterator<std::string>(ss)), std::istream_iterator<std::string>());
-        r.means = std::vector<double>(ts.size());
-        for (int i = 0; i < ts.size(); ++i)
+        r.means = std::vector<double>((int)ts.size());
+        for (int i = 0; i < (int)ts.size(); ++i)
             r.means.push_back(std::stod(ts[i]));
         s = t[idx++];
         if (s.find("<CNT>") != std::string::npos)
@@ -966,8 +972,8 @@ Region SPN::load_region(std::vector<std::string> t)
         ts.clear();
         std::stringstream ss2(s); // split by ' '
         ts = std::vector<std::string>((std::istream_iterator<std::string>(ss2)), std::istream_iterator<std::string>());
-        r.cnts = std::vector<double>(ts.size());
-        for (int i = 0; i < ts.size(); ++i)
+        r.cnts = std::vector<double>((int)ts.size());
+        for (int i = 0; i < (int)ts.size(); ++i)
             r.cnts.push_back(std::stod(ts[i]));
     }
     

@@ -47,7 +47,7 @@ class Region
     /*************************************************************/
 
     static std::unordered_map<int, Region> id_regions;
-   
+  
     static int get_region_id(int a1, int a2, int b1, int b2);
     static Region &get_region(int id);
     int get_id();
