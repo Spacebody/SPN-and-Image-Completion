@@ -22,15 +22,20 @@ class SPN
     static bool complete_by_marginal;  // complete pixel by marginal
 
     // root
-    std::shared_ptr<SumNode> root;
-    std::shared_ptr<Region> root_region;
+    SumNode *root;
+    Region *root_region;
 
     // coarser resolution for larger regions
     int coarse_dim1, coarse_dim2;
 
-    SPN() : coarse_dim1(Parameter::input_dim1 / Parameter::base_resolution), \
+    SPN() : root(nullptr), root_region(nullptr), \
+            coarse_dim1(Parameter::input_dim1 / Parameter::base_resolution), \
             coarse_dim2(Parameter::input_dim2 / Parameter::base_resolution) {}
-    ~SPN() {}
+    ~SPN() 
+    { 
+        this->root_region = nullptr;
+        this->root = nullptr;
+    }
 
     // ----------------------------------------------
     // Bottom
@@ -111,7 +116,7 @@ class SPN
     // load/save
     // ----------------------------------------------
     void save_region(Region &r, std::fstream &fs);
-    static Region load_region(std::vector<std::string> t);
+    static Region &load_region(std::vector<std::string> t);
     static void add_child(Region &r, SumNode &n, std::string di, double cc);
 
 };

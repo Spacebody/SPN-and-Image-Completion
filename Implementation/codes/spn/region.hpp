@@ -31,10 +31,10 @@ class Region
     // data structure for a parse
     std::unordered_map<int, int> inst_type;
     std::unordered_map<int, std::string> inst_decomp;
-    std::unordered_map<std::string, std::shared_ptr<ProdNode> > decomp_prod;
+    std::unordered_map<std::string, ProdNode> decomp_prod;
 
     // each region is alloted a set of sum nodes
-    std::vector<std::shared_ptr<SumNode> > types;
+    std::vector<SumNode> types;
 
     // MAP computation
     int def_map_type_idx;

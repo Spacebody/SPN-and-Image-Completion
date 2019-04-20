@@ -3,7 +3,7 @@
 
 ProdNode::ProdNode()
 {
-    this->children = std::vector<std::shared_ptr<Node> >();
+    this->children = std::vector<Node>();
 }
 
 void ProdNode::pass_derivative()
@@ -13,10 +13,10 @@ void ProdNode::pass_derivative()
     if (this->log_val == Node::zero_log_val)
     {
         int cnt = 0;
-        for (std::vector<std::shared_ptr<Node> >::iterator iter = this->children.begin();
+        for (std::vector<Node>::iterator iter = this->children.begin();
              iter != this->children.end(); ++iter)
         {
-            if ((*iter)->log_val == Node::zero_log_val)
+            if (iter->log_val == Node::zero_log_val)
             {
                 ++cnt;
                 if (cnt > 1) return;
@@ -24,32 +24,32 @@ void ProdNode::pass_derivative()
         }
     }
 
-    for (std::vector<std::shared_ptr<Node> >::iterator iter1 = this->children.begin();
+    for (std::vector<Node>::iterator iter1 = this->children.begin();
          iter1 != this->children.end(); ++iter1)
     {
-        if ((*iter1)->log_val == Node::zero_log_val)
+        if (iter1->log_val == Node::zero_log_val)
         {
             double l = 0;
-            for (std::vector<std::shared_ptr<Node> >::iterator iter2 = this->children.begin();
+            for (std::vector<Node>::iterator iter2 = this->children.begin();
                  iter2 != this->children.end(); ++iter2)
             {
-                if ((*iter2)->log_val != Node::zero_log_val)
-                    l += (*iter2)->log_val;
+                if (iter2->log_val != Node::zero_log_val)
+                    l += iter2->log_val;
 
                 l += this->log_derivative;
-                if ((*iter1)->log_derivative == Node::zero_log_val)
-                    (*iter1)->log_derivative = l;
+                if (iter1->log_derivative == Node::zero_log_val)
+                    iter1->log_derivative = l;
                 else
-                    (*iter1)->log_derivative = Utils::add_log((*iter1)->log_derivative, l);
+                    iter1->log_derivative = Utils::add_log(iter1->log_derivative, l);
             }
         }
         else if (this->log_val != Node::zero_log_val)
         {
-            double l = this->log_derivative + this->log_val - (*iter1)->log_val;
-            if ((*iter1)->log_derivative == Node::zero_log_val)
-                (*iter1)->log_derivative = l;
+            double l = this->log_derivative + this->log_val - iter1->log_val;
+            if (iter1->log_derivative == Node::zero_log_val)
+                iter1->log_derivative = l;
             else
-                (*iter1)->log_derivative = Utils::add_log((*iter1)->log_derivative, l);
+                iter1->log_derivative = Utils::add_log(iter1->log_derivative, l);
         }
     }
 }
@@ -57,10 +57,10 @@ void ProdNode::pass_derivative()
 void ProdNode::eval()
 {
     this->log_val = 0;
-    for (std::vector<std::shared_ptr<Node> >::iterator iter = this->children.begin();
+    for (std::vector<Node>::iterator iter = this->children.begin();
          iter != this->children.end(); ++iter)
     {
-        double v = (*iter)->log_val;
+        double v = iter->log_val;
         if (v == Node::zero_log_val)
         {
             this->log_val = Node::zero_log_val;
@@ -70,7 +70,7 @@ void ProdNode::eval()
     }
 }
 
-void ProdNode::add_child(std::shared_ptr<Node> n)
+void ProdNode::add_child(Node &n)
 {
     this->children.push_back(n);
 }

@@ -13,10 +13,10 @@ class ProdNode : public Node
 
     void pass_derivative();
     void eval();
-    void add_child(std::shared_ptr<Node> n);
+    void add_child(Node &n);
 
   private:
-    std::vector<std::shared_ptr<Node> > children;
+    std::vector<Node> children;
 };
 
 #endif
