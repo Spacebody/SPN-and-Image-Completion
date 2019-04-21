@@ -12,7 +12,7 @@ int Parameter::base_resolution = 4;
 double Parameter::smooth_sum_cnt = 0.01;
 int Parameter::num_components_per_var = 4;
 
-int Parameter::max_test_size = 10; // 50
+int Parameter::max_test_size = 40; // 50
 std::string Parameter::domain = "";
 int Parameter::num_slave_per_class = 1;  //50
-int Parameter::num_slave_grp = 1;
+int Parameter::num_slave_grp = 2;
