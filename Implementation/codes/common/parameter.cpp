@@ -15,4 +15,4 @@ int Parameter::num_components_per_var = 4;
 int Parameter::max_test_size = 40; // 50
 std::string Parameter::domain = "";
 int Parameter::num_slave_per_class = 40;  //50
-int Parameter::num_slave_grp = 2;
+int Parameter::num_slave_grp = 3;
