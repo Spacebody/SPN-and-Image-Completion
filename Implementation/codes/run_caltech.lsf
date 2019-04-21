@@ -1,6 +1,5 @@
 #BSUB -J caltech  ### set job name
-#BSUB -q debug
-#BSUB -n 80  ## number of cores
+#BSUB -n 120 ## number of cores
 #BSUB -R "span[ptile=40]"
 #BSUB -oo ../output/stdout_caltech.out  ### standard output, rewrite every run
 #BSUB -eo ../errors/stderr_caltech.err  ### standard error, rewrite every run
