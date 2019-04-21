@@ -62,7 +62,7 @@ void SPN::cmp_MAP_bottom_half_marginal(Instance &inst)
         for (int j = 0; j < Parameter::input_dim2; ++j)
         {
             int ri = Region::get_region_id(i, i + 1, j, j + 1);
-            Region &r = Region::get_region(ri);
+            Region &r = *(Region::get_region(ri));
             double p = this->cmp_marginal(r);
             MyMPI::buf_int[MyMPI::buf_idx++] = Utils::get_int_val(inst, p);
         }
@@ -88,7 +88,7 @@ void SPN::infer_MAP_bottom_half(int ii, Instance &inst)
                         {
                             int b2 = b1 + b;
                             int ri = Region::get_region_id(a1, a2, b1, b2);
-                            Region &r = Region::get_region(ri);
+                            Region &r = *(Region::get_region(ri));
                             r.infer_MAP(ii, inst);
                         }
                     }
@@ -108,7 +108,7 @@ void SPN::infer_MAP_bottom_half(int ii, Instance &inst)
                 {
                     int b2 = b1 + cb * Parameter::base_resolution;
                     int ri = Region::get_region_id(a1, a2, b1, b2);
-                    Region &r = Region::get_region(ri);
+                    Region &r = *(Region::get_region(ri));
                     r.infer_MAP(ii, inst);
                 }
             }
@@ -131,7 +131,7 @@ void SPN::set_MAP_bottom_to_buf(int inst_idx, Instance &inst)
             else
             {
                 int ri = Region::get_region_id(a1, a2, b1, b2);
-                Region &r = Region::get_region(ri);
+                Region &r = *(Region::get_region(ri));
                 int vi = r.inst_type[inst_idx];
                 MyMPI::buf_int[MyMPI::buf_idx++] = Utils::get_int_val(inst, r.means[vi]);
             }
@@ -180,7 +180,7 @@ void SPN::cmp_MAP_left_half_marginal(Instance &inst)
         for (int j = 0; j < Parameter::input_dim2 / 2; ++j)
         {
             int ri = Region::get_region_id(i, i + 1, j, j + 1);
-            Region &r = Region::get_region(ri);
+            Region &r = *(Region::get_region(ri));
             double p = this->cmp_marginal(r);
             MyMPI::buf_int[MyMPI::buf_idx++] = Utils::get_int_val(inst, p);
         }
@@ -196,7 +196,7 @@ double SPN::cmp_marginal(Region &r)
 
     for (int i = 0; i < (int)r.types.size(); ++i)
     {
-        SumNode &n = r.types[i];
+        SumNode &n = *(r.types[i]);
         if (n.log_derivative == Node::zero_log_val)
             continue;
         if (md == 100 || n.log_derivative > md)
@@ -204,7 +204,7 @@ double SPN::cmp_marginal(Region &r)
     }
     for (int i = 0; i < (int)r.types.size(); ++i)
     {
-        SumNode &n = r.types[i];
+        SumNode &n = *(r.types[i]);
         if (n.log_derivative == Node::zero_log_val)
             continue;
         double p = exp(n.log_derivative - md);
@@ -230,7 +230,7 @@ void SPN::set_MAP_left_to_buf(int inst_idx, Instance &inst)
             else
             {
                 int ri = Region::get_region_id(a1, a2, b1, b2);
-                Region &r = Region::get_region(ri);
+                Region &r = *(Region::get_region(ri));
                 int vi = r.inst_type[inst_idx];
                 MyMPI::buf_int[MyMPI::buf_idx++] = Utils::get_int_val(inst, r.means[vi]);
             }
@@ -257,15 +257,15 @@ void SPN::init()
                     int b2 = b1 + cb * Parameter::base_resolution;
                     // coarse regions
                     int ri = Region::get_region_id(a1, a2, b1, b2);
-                    Region &r = Region::get_region(ri); // one sum node as root
+                    std::shared_ptr<Region> r = Region::get_region(ri); // one sum node as root
                     if (ca == this->coarse_dim1 && cb == this->coarse_dim2)
                     {
-                        r.reset_types(1);
-                        this->root_region = &r;
-                        this->root = &(r.types[0]);
+                        r->reset_types(1);
+                        this->root_region = r;
+                        this->root = r->types[0];
                     }
                     else
-                        r.reset_types(Parameter::num_sum_per_region);
+                        r->reset_types(Parameter::num_sum_per_region);
                 }
             }
         }
@@ -283,13 +283,13 @@ void SPN::init()
                         {
                             int b2 = b1 + b;
                             int ri = Region::get_region_id(a1, a2, b1, b2);
-                            Region &r = Region::get_region(ri);
+                            std::shared_ptr<Region> r = Region::get_region(ri);
                             if (a == 1 && b == 1)
                             {
-                                this->init_unit_region(r);
+                                this->init_unit_region(*r);
                             }
                             else
-                                r.reset_types(Parameter::num_sum_per_region);
+                                r->reset_types(Parameter::num_sum_per_region);
                         }
                     }
                 }
@@ -310,16 +310,16 @@ void SPN::clear_unused_in_SPN()
                 {
                     int b2 = b1 + cb * Parameter::base_resolution;
                     int ri = Region::get_region_id(a1, a2, b1, b2);
-                    Region r = Region::get_region(ri);
+                    std::shared_ptr<Region> r = Region::get_region(ri);
                     std::set<std::string> decomps = std::set<std::string>();
-                    for (std::vector<SumNode>::iterator iter = r.types.begin(); iter != r.types.end(); ++iter)
+                    for (std::vector<std::shared_ptr<SumNode> >::iterator iter = r->types.begin(); iter != r->types.end(); ++iter)
                     {
-                        if ((int)(iter->children.size()) > 0)
+                        if ((int)((*iter)->children.size()) > 0)
                         {
                             double tc = 0;
-                            for (std::map<std::string, Node>::iterator iter2 = iter->children.begin(); iter2 != iter->children.end(); ++iter2)
+                            for (std::map<std::string, std::shared_ptr<Node> >::iterator iter2 = (*iter)->children.begin(); iter2 != (*iter)->children.end(); ++iter2)
                             {
-                                tc += iter->get_child_cnt(iter2->first);
+                                tc += (*iter)->get_child_cnt(iter2->first);
                                 decomps.insert(iter2->first);
                             }
                         }
@@ -327,7 +327,7 @@ void SPN::clear_unused_in_SPN()
 
                     // clear dead decomp_prod
                     std::set<std::string> dead_decomps = std::set<std::string>();
-                    for (std::unordered_map<std::string, ProdNode>::iterator iter3 = r.decomp_prod.begin(); iter3 != r.decomp_prod.end(); ++iter3)
+                    for (std::unordered_map<std::string, std::shared_ptr<ProdNode> >::iterator iter3 = r->decomp_prod.begin(); iter3 != r->decomp_prod.end(); ++iter3)
                     {
                         if (decomps.count(iter3->first) == 0)
                         {
@@ -338,7 +338,7 @@ void SPN::clear_unused_in_SPN()
 
                     for (std::set<std::string>::iterator iter4 = dead_decomps.begin(); iter4 != dead_decomps.end(); ++iter4)
                     {
-                        r.decomp_prod.erase(*iter4);
+                        r->decomp_prod.erase(*iter4);
                         Decomposition::remove(*iter4);
                     }
                 }
@@ -389,9 +389,9 @@ void SPN::cmp_derivative()
 
     this->root->log_derivative = 0;
     this->root->pass_derivative();
-    for (std::map<std::string, Node>::iterator iter = this->root->children.begin(); iter != this->root->children.end(); ++iter)
+    for (std::map<std::string, std::shared_ptr<Node> >::iterator iter = this->root->children.begin(); iter != this->root->children.end(); ++iter)
     {
-        Node &n = this->root->children[iter->first];
+        Node &n = *(this->root->children[iter->first]);
         n.pass_derivative();
     }
 
@@ -411,8 +411,8 @@ void SPN::cmp_derivative()
 
                     // coarse regions
                     int ri = Region::get_region_id(a1, a2, b1, b2);
-                    Region &r = Region::get_region(ri);
-                    this->cmp_derivative(r);
+                    std::shared_ptr<Region> r = Region::get_region(ri);
+                    this->cmp_derivative(*r);
                 }
             }
         }
@@ -432,8 +432,8 @@ void SPN::cmp_derivative()
                         {
                             int b2 = b1 + b;
                             int ri = Region::get_region_id(a1, a2, b1, b2);
-                            Region &r = Region::get_region(ri);
-                            this->cmp_derivative(r);
+                            std::shared_ptr<Region> r = Region::get_region(ri);
+                            this->cmp_derivative(*r);
                         }
                     }
                 }
@@ -457,8 +457,8 @@ void SPN::eval()
                         {
                             int b2 = b1 + b;
                             int ri = Region::get_region_id(a1, a2, b1, b2);
-                            Region &r = Region::get_region(ri);
-                            this->eval(r);
+                            std::shared_ptr<Region> r = Region::get_region(ri);
+                            this->eval(*r);
                         }
                     }
                 }
@@ -479,8 +479,8 @@ void SPN::eval()
 
                     // coarse regions
                     int ri = Region::get_region_id(a1, a2, b1, b2);
-                    Region &r = Region::get_region(ri);
-                    this->eval(r);
+                    std::shared_ptr<Region> r = Region::get_region(ri);
+                    this->eval(*r);
                 }
             }
         }
@@ -490,41 +490,41 @@ void SPN::cmp_derivative(Region &r)
 {
     for (int i = 0; i < (int)r.types.size(); ++i)
     {
-        r.types[i].pass_derivative();
+        r.types[i]->pass_derivative();
     }
-    for (std::unordered_map<std::string, ProdNode>::iterator iter = r.decomp_prod.begin(); iter != r.decomp_prod.end(); ++iter)
+    for (std::unordered_map<std::string, std::shared_ptr<ProdNode> >::iterator iter = r.decomp_prod.begin(); iter != r.decomp_prod.end(); ++iter)
     {
-        Node &n = r.decomp_prod[iter->first];
+        Node &n = *(r.decomp_prod[iter->first]);
         n.pass_derivative();
     }
 }
 
 void SPN::eval(Region &r)
 {
-    for (std::unordered_map<std::string, ProdNode>::iterator iter = r.decomp_prod.begin(); iter != r.decomp_prod.end(); ++iter)
+    for (std::unordered_map<std::string, std::shared_ptr<ProdNode> >::iterator iter = r.decomp_prod.begin(); iter != r.decomp_prod.end(); ++iter)
     {
-        ProdNode &n = r.decomp_prod[iter->first];
+        ProdNode &n = *(r.decomp_prod[iter->first]);
         n.eval();
     }
-    for (std::vector<SumNode>::iterator iter2 = r.types.begin(); iter2 != r.types.end(); ++iter2)
+    for (std::vector<std::shared_ptr<SumNode> >::iterator iter2 = r.types.begin(); iter2 != r.types.end(); ++iter2)
     {
-        if ((int)(iter2->children.size()) > 0)
-            iter2->eval();
+        if ((int)((*iter2)->children.size()) > 0)
+            (*iter2)->eval();
         else
-            iter2->log_val = Node::zero_log_val;
+            (*iter2)->log_val = Node::zero_log_val;
     }
 }
 
 void SPN::init_derviative(Region &r)
 {
-    for (std::unordered_map<std::string, ProdNode>::iterator iter = r.decomp_prod.begin(); iter != r.decomp_prod.end(); ++iter)
+    for (std::unordered_map<std::string, std::shared_ptr<ProdNode> >::iterator iter = r.decomp_prod.begin(); iter != r.decomp_prod.end(); ++iter)
     {
-        ProdNode &n = r.decomp_prod[iter->first];
+        ProdNode &n = *(r.decomp_prod[iter->first]);
         n.log_derivative = Node::zero_log_val;
     }
-    for (std::vector<SumNode>::iterator iter2 = r.types.begin(); iter2 != r.types.end(); ++iter2)
+    for (std::vector<std::shared_ptr<SumNode> >::iterator iter2 = r.types.begin(); iter2 != r.types.end(); ++iter2)
     {
-        iter2->log_derivative = Node::zero_log_val;
+        (*iter2)->log_derivative = Node::zero_log_val;
     }
 }
 
@@ -545,8 +545,8 @@ void SPN::init_derviative()
 
                     // coarse regions
                     int ri = Region::get_region_id(a1, a2, b1, b2);
-                    Region &r = Region::get_region(ri);
-                    this->init_derviative(r);
+                    std::shared_ptr<Region> r = Region::get_region(ri);
+                    this->init_derviative(*r);
                 }
             }
         }
@@ -564,8 +564,8 @@ void SPN::init_derviative()
                        {
                            int b2 = b1 + b;
                            int ri = Region::get_region_id(a1, a2, b1, b2);
-                           Region &r = Region::get_region(ri);
-                           this->init_derviative(r);
+                           std::shared_ptr<Region> r = Region::get_region(ri);
+                           this->init_derviative(*r);
                        }
                     }
                 }
@@ -592,8 +592,8 @@ void SPN::infer_MAP_left_half(int ii, Instance &inst)
                         {
                             int b2 = b1 + b;
                             int ri = Region::get_region_id(a1, a2, b1, b2);
-                            Region &r = Region::get_region(ri);
-                            r.infer_MAP(ii, inst);
+                            std::shared_ptr<Region> r = Region::get_region(ri);
+                            r->infer_MAP(ii, inst);
                         }
                     }
                 }
@@ -612,8 +612,8 @@ void SPN::infer_MAP_left_half(int ii, Instance &inst)
                 {
                     int b2 = b1 + cb * Parameter::base_resolution;
                     int ri = Region::get_region_id(a1, a2, b1, b2);
-                    Region &r = Region::get_region(ri);
-                    r.infer_MAP(ii, inst);
+                    std::shared_ptr<Region> r = Region::get_region(ri);
+                    r->infer_MAP(ii, inst);
                 }
             }
         }
@@ -638,8 +638,8 @@ void SPN::infer_MAP_for_learning(int ii, Instance &inst)
                         {
                             int b2 = b1 + b;
                             int ri = Region::get_region_id(a1, a2, b1, b2);
-                            Region &r = Region::get_region(ri);
-                            r.infer_MAP_for_learning(ii, inst);
+                            std::shared_ptr<Region> r = Region::get_region(ri);
+                            r->infer_MAP_for_learning(ii, inst);
                         }
                     }
                 }
@@ -657,8 +657,8 @@ void SPN::infer_MAP_for_learning(int ii, Instance &inst)
                 {
                     int b2 = b1 + cb * Parameter::base_resolution;
                     int ri = Region::get_region_id(a1, a2, b1, b2);
-                    Region &r = Region::get_region(ri);
-                    r.infer_MAP_for_learning(ii, inst);
+                    std::shared_ptr<Region> r = Region::get_region(ri);
+                    r->infer_MAP_for_learning(ii, inst);
                 }
             }
         }
@@ -687,8 +687,8 @@ void SPN::set_cur_parse_from_buf()
         int ri2 = MyMPI::buf_int[k++];
         int ti1 = MyMPI::buf_int[k++];
         int ti2 = MyMPI::buf_int[k++];
-        Region &r = Region::get_region(ri);
-        r.set_cur_parse_from_buf(chosen_type, ri1, ri2, ti1, ti2);
+        std::shared_ptr<Region> r = Region::get_region(ri);
+        r->set_cur_parse_from_buf(chosen_type, ri1, ri2, ti1, ti2);
     }
 }
 
@@ -704,8 +704,8 @@ void SPN::clear_cur_parse_from_buf()
         int ri2 = MyMPI::buf_int[k++];
         int ti1 = MyMPI::buf_int[k++];
         int ti2 = MyMPI::buf_int[k++];
-        Region &r = Region::get_region(ri);
-        r.clear_cur_parse_from_buf(chosen_type, ri1, ri2, ti1, ti2);
+        std::shared_ptr<Region> r = Region::get_region(ri);
+        r->clear_cur_parse_from_buf(chosen_type, ri1, ri2, ti1, ti2);
     }
 }
 
@@ -745,8 +745,8 @@ void SPN::set_input(Instance &inst)
         {
             int b2 = b1 + 1;
             int ri = Region::get_region_id(a1, a2, b1, b2);
-            Region &r = Region::get_region(ri);
-            r.set_base(inst.vals[a1][b1]);
+            std::shared_ptr<Region> r = Region::get_region(ri);
+            r->set_base(inst.vals[a1][b1]);
         }
     }
 }
@@ -760,11 +760,11 @@ void SPN::set_input_occlude_left_half(Instance &inst)
         {
             int b2 = b1 + 1;
             int ri = Region::get_region_id(a1, a2, b1, b2);
-            Region &r = Region::get_region(ri);
+            std::shared_ptr<Region> r = Region::get_region(ri);
             if (b1 < Parameter::input_dim2 / 2) // r.set_base(0, 0); // log 1, 1
-                r.set_base_for_sum_out();
+                r->set_base_for_sum_out();
             else
-                r.set_base(inst.vals[a1][b1]);
+                r->set_base(inst.vals[a1][b1]);
         }
     }
 }
@@ -778,11 +778,11 @@ void SPN::set_input_occlude_bottom_half(Instance &inst)
         {
             int b2 = b1 + 1;
             int ri = Region::get_region_id(a1, a2, b1, b2);
-            Region &r = Region::get_region(ri);
+            std::shared_ptr<Region> r = Region::get_region(ri);
             if (a1 >= Parameter::input_dim1 / 2)
-                r.set_base_for_sum_out();
+                r->set_base_for_sum_out();
             else
-                r.set_base(inst.vals[a1][b1]);
+                r->set_base(inst.vals[a1][b1]);
         }
     }
 }
@@ -808,8 +808,8 @@ void SPN::save_DSPN(std::string mdl_name)
                         {
                             int b2 = b1 + b;
                             int ri = Region::get_region_id(a1, a2, b1, b2);
-                            Region &r = Region::get_region(ri);
-                            this->save_region(r, out);
+                            std::shared_ptr<Region> r = Region::get_region(ri);
+                            this->save_region(*r, out);
                         }
                     }
                 }
@@ -827,8 +827,8 @@ void SPN::save_DSPN(std::string mdl_name)
                 {
                     int b2 = b1 + cb * Parameter::base_resolution;
                     int ri = Region::get_region_id(a1, a2, b1, b2);
-                    Region &r = Region::get_region(ri);
-                    this->save_region(r, out);
+                    std::shared_ptr<Region> r = Region::get_region(ri);
+                    this->save_region(*r, out);
                 }
             }
         }
@@ -848,9 +848,9 @@ void SPN::save_region(Region &r, std::fstream &out)
     out << std::to_string((int)r.types.size()) + "\n";
     for (int i = 0; i < (int)r.types.size(); ++i)
     {
-        SumNode n = r.types[i];
+        SumNode n = *(r.types[i]);
         s = std::to_string(n.cnt) + "";
-        for (std::map<std::string, Node>::iterator iter = n.children.begin(); iter != n.children.end(); ++iter)
+        for (std::map<std::string, std::shared_ptr<Node> >::iterator iter = n.children.begin(); iter != n.children.end(); ++iter)
         {
             s += ":<" + iter->first + ">:" + std::to_string(n.get_child_cnt(iter->first));
         }
@@ -888,11 +888,11 @@ SPN SPN::load_DSPN(std::string mdl_name)
             t = std::vector<std::string>();
         else if (s == "</REGION>")
         {
-            Region &r = SPN::load_region(t);
-            if ((int)r.types.size() == 1)
+            std::shared_ptr<Region> r = SPN::load_region(t);
+            if ((int)r->types.size() == 1)
             {
-                dspn.root_region = &r;
-                dspn.root = &(r.types[0]);
+                dspn.root_region = r;
+                dspn.root = r->types[0];
                 t.clear();
             }
         }
@@ -907,7 +907,7 @@ SPN SPN::load_DSPN(std::string mdl_name)
     return dspn;
 }
 
-Region &SPN::load_region(std::vector<std::string> t)
+std::shared_ptr<Region> SPN::load_region(std::vector<std::string> t)
 {
     int a1, a2, b1, b2;
     std::string s;
@@ -920,13 +920,13 @@ Region &SPN::load_region(std::vector<std::string> t)
     a2 = std::stoi(ts[1]);
     b1 = std::stoi(ts[2]);
     b2 = std::stoi(ts[3]);
-    Region &r = Region::get_region(Region::get_region_id(a1, a2, b1, b2));
+    std::shared_ptr<Region> r = Region::get_region(Region::get_region_id(a1, a2, b1, b2));
 
     // type
     s = t[idx++];  // <TYPE>
     s = t[idx++];
     int num_types = std::stoi(s);
-    r.reset_types(num_types);
+    r->reset_types(num_types);
     for (int i = 0; i < num_types; ++i)
     {
         s = t[idx++];
@@ -934,14 +934,14 @@ Region &SPN::load_region(std::vector<std::string> t)
         ts.clear();
         while (std::getline(ss, s, ':'))
             ts.push_back(s); // split by ':'
-        SumNode &n = r.types[i];
+        SumNode &n = *(r->types[i]);
         n.cnt = std::stod(ts[0]);
         for (int j = 1; j < (int)ts.size(); j += 2)
         {
             std::string di = ts[j];
             di = di.substr(1, di.length() - 1);
             double cc = std::stod(ts[j + 1]);
-            SPN::add_child(r, n, di, cc);
+            SPN::add_child(*r, n, di, cc);
         }
     }
     s = t[idx++]; // </TYPE>
@@ -959,9 +959,9 @@ Region &SPN::load_region(std::vector<std::string> t)
         ts.clear();
         std::stringstream ss(s); // split by ' '
         ts = std::vector<std::string>((std::istream_iterator<std::string>(ss)), std::istream_iterator<std::string>());
-        r.means = std::vector<double>((int)ts.size());
+        r->means = std::vector<double>((int)ts.size());
         for (int i = 0; i < (int)ts.size(); ++i)
-            r.means.push_back(std::stod(ts[i]));
+            r->means.push_back(std::stod(ts[i]));
         s = t[idx++];
         if (s.find("<CNT>") != std::string::npos)
         {
@@ -972,9 +972,9 @@ Region &SPN::load_region(std::vector<std::string> t)
         ts.clear();
         std::stringstream ss2(s); // split by ' '
         ts = std::vector<std::string>((std::istream_iterator<std::string>(ss2)), std::istream_iterator<std::string>());
-        r.cnts = std::vector<double>((int)ts.size());
+        r->cnts = std::vector<double>((int)ts.size());
         for (int i = 0; i < (int)ts.size(); ++i)
-            r.cnts.push_back(std::stod(ts[i]));
+            r->cnts.push_back(std::stod(ts[i]));
     }
     
     return r;
@@ -983,20 +983,19 @@ Region &SPN::load_region(std::vector<std::string> t)
 void SPN::add_child(Region &r, SumNode &n, std::string di, double cc)
 {
     n.set_child_cnt(di, cc);
-    ProdNode np;
+    std::shared_ptr<ProdNode> np = std::make_shared<ProdNode>();
     if (r.decomp_prod.count(di) == 0)
     {
         Decomposition d = Decomposition::get_decomposition(di);
-        np = ProdNode();
-        Region &r1 = Region::get_region(d.type_id_1);
-        Region &r2 = Region::get_region(d.type_id_2);
-        np.add_child(r1.types[d.type_id_1]);
-        np.add_child(r2.types[d.type_id_2]);
-        r.decomp_prod.insert(std::pair<std::string, ProdNode>(di, np));
+        Region &r1 = *(Region::get_region(d.type_id_1));
+        Region &r2 = *(Region::get_region(d.type_id_2));
+        (*np).add_child(r1.types[d.type_id_1]);
+        (*np).add_child(r2.types[d.type_id_2]);
+        r.decomp_prod.insert(std::make_pair(di, np));
     }
     else
         np = r.decomp_prod[di];
-    n.children.insert(std::pair<std::string, Node>(di, np));
+    n.children.insert(std::make_pair(di, np));
 }
 
 // ----------------------------------------------

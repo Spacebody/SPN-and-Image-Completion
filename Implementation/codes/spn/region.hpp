@@ -9,6 +9,7 @@
 #include "prod_node.hpp"
 #include "../common/parameter.hpp"
 #include "instance.hpp"
+#include <memory>
 
 class Region
 {
@@ -31,10 +32,10 @@ class Region
     // data structure for a parse
     std::unordered_map<int, int> inst_type;
     std::unordered_map<int, std::string> inst_decomp;
-    std::unordered_map<std::string, ProdNode> decomp_prod;
+    std::unordered_map<std::string, std::shared_ptr<ProdNode> > decomp_prod;
 
     // each region is alloted a set of sum nodes
-    std::vector<SumNode> types;
+    std::vector<std::shared_ptr<SumNode> > types;
 
     // MAP computation
     int def_map_type_idx;
@@ -46,10 +47,10 @@ class Region
     
     /*************************************************************/
 
-    static std::unordered_map<int, Region> id_regions;
+    static std::unordered_map<int, std::shared_ptr<Region> > id_regions;
   
     static int get_region_id(int a1, int a2, int b1, int b2);
-    static Region &get_region(int id);
+    static std::shared_ptr<Region> get_region(int id);
     int get_id();
     std::string my_str();
     void reset_types(int num_types);

@@ -132,7 +132,7 @@ std::map<std::string, std::map<std::string, std::string> > Run::get_caltech_info
         if (ptr->d_name[0] == '.')
             continue;
         if (ptr->d_type == DT_DIR)
-            cat_info.insert(std::pair<std::string, std::map<std::string, std::string> >(ptr->d_name, std::map<std::string, std::string>()));
+            cat_info.insert(std::make_pair(ptr->d_name, std::map<std::string, std::string>()));
     }
     closedir(dir);  // close directory
     return cat_info;
