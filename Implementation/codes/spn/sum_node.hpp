@@ -4,6 +4,7 @@
 #include "node.hpp"
 #include <map>
 #include "../common/parameter.hpp"
+#include <memory>
 
 class SumNode: public Node
 {

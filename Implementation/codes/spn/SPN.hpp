@@ -9,6 +9,7 @@
 #include "../common/parameter.hpp"
 #include <string>
 #include <fstream>
+#include <memory>
 
 class SPN
 {

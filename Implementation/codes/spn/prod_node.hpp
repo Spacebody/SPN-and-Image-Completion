@@ -3,6 +3,7 @@
 
 #include "node.hpp"
 #include <vector>
+#include <memory>
 
 class ProdNode : public Node
 {
