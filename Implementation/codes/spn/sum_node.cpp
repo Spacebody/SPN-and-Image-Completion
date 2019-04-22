@@ -39,7 +39,7 @@ void SumNode::eval()
         double l = this->children[iter->first]->log_val;
         if(l == Node::zero_log_val)
             continue;
-        v += SumNode::get_child_cnt(iter->first) * exp(l - max_l);
+        v += this->get_child_cnt(iter->first) * exp(l - max_l);
     }
     this->log_val = log(v / this->cnt) + max_l;
 }
@@ -77,7 +77,7 @@ void SumNode::add_child_only(std::string decomp_idx, double cnt_, std::shared_pt
     if (this->child_cnts.count(decomp_idx) == 0)
         this->child_cnts.insert(std::make_pair(decomp_idx, cnt_));
     else
-        this->child_cnts[decomp_idx] = cnt_ + SumNode::get_child_cnt(decomp_idx);
+        this->child_cnts[decomp_idx] = cnt_ + this->get_child_cnt(decomp_idx);
     this->cnt += cnt_;
 }
 

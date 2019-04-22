@@ -7,15 +7,15 @@
 
 std::unordered_map<int, std::shared_ptr<Region> > Region::id_regions = std::unordered_map<int, std::shared_ptr<Region> >();
 
-Region::Region(int id, int a1, int a2, int b1, int b2)
+Region::Region(int id_, int a1_, int a2_, int b1_, int b2_)
 {
-    this->id = id;
-    this->a1 = a1;
-    this->a2 = a2;
-    this->b1 = b1;
-    this->b2 = b2;
-    this->a = a2 - a1;
-    this->b = b2 - b1;
+    this->id = id_;
+    this->a1 = a1_;
+    this->a2 = a2_;
+    this->b1 = b1_;
+    this->b2 = b2_;
+    this->a = a2_ - a1_;
+    this->b = b2_ - b1_;
     
     if(this->a > Parameter::base_resolution || this->b > Parameter::base_resolution)
     {
@@ -45,30 +45,30 @@ Region::Region(int id, int a1, int a2, int b1, int b2)
     this->invar = sqrt(20);
 }
 
-int Region::get_region_id(int a1, int a2, int b1, int b2)
+int Region::get_region_id(int a1_, int a2_, int b1_, int b2_)
 {
-    int id = ((a1 * Parameter::input_dim1 + a2 - 1) * Parameter::input_dim2 + b1) * Parameter::input_dim2 + b2 - 1;
-    if (Region::id_regions.count(id) == 0)
+    int id_ = ((a1_ * Parameter::input_dim1 + a2_ - 1) * Parameter::input_dim2 + b1_) * Parameter::input_dim2 + b2_ - 1;
+    if (Region::id_regions.count(id_) == 0)
     {
-        Region::id_regions.insert(std::make_pair(id, std::make_shared<Region>(id, a1, a2, b1, b2))); // mark
+        Region::id_regions.insert(std::make_pair(id_, std::make_shared<Region>(id_, a1_, a2_, b1_, b2_))); // mark
     }
-    return id;
+    return id_;
 }
 
-std::shared_ptr<Region> Region::get_region(int id)
+std::shared_ptr<Region> Region::get_region(int id_)
 {
-    if (id_regions.count(id) == 0)
+    if (id_regions.count(id_) == 0)
     {
-        int b2 = id % Parameter::input_dim2 + 1;
-        int x = id / Parameter::input_dim2;
-        int b1 = x % Parameter::input_dim2;
+        int b2_ = id_ % Parameter::input_dim2 + 1;
+        int x = id_ / Parameter::input_dim2;
+        int b1_ = x % Parameter::input_dim2;
         x = x / Parameter::input_dim2;
-        int a2 = x % Parameter::input_dim1 + 1;
-        int a1 = x / Parameter::input_dim1;
-        return Region::get_region(Region::get_region_id(a1, a2, b1, b2));
+        int a2_ = x % Parameter::input_dim1 + 1;
+        int a1_ = x / Parameter::input_dim1;
+        return Region::get_region(Region::get_region_id(a1_, a2_, b1_, b2_));
     }
     else
-        return Region::id_regions[id];
+        return Region::id_regions[id_];
 }
 
 int Region::get_id() 
@@ -98,12 +98,12 @@ void Region::reset_types(int num_types)
 
 void Region::set_types(int num_types)
 {
-    if (num_types < (int)this->types.size())
+    if (num_types < (int)(this->types.size()))
     {
         this->reset_types(num_types);
         return;
     }
-    int nn = num_types - (int)this->types.size();
+    int nn = num_types - (int)(this->types.size());
     for (int i = 0; i < nn; ++i)
     {
         this->types.push_back(std::make_shared<SumNode>());
@@ -126,7 +126,7 @@ void Region::set_base_Gauss(double v)
 {
     this->def_map_type_idx = -1;
     double mp = 0;
-    for (int i = 0; i < (int)this->types.size(); ++i)
+    for (int i = 0; i < (int)(this->types.size()); ++i)
     {
         SumNode &n = *(this->types[i]);
         n.log_val = this->cmp_Gauss(v, this->means[i]);
@@ -152,7 +152,7 @@ void Region::set_base_for_sum_out()
 void Region::infer_MAP(int inst_idx, Instance &inst)
 {
     if (this->map_decomps.empty())
-        this->map_decomps.resize((int)this->types.size());
+        this->map_decomps.resize((int)(this->types.size()));
 
     // compute prod values
     for (std::unordered_map<std::string, std::shared_ptr<ProdNode> >::iterator iter = this->decomp_prod.begin();
@@ -163,9 +163,9 @@ void Region::infer_MAP(int inst_idx, Instance &inst)
     }
 
     // evaluate children for sum nodes
-    for (int ti = 0; ti < (int)this->types.size(); ++ti)
+    for (int ti = 0; ti < (int)(this->types.size()); ++ti)
     {
-        if ((int)this->types[ti]->children.size() == 0)
+        if ((int)(this->types[ti]->children.size()) == 0)
             continue;
 
         SumNode &n = *(this->types[ti]);
@@ -191,7 +191,7 @@ void Region::infer_MAP(int inst_idx, Instance &inst)
         }
 
         // randomly break tie
-        this->map_decomps[ti] = map_decomp_opt[Utils::random_next_int((int)map_decomp_opt.size())];
+        this->map_decomps[ti] = map_decomp_opt[Utils::random_next_int((int)(map_decomp_opt.size()))];
         map_decomp_opt.clear();
     }
 }
@@ -202,7 +202,7 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance &inst)
     std::vector<std::string> def_map_decomp_opts = std::vector<std::string>();
     std::string def_map_decomp = "";
     if (this->map_decomps.empty())
-        this->map_decomps.resize((int)this->types.size());
+        this->map_decomps.resize((int)(this->types.size()));
 
     this->def_map_type_idx = -1;
     this->def_map_sum_prob = 100;
@@ -211,10 +211,10 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance &inst)
 
     // sum: choose a previous unused node
     std::vector<int> blanks = std::vector<int>();
-    for (int i = 0; i < (int)this->types.size(); ++i)
+    for (int i = 0; i < (int)(this->types.size()); ++i)
     {
         SumNode &n = *(this->types[i]);
-        if ((int)n.children.size() == 0)
+        if ((int)(n.children.size()) == 0)
         {
             // if (blanks.empty())
                 // blanks = std::vector<int>();
@@ -226,9 +226,9 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance &inst)
 
     if (!blanks.empty())
     {
-        if ((int)blanks.size() > 1)
+        if ((int)(blanks.size()) > 1)
         {
-            int ci = Utils::random_next_int((int)blanks.size());
+            int ci = Utils::random_next_int((int)(blanks.size()));
             chosen_blank_idx = blanks[ci];
         }
         else
@@ -294,7 +294,7 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance &inst)
     }
 
     // random break ties for a previously unused node
-    def_map_decomp = def_map_decomp_opts[Utils::random_next_int((int)def_map_decomp_opts.size())];
+    def_map_decomp = def_map_decomp_opts[Utils::random_next_int((int)(def_map_decomp_opts.size()))];
     def_map_decomp_opts.clear();
 
     // evaluate product nodes
@@ -307,9 +307,9 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance &inst)
 
     // evaluate existing sum nodes and children
     std::vector<int> map_types = std::vector<int>();
-    for (int ti = 0; ti < (int)this->types.size(); ++ti)
+    for (int ti = 0; ti < (int)(this->types.size()); ++ti)
     {
-        if ((int)this->types[ti]->children.size() == 0)
+        if ((int)(this->types[ti]->children.size()) == 0)
             continue;
         SumNode &n = *(this->types[ti]);
         n.eval();
@@ -373,7 +373,7 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance &inst)
         n.log_val = max_sum_prob - log(n.cnt + 1);
 
         // randomly break tie
-        this->map_decomps[ti] = map_decomp_opt[Utils::random_next_int((int)map_decomp_opt.size())];
+        this->map_decomps[ti] = map_decomp_opt[Utils::random_next_int((int)(map_decomp_opt.size()))];
         map_decomp_opt.clear();
 
         if (map_types.empty() || n.log_val > this->def_map_sum_prob)
@@ -401,7 +401,7 @@ void Region::infer_MAP_for_learning(int inst_idx, Instance &inst)
         }
     }
 
-    this->def_map_type_idx = map_types[Utils::random_next_int((int)map_types.size())];
+    this->def_map_type_idx = map_types[Utils::random_next_int((int)(map_types.size()))];
     map_types.clear();
 }
 
@@ -412,7 +412,7 @@ void Region::set_cur_parse_to_MAP(int inst_idx)
         return;
 
     // type node
-    if ((int)this->types.size() == 1)
+    if ((int)(this->types.size()) == 1)
         this->inst_type[inst_idx] = 0;  // only one choice
     int chosen_type = this->inst_type[inst_idx];
     std::string di = this->map_decomps[chosen_type];
