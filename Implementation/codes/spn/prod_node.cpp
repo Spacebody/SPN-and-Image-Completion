@@ -35,13 +35,13 @@ void ProdNode::pass_derivative()
             {
                 if ((*iter2)->log_val != Node::zero_log_val)
                     l += (*iter2)->log_val;
-
-                l += this->log_derivative;
-                if ((*iter1)->log_derivative == Node::zero_log_val)
-                    (*iter1)->log_derivative = l;
-                else
-                    (*iter1)->log_derivative = Utils::add_log((*iter1)->log_derivative, l);
             }
+            l += this->log_derivative;
+            if ((*iter1)->log_derivative == Node::zero_log_val)
+                (*iter1)->log_derivative = l;
+            else
+                (*iter1)->log_derivative = Utils::add_log((*iter1)->log_derivative, l);
+            
         }
         else if (this->log_val != Node::zero_log_val)
         {
