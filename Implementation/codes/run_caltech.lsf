@@ -5,7 +5,7 @@
 #BSUB -eo ../errors/stderr_caltech.err  ### standard error, rewrite every run
 
 ### load module
-module load mpi/openmpi/3.1.2_intel
+module load mpi/openmpi/3.1.2_gcc
 
 ### run program
 mpirun -np $LSB_DJOB_NUMPROC ./run -d C

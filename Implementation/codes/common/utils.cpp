@@ -45,7 +45,7 @@ std::string Utils::get_prefix()
 
 std::string Utils::left_pad(std::string s, const int len, const char c)
 {
-    for (int i = 0; i < len - s.length(); ++i)
+    for (int i = 0; i < len - (int)(s.length()); ++i)
         s = c + s;
     return s;
 }
