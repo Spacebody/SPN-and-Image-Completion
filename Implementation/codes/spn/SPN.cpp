@@ -405,7 +405,7 @@ void SPN::init_unit_region(Region &r)
     int ttl_cnt = (int)(this->training_set.size());
     int cnt = (int)ceil(ttl_cnt * 1.0 / Parameter::num_components_per_var);
     std::vector<double> vals = std::vector<double>(ttl_cnt);
-    for (int ii = 0; ii < this->training_set.size(); ++ii)
+    for (int ii = 0; ii < (int)(this->training_set.size()); ++ii)
     {
         vals[ii] = this->training_set[ii].vals[r.a1][r.b1];
     }
