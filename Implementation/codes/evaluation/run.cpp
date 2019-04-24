@@ -102,8 +102,8 @@ void Run::run_caltech()
         if (num_cat % Parameter::num_slave_grp != my_id)
             continue;
         MyMPI::set_constants_for_imgs_parallel();
-
-        Utils::println("learn " + iter->first + " num_cat=" + std::to_string(num_cat));
+        if (MyMPI::is_class_master)
+            Utils::println("learn " + iter->first + " num_cat=" + std::to_string(num_cat));
         Dataset data;
         data.load_caltech(iter->first);
         // learn

@@ -27,7 +27,8 @@ void GenerativeLearning::learn_hard_EM(std::vector<Instance> train)
     std::chrono::high_resolution_clock::time_point start_time = std::chrono::high_resolution_clock::now();
     bool is_log = false;
 
-    this->spn.print_params();
+    if (MyMPI::is_class_master)
+        this->spn.print_params();
     this->spn.init();
     Utils::log_time_ms("init");
 
@@ -153,7 +154,7 @@ void GenerativeLearning::learn_hard_EM(std::vector<Instance> train)
                 int rank = i + MyMPI::my_slave;
                 llh += this->recv_llh(rank);
             }
-            llh /= (double)train.size();
+            llh /= (double)(train.size());
             Utils::log_time_ms("[iter=" + std::to_string(iter) + "] llh=" + std::to_string(llh) + " ollh=" + std::to_string(ollh));
             if (iter == 1)
                 ollh = llh;
@@ -180,10 +181,10 @@ void GenerativeLearning::learn_hard_EM(std::vector<Instance> train)
         {
             // slave: compute llh, send to class master
             double llh = 0.0;
-            int size = (int)ceil((int)train.size() * 1.0 / Parameter::num_slave_per_class);
+            int size = (int)ceil((int)(train.size()) * 1.0 / Parameter::num_slave_per_class);
             for (int i = MyMPI::my_offset * size; i < (MyMPI::my_offset + 1) * size && i < (int)(train.size()); i++)
             {
-                Instance inst = train[i];
+                Instance &inst = train[i];
                 llh += this->spn.llh(inst);
             }
             this->send_llh(MyMPI::master_rank, llh);
