@@ -27,7 +27,8 @@ void GenerativeLearning::learn_hard_EM(std::vector<Instance> train)
     std::chrono::high_resolution_clock::time_point start_time = std::chrono::high_resolution_clock::now();
     bool is_log = false;
 
-    this->spn.print_params();
+    if (MyMPI::is_class_master)
+        this->spn.print_params();
     this->spn.init();
     Utils::log_time_ms("init");
 
@@ -153,18 +154,18 @@ void GenerativeLearning::learn_hard_EM(std::vector<Instance> train)
                 int rank = i + MyMPI::my_slave;
                 llh += this->recv_llh(rank);
             }
-            llh /= (double)train.size();
+            llh /= (double)(train.size());
             Utils::log_time_ms("[iter=" + std::to_string(iter) + "] llh=" + std::to_string(llh) + " ollh=" + std::to_string(ollh));
             if (iter == 1)
                 ollh = llh;
             else
             {
-                double dllh = abs(llh - ollh);
+                double dllh = std::abs(llh - ollh);
                 ollh = llh;
                 if (dllh < Parameter::threshold_LLHChg)
                 {
                     Utils::println("\tllh converged");
-                    
+                    std::cout << "delta: " << dllh << " " << Parameter::threshold_LLHChg << std::endl;                    
                     // send msg break
                     for (int k = 0; k < Parameter::num_slave_per_class; ++k)
                         this->send_msg_break(k + MyMPI::my_slave);

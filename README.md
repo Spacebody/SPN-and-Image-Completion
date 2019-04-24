@@ -145,7 +145,7 @@ TODO
 
 - [ ] Further Exploration and Optimization (*Apr. 27, 2019*)
 
-- [x] Interim Report (*April 4, 2019*)
+- [x] Interim Report (*Apr. 4, 2019*)
 
 - [ ] Thesis Draft(*May 6, 2019*)
 

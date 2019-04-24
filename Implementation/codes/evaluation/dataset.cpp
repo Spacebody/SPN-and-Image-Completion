@@ -6,6 +6,7 @@
 #include <cmath>
 #include <algorithm>
 #include <iterator>
+#include "../common/my_mpi.hpp"
 
 std::vector<std::vector<int> > Dataset::tmp = std::vector<std::vector<int> >(Parameter::input_dim1, std::vector<int>(Parameter::input_dim2, 0));
 
@@ -77,7 +78,8 @@ void Dataset::load_caltech(std::string dir_name)
     struct dirent *ptr;
     DIR *dir;
     std::string dir_path = Dataset::cal_data_dir + "/" + dir_name;
-    std::cout << "Loading " + dir_path << std::endl;
+    if (MyMPI::is_class_master)
+        std::cout << "Loading " + dir_path << std::endl;
     dir = opendir(dir_path.c_str());
     std::vector<std::string> files = std::vector<std::string>();
     while ((ptr = readdir(dir)) != NULL)
