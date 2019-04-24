@@ -1,0 +1,1867 @@
+Sender: LSF System <lsfadmin@r13n04>
+Subject: Job 337694: <olivetti> in cluster <sustchpc> Done
+
+Job <olivetti> was submitted from host <login02> by user <cse-zhengyl> in cluster <sustchpc> at Wed Apr 24 14:20:00 2019.
+Job was executed on host(s) <19*r13n04>, in queue <medium>, as user <cse-zhengyl> in cluster <sustchpc> at Wed Apr 24 14:20:00 2019.
+                            <20*r13n06>
+                            <1*r10n45>
+</work/cse-zhengyl> was used as the home directory.
+</work/cse-zhengyl/codes2> was used as the working directory.
+Started at Wed Apr 24 14:20:00 2019.
+Terminated at Wed Apr 24 14:23:25 2019.
+Results reported at Wed Apr 24 14:23:25 2019.
+
+Your job looked like:
+
+------------------------------------------------------------
+# LSBATCH: User input
+#BSUB -J olivetti  ### set job name
+#BSUB -n 40  ## number of cores
+#BSUB -oo ../output/stdout_olivetti.out  ### standard output, rewrite every run
+#BSUB -eo ../errors/stderr_olivetti.err  ### standard error, rewrite every run
+
+### load module
+module load mpi/openmpi/3.1.2_gcc
+
+### run program
+mpirun ./run -d O
+
+------------------------------------------------------------
+
+Successfully completed.
+
+Resource usage summary:
+
+    CPU time :                                   7948.49 sec.
+    Max Memory :                                 12682 MB
+    Average Memory :                             9931.54 MB
+    Total Requested Memory :                     -
+    Delta Memory :                               -
+    Max Swap :                                   -
+    Max Processes :                              46
+    Max Threads :                                177
+    Run time :                                   204 sec.
+    Turnaround time :                            205 sec.
+
+The output (if any) follows:
+
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+<TIME> init 4370000ms
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+*** Parameters ***
+	Domain = O
+	Num of Sum Per Region = 20
+	Num of Components Per Variable = 4
+	Sparse Prior = 1.000000
+	Base Resolution = 4
+	Num of Slave Per Class = 39
+	Num of Slave Group = 1
+<TIME> init 6270000ms
+<TIME> init 6270000ms
+<TIME> init 6280000ms
+<TIME> init 6280000ms
+<TIME> init 6270000ms
+<TIME> init 6270000ms
+<TIME> init 6270000ms
+<TIME> init 6280000ms
+<TIME> init 6290000ms
+<TIME> init 6280000ms
+<TIME> init 6290000ms
+<TIME> init 6290000ms
+<TIME> init 6290000ms
+<TIME> init 6300000ms
+<TIME> init 6300000ms
+<TIME> init 6320000ms
+<TIME> init 6280000ms
+<TIME> init 6330000ms
+<TIME> init 6280000ms
+<TIME> init 6420000ms
+<TIME> init 6450000ms
+<TIME> init 6430000ms
+<TIME> init 6430000ms
+<TIME> init 6440000ms
+<TIME> init 6410000ms
+<TIME> init 6430000ms
+<TIME> init 6430000ms
+<TIME> init 6400000ms
+<TIME> init 6400000ms
+<TIME> init 6410000ms
+<TIME> init 6400000ms
+<TIME> init 6390000ms
+<TIME> init 6400000ms
+<TIME> init 6490000ms
+<TIME> init 6450000ms
+<TIME> init 6450000ms
+<TIME> init 6400000ms
+<TIME> init 6350000ms
+<TIME> init 6370000ms
+<TIME> finish iter 1 12550000ms
+<TIME> finish iter 1 12610000ms
+<TIME> finish iter 1 12540000ms
+<TIME> finish iter 1 12710000ms
+<TIME> finish iter 1 12690000ms
+<TIME> finish iter 1 12730000ms
+<TIME> finish iter 1 12740000ms
+<TIME> finish iter 1 12730000ms
+<TIME> finish iter 1 12750000ms
+<TIME> finish iter 1 12700000ms
+<TIME> finish iter 1 12720000ms
+<TIME> finish iter 1 12740000ms
+<TIME> finish iter 1 12730000ms
+<TIME> finish iter 1 12720000ms
+<TIME> finish iter 1 12740000ms
+<TIME> finish iter 1 12740000ms
+<TIME> finish iter 1 12760000ms
+<TIME> finish iter 1 12750000ms
+<TIME> finish iter 1 12740000ms
+<TIME> finish iter 1 12570000ms
+<TIME> finish iter 1 12420000ms
+<TIME> finish iter 1 12570000ms
+<TIME> finish iter 1 12520000ms
+<TIME> finish iter 1 12080000ms
+<TIME> finish iter 1 12610000ms
+<TIME> finish iter 1 12090000ms
+<TIME> finish iter 1 14650000ms
+<TIME> finish iter 1 12440000ms
+<TIME> finish iter 1 12520000ms
+<TIME> finish iter 1 12500000ms
+<TIME> finish iter 1 12640000ms
+<TIME> finish iter 1 12490000ms
+<TIME> finish iter 1 12580000ms
+<TIME> finish iter 1 12520000ms
+<TIME> finish iter 1 12530000ms
+<TIME> finish iter 1 12630000ms
+<TIME> finish iter 1 12630000ms
+<TIME> finish iter 1 12490000ms
+<TIME> finish iter 1 12580000ms
+<TIME> finish iter 1 12480000ms
+<TIME> [iter=1] llh=-1251.328502 ollh=0.000000 1410000ms
+<TIME> finish iter 2 13530000ms
+<TIME> finish iter 2 14950000ms
+<TIME> finish iter 2 14960000ms
+<TIME> finish iter 2 14940000ms
+<TIME> finish iter 2 14940000ms
+<TIME> finish iter 2 14930000ms
+<TIME> finish iter 2 14940000ms
+<TIME> finish iter 2 14940000ms
+<TIME> finish iter 2 14940000ms
+<TIME> finish iter 2 14950000ms
+<TIME> finish iter 2 14950000ms
+<TIME> finish iter 2 14940000ms
+<TIME> finish iter 2 14950000ms
+<TIME> finish iter 2 14940000ms
+<TIME> finish iter 2 14950000ms
+<TIME> finish iter 2 14940000ms
+<TIME> finish iter 2 14950000ms
+<TIME> finish iter 2 14860000ms
+<TIME> finish iter 2 14950000ms
+<TIME> finish iter 2 14790000ms
+<TIME> finish iter 2 14950000ms
+<TIME> finish iter 2 14950000ms
+<TIME> finish iter 2 14940000ms
+<TIME> finish iter 2 14950000ms
+<TIME> finish iter 2 14920000ms
+<TIME> finish iter 2 14920000ms
+<TIME> finish iter 2 14920000ms
+<TIME> finish iter 2 14920000ms
+<TIME> finish iter 2 14920000ms
+<TIME> finish iter 2 14920000ms
+<TIME> finish iter 2 14930000ms
+<TIME> finish iter 2 14920000ms
+<TIME> finish iter 2 14920000ms
+<TIME> finish iter 2 14920000ms
+<TIME> finish iter 2 14730000ms
+<TIME> finish iter 2 14930000ms
+<TIME> finish iter 2 14930000ms
+<TIME> finish iter 2 14930000ms
+<TIME> finish iter 2 14920000ms
+<TIME> finish iter 2 14750000ms
+<TIME> [iter=2] llh=-1292.198824 ollh=-1251.328502 1440000ms
+<TIME> finish iter 3 13420000ms
+<TIME> finish iter 3 14340000ms
+<TIME> finish iter 3 13940000ms
+<TIME> finish iter 3 14870000ms
+<TIME> finish iter 3 14870000ms
+<TIME> finish iter 3 14870000ms
+<TIME> finish iter 3 14870000ms
+<TIME> finish iter 3 14880000ms
+<TIME> finish iter 3 14870000ms
+<TIME> finish iter 3 14880000ms
+<TIME> finish iter 3 14860000ms
+<TIME> finish iter 3 14870000ms
+<TIME> finish iter 3 14860000ms
+<TIME> finish iter 3 14880000ms
+<TIME> finish iter 3 14860000ms
+<TIME> finish iter 3 14870000ms
+<TIME> finish iter 3 14860000ms
+<TIME> finish iter 3 14860000ms
+<TIME> finish iter 3 14860000ms
+<TIME> finish iter 3 14800000ms
+<TIME> finish iter 3 14590000ms
+<TIME> finish iter 3 14840000ms
+<TIME> finish iter 3 14860000ms
+<TIME> finish iter 3 14870000ms
+<TIME> finish iter 3 14620000ms
+<TIME> finish iter 3 14850000ms
+<TIME> finish iter 3 14860000ms
+<TIME> finish iter 3 14860000ms
+<TIME> finish iter 3 14860000ms
+<TIME> finish iter 3 14870000ms
+<TIME> finish iter 3 14860000ms
+<TIME> finish iter 3 14860000ms
+<TIME> finish iter 3 14860000ms
+<TIME> finish iter 3 14860000ms
+<TIME> finish iter 3 14870000ms
+<TIME> finish iter 3 14850000ms
+<TIME> finish iter 3 14860000ms
+<TIME> finish iter 3 14860000ms
+<TIME> finish iter 3 14870000ms
+<TIME> finish iter 3 14870000ms
+<TIME> [iter=3] llh=-1284.248557 ollh=-1292.198824 1310000ms
+<TIME> finish iter 4 13470000ms
+<TIME> finish iter 4 14380000ms
+<TIME> finish iter 4 14750000ms
+<TIME> finish iter 4 14770000ms
+<TIME> finish iter 4 14500000ms
+<TIME> finish iter 4 14780000ms
+<TIME> finish iter 4 14780000ms
+<TIME> finish iter 4 14790000ms
+<TIME> finish iter 4 14750000ms
+<TIME> finish iter 4 14720000ms
+<TIME> finish iter 4 14780000ms
+<TIME> finish iter 4 14780000ms
+<TIME> finish iter 4 14690000ms
+<TIME> finish iter 4 14670000ms
+<TIME> finish iter 4 14670000ms
+<TIME> finish iter 4 14680000ms
+<TIME> finish iter 4 14690000ms
+<TIME> finish iter 4 14710000ms
+<TIME> finish iter 4 14690000ms
+<TIME> finish iter 4 14590000ms
+<TIME> finish iter 4 14610000ms
+<TIME> finish iter 4 14690000ms
+<TIME> finish iter 4 14360000ms
+<TIME> finish iter 4 14500000ms
+<TIME> finish iter 4 14680000ms
+<TIME> finish iter 4 14700000ms
+<TIME> finish iter 4 14690000ms
+<TIME> finish iter 4 14470000ms
+<TIME> finish iter 4 14750000ms
+<TIME> finish iter 4 14710000ms
+<TIME> finish iter 4 14660000ms
+<TIME> finish iter 4 14320000ms
+<TIME> finish iter 4 14790000ms
+<TIME> finish iter 4 14760000ms
+<TIME> finish iter 4 14790000ms
+<TIME> finish iter 4 14790000ms
+<TIME> finish iter 4 14770000ms
+<TIME> finish iter 4 14700000ms
+<TIME> finish iter 4 14790000ms
+<TIME> finish iter 4 14680000ms
+<TIME> [iter=4] llh=-1254.171409 ollh=-1284.248557 1320000ms
+<TIME> finish iter 5 12970000ms
+<TIME> finish iter 5 14140000ms
+<TIME> finish iter 5 14040000ms
+<TIME> finish iter 5 14300000ms
+<TIME> finish iter 5 14300000ms
+<TIME> finish iter 5 14290000ms
+<TIME> finish iter 5 14300000ms
+<TIME> finish iter 5 14300000ms
+<TIME> finish iter 5 14300000ms
+<TIME> finish iter 5 14300000ms
+<TIME> finish iter 5 14290000ms
+<TIME> finish iter 5 14300000ms
+<TIME> finish iter 5 14300000ms
+<TIME> finish iter 5 14300000ms
+<TIME> finish iter 5 14300000ms
+<TIME> finish iter 5 14300000ms
+<TIME> finish iter 5 14290000ms
+<TIME> finish iter 5 14300000ms
+<TIME> finish iter 5 14300000ms
+<TIME> finish iter 5 14020000ms
+<TIME> finish iter 5 14260000ms
+<TIME> finish iter 5 14300000ms
+<TIME> finish iter 5 14290000ms
+<TIME> finish iter 5 14300000ms
+<TIME> finish iter 5 14300000ms
+<TIME> finish iter 5 14300000ms
+<TIME> finish iter 5 14300000ms
+<TIME> finish iter 5 14290000ms
+<TIME> finish iter 5 14300000ms
+<TIME> finish iter 5 14290000ms
+<TIME> finish iter 5 14300000ms
+<TIME> finish iter 5 14300000ms
+<TIME> finish iter 5 14300000ms
+<TIME> finish iter 5 14300000ms
+<TIME> finish iter 5 14300000ms
+<TIME> finish iter 5 14300000ms
+<TIME> finish iter 5 14020000ms
+<TIME> finish iter 5 14290000ms
+<TIME> finish iter 5 14290000ms
+<TIME> finish iter 5 14290000ms
+<TIME> [iter=5] llh=-1228.793486 ollh=-1254.171409 1300000ms
+<TIME> finish iter 6 12960000ms
+<TIME> finish iter 6 14270000ms
+<TIME> finish iter 6 14260000ms
+<TIME> finish iter 6 14270000ms
+<TIME> finish iter 6 14260000ms
+<TIME> finish iter 6 14260000ms
+<TIME> finish iter 6 14260000ms
+<TIME> finish iter 6 14260000ms
+<TIME> finish iter 6 14260000ms
+<TIME> finish iter 6 14270000ms
+<TIME> finish iter 6 14260000ms
+<TIME> finish iter 6 14100000ms
+<TIME> finish iter 6 14260000ms
+<TIME> finish iter 6 14270000ms
+<TIME> finish iter 6 14260000ms
+<TIME> finish iter 6 13940000ms
+<TIME> finish iter 6 14260000ms
+<TIME> finish iter 6 14260000ms
+<TIME> finish iter 6 14260000ms
+<TIME> finish iter 6 14270000ms
+<TIME> finish iter 6 14040000ms
+<TIME> finish iter 6 14260000ms
+<TIME> finish iter 6 14280000ms
+<TIME> finish iter 6 14270000ms
+<TIME> finish iter 6 14270000ms
+<TIME> finish iter 6 14070000ms
+<TIME> finish iter 6 14260000ms
+<TIME> finish iter 6 14290000ms
+<TIME> finish iter 6 14280000ms
+<TIME> finish iter 6 14290000ms
+<TIME> finish iter 6 14280000ms
+<TIME> finish iter 6 14280000ms
+<TIME> finish iter 6 14280000ms
+<TIME> finish iter 6 14280000ms
+<TIME> finish iter 6 14280000ms
+<TIME> finish iter 6 14280000ms
+<TIME> finish iter 6 14290000ms
+<TIME> finish iter 6 14270000ms
+<TIME> finish iter 6 14290000ms
+<TIME> finish iter 6 14290000ms
+<TIME> [iter=6] llh=-1224.648068 ollh=-1228.793486 1370000ms
+<TIME> finish iter 7 13630000ms
+<TIME> finish iter 7 14950000ms
+<TIME> finish iter 7 14510000ms
+<TIME> finish iter 7 15010000ms
+<TIME> finish iter 7 15030000ms
+<TIME> finish iter 7 15050000ms
+<TIME> finish iter 7 14980000ms
+<TIME> finish iter 7 15060000ms
+<TIME> finish iter 7 14980000ms
+<TIME> finish iter 7 15000000ms
+<TIME> finish iter 7 14220000ms
+<TIME> finish iter 7 14960000ms
+<TIME> finish iter 7 15060000ms
+<TIME> finish iter 7 14980000ms
+<TIME> finish iter 7 14980000ms
+<TIME> finish iter 7 14980000ms
+<TIME> finish iter 7 14960000ms
+<TIME> finish iter 7 14990000ms
+<TIME> finish iter 7 14980000ms
+<TIME> finish iter 7 15050000ms
+<TIME> finish iter 7 15040000ms
+<TIME> finish iter 7 15030000ms
+<TIME> finish iter 7 15030000ms
+<TIME> finish iter 7 15010000ms
+<TIME> finish iter 7 15020000ms
+<TIME> finish iter 7 15000000ms
+<TIME> finish iter 7 15020000ms
+<TIME> finish iter 7 14960000ms
+<TIME> finish iter 7 15020000ms
+<TIME> finish iter 7 14570000ms
+<TIME> finish iter 7 14530000ms
+<TIME> finish iter 7 15030000ms
+<TIME> finish iter 7 15010000ms
+<TIME> finish iter 7 15010000ms
+<TIME> finish iter 7 15020000ms
+<TIME> finish iter 7 15040000ms
+<TIME> finish iter 7 15020000ms
+<TIME> finish iter 7 15000000ms
+<TIME> finish iter 7 15000000ms
+<TIME> finish iter 7 15060000ms
+<TIME> [iter=7] llh=-1183.666791 ollh=-1224.648068 1500000ms
+<TIME> finish iter 8 13270000ms
+<TIME> finish iter 8 14490000ms
+<TIME> finish iter 8 14780000ms
+<TIME> finish iter 8 14630000ms
+<TIME> finish iter 8 14790000ms
+<TIME> finish iter 8 14780000ms
+<TIME> finish iter 8 14780000ms
+<TIME> finish iter 8 14790000ms
+<TIME> finish iter 8 14770000ms
+<TIME> finish iter 8 14780000ms
+<TIME> finish iter 8 14780000ms
+<TIME> finish iter 8 14790000ms
+<TIME> finish iter 8 14790000ms
+<TIME> finish iter 8 14770000ms
+<TIME> finish iter 8 14790000ms
+<TIME> finish iter 8 14780000ms
+<TIME> finish iter 8 14780000ms
+<TIME> finish iter 8 14780000ms
+<TIME> finish iter 8 14790000ms
+<TIME> finish iter 8 14730000ms
+<TIME> finish iter 8 14610000ms
+<TIME> finish iter 8 14780000ms
+<TIME> finish iter 8 14690000ms
+<TIME> finish iter 8 14570000ms
+<TIME> finish iter 8 14590000ms
+<TIME> finish iter 8 14690000ms
+<TIME> finish iter 8 14660000ms
+<TIME> finish iter 8 14710000ms
+<TIME> finish iter 8 14780000ms
+<TIME> finish iter 8 14700000ms
+<TIME> finish iter 8 14680000ms
+<TIME> finish iter 8 14770000ms
+<TIME> finish iter 8 14770000ms
+<TIME> finish iter 8 14770000ms
+<TIME> finish iter 8 14690000ms
+<TIME> finish iter 8 14750000ms
+<TIME> finish iter 8 14680000ms
+<TIME> finish iter 8 14760000ms
+<TIME> finish iter 8 14130000ms
+<TIME> finish iter 8 14120000ms
+<TIME> [iter=8] llh=-1158.029458 ollh=-1183.666791 1290000ms
+<TIME> finish iter 9 12640000ms
+<TIME> finish iter 9 13780000ms
+<TIME> finish iter 9 13930000ms
+<TIME> finish iter 9 13720000ms
+<TIME> finish iter 9 13920000ms
+<TIME> finish iter 9 13930000ms
+<TIME> finish iter 9 13920000ms
+<TIME> finish iter 9 13920000ms
+<TIME> finish iter 9 13920000ms
+<TIME> finish iter 9 13930000ms
+<TIME> finish iter 9 13930000ms
+<TIME> finish iter 9 13920000ms
+<TIME> finish iter 9 13920000ms
+<TIME> finish iter 9 13930000ms
+<TIME> finish iter 9 13930000ms
+<TIME> finish iter 9 13920000ms
+<TIME> finish iter 9 13920000ms
+<TIME> finish iter 9 13930000ms
+<TIME> finish iter 9 13930000ms
+<TIME> finish iter 9 13910000ms
+<TIME> finish iter 9 13780000ms
+<TIME> finish iter 9 13930000ms
+<TIME> finish iter 9 13910000ms
+<TIME> finish iter 9 13920000ms
+<TIME> finish iter 9 13910000ms
+<TIME> finish iter 9 13920000ms
+<TIME> finish iter 9 13910000ms
+<TIME> finish iter 9 13910000ms
+<TIME> finish iter 9 13920000ms
+<TIME> finish iter 9 13930000ms
+<TIME> finish iter 9 13930000ms
+<TIME> finish iter 9 13920000ms
+<TIME> finish iter 9 13920000ms
+<TIME> finish iter 9 13940000ms
+<TIME> finish iter 9 13930000ms
+<TIME> finish iter 9 13920000ms
+<TIME> finish iter 9 13920000ms
+<TIME> finish iter 9 13920000ms
+<TIME> finish iter 9 13920000ms
+<TIME> finish iter 9 13790000ms
+<TIME> [iter=9] llh=-1156.009152 ollh=-1158.029458 1280000ms
+<TIME> finish iter 10 13120000ms
+<TIME> finish iter 10 14380000ms
+<TIME> finish iter 10 14410000ms
+<TIME> finish iter 10 14180000ms
+<TIME> finish iter 10 14400000ms
+<TIME> finish iter 10 14410000ms
+<TIME> finish iter 10 14410000ms
+<TIME> finish iter 10 14400000ms
+<TIME> finish iter 10 14010000ms
+<TIME> finish iter 10 14410000ms
+<TIME> finish iter 10 14410000ms
+<TIME> finish iter 10 14400000ms
+<TIME> finish iter 10 14400000ms
+<TIME> finish iter 10 14410000ms
+<TIME> finish iter 10 14410000ms
+<TIME> finish iter 10 14410000ms
+<TIME> finish iter 10 14410000ms
+<TIME> finish iter 10 14410000ms
+<TIME> finish iter 10 14410000ms
+<TIME> finish iter 10 14280000ms
+<TIME> finish iter 10 14340000ms
+<TIME> finish iter 10 14390000ms
+<TIME> finish iter 10 14390000ms
+<TIME> finish iter 10 14240000ms
+<TIME> finish iter 10 14410000ms
+<TIME> finish iter 10 14340000ms
+<TIME> finish iter 10 14350000ms
+<TIME> finish iter 10 14320000ms
+<TIME> finish iter 10 14390000ms
+<TIME> finish iter 10 14300000ms
+<TIME> finish iter 10 14390000ms
+<TIME> finish iter 10 14400000ms
+<TIME> finish iter 10 14360000ms
+<TIME> finish iter 10 14400000ms
+<TIME> finish iter 10 14370000ms
+<TIME> finish iter 10 14240000ms
+<TIME> finish iter 10 14380000ms
+<TIME> finish iter 10 14420000ms
+<TIME> finish iter 10 14130000ms
+<TIME> finish iter 10 14110000ms
+<TIME> [iter=10] llh=-1144.670560 ollh=-1156.009152 1530000ms
+<TIME> finish iter 11 13060000ms
+<TIME> finish iter 11 14210000ms
+<TIME> finish iter 11 14590000ms
+<TIME> finish iter 11 14590000ms
+<TIME> finish iter 11 14580000ms
+<TIME> finish iter 11 14590000ms
+<TIME> finish iter 11 14590000ms
+<TIME> finish iter 11 14590000ms
+<TIME> finish iter 11 14600000ms
+<TIME> finish iter 11 14360000ms
+<TIME> finish iter 11 14510000ms
+<TIME> finish iter 11 14570000ms
+<TIME> finish iter 11 14520000ms
+<TIME> finish iter 11 14500000ms
+<TIME> finish iter 11 14510000ms
+<TIME> finish iter 11 14510000ms
+<TIME> finish iter 11 14520000ms
+<TIME> finish iter 11 14520000ms
+<TIME> finish iter 11 14510000ms
+<TIME> finish iter 11 14070000ms
+<TIME> finish iter 11 14580000ms
+<TIME> finish iter 11 14590000ms
+<TIME> finish iter 11 13950000ms
+<TIME> finish iter 11 14590000ms
+<TIME> finish iter 11 14590000ms
+<TIME> finish iter 11 14580000ms
+<TIME> finish iter 11 14600000ms
+<TIME> finish iter 11 14580000ms
+<TIME> finish iter 11 14590000ms
+<TIME> finish iter 11 14590000ms
+<TIME> finish iter 11 14600000ms
+<TIME> finish iter 11 14580000ms
+<TIME> finish iter 11 14580000ms
+<TIME> finish iter 11 14590000ms
+<TIME> finish iter 11 14590000ms
+<TIME> finish iter 11 14580000ms
+<TIME> finish iter 11 14590000ms
+<TIME> finish iter 11 14580000ms
+<TIME> finish iter 11 14580000ms
+<TIME> finish iter 11 14600000ms
+<TIME> [iter=11] llh=-1147.802046 ollh=-1144.670560 1270000ms
+<TIME> finish iter 12 12700000ms
+<TIME> finish iter 12 13720000ms
+<TIME> finish iter 12 13980000ms
+<TIME> finish iter 12 13980000ms
+<TIME> finish iter 12 13810000ms
+<TIME> finish iter 12 13980000ms
+<TIME> finish iter 12 13980000ms
+<TIME> finish iter 12 13990000ms
+<TIME> finish iter 12 13990000ms
+<TIME> finish iter 12 13980000ms
+<TIME> finish iter 12 13990000ms
+<TIME> finish iter 12 13980000ms
+<TIME> finish iter 12 13990000ms
+<TIME> finish iter 12 13980000ms
+<TIME> finish iter 12 13980000ms
+<TIME> finish iter 12 13990000ms
+<TIME> finish iter 12 13990000ms
+<TIME> finish iter 12 13970000ms
+<TIME> finish iter 12 13990000ms
+<TIME> finish iter 12 13980000ms
+<TIME> finish iter 12 13980000ms
+<TIME> finish iter 12 13810000ms
+<TIME> finish iter 12 13980000ms
+<TIME> finish iter 12 13980000ms
+<TIME> finish iter 12 13990000ms
+<TIME> finish iter 12 13970000ms
+<TIME> finish iter 12 13980000ms
+<TIME> finish iter 12 13980000ms
+<TIME> finish iter 12 13830000ms
+<TIME> finish iter 12 13970000ms
+<TIME> finish iter 12 13970000ms
+<TIME> finish iter 12 13980000ms
+<TIME> finish iter 12 13990000ms
+<TIME> finish iter 12 13980000ms
+<TIME> finish iter 12 13990000ms
+<TIME> finish iter 12 13990000ms
+<TIME> finish iter 12 13980000ms
+<TIME> finish iter 12 13970000ms
+<TIME> finish iter 12 13990000ms
+<TIME> finish iter 12 13990000ms
+<TIME> [iter=12] llh=-1138.439304 ollh=-1147.802046 1280000ms
+<TIME> finish iter 13 12820000ms
+<TIME> finish iter 13 13870000ms
+<TIME> finish iter 13 14090000ms
+<TIME> finish iter 13 13950000ms
+<TIME> finish iter 13 14110000ms
+<TIME> finish iter 13 14100000ms
+<TIME> finish iter 13 14100000ms
+<TIME> finish iter 13 14090000ms
+<TIME> finish iter 13 14100000ms
+<TIME> finish iter 13 14080000ms
+<TIME> finish iter 13 14090000ms
+<TIME> finish iter 13 14100000ms
+<TIME> finish iter 13 14100000ms
+<TIME> finish iter 13 14100000ms
+<TIME> finish iter 13 14100000ms
+<TIME> finish iter 13 14100000ms
+<TIME> finish iter 13 14100000ms
+<TIME> finish iter 13 14090000ms
+<TIME> finish iter 13 13840000ms
+<TIME> finish iter 13 14080000ms
+<TIME> finish iter 13 14100000ms
+<TIME> finish iter 13 14100000ms
+<TIME> finish iter 13 14100000ms
+<TIME> finish iter 13 14100000ms
+<TIME> finish iter 13 14080000ms
+<TIME> finish iter 13 14100000ms
+<TIME> finish iter 13 14090000ms
+<TIME> finish iter 13 14090000ms
+<TIME> finish iter 13 14090000ms
+<TIME> finish iter 13 14100000ms
+<TIME> finish iter 13 14090000ms
+<TIME> finish iter 13 14090000ms
+<TIME> finish iter 13 14100000ms
+<TIME> finish iter 13 14090000ms
+<TIME> finish iter 13 14090000ms
+<TIME> finish iter 13 13810000ms
+<TIME> finish iter 13 14090000ms
+<TIME> finish iter 13 14090000ms
+<TIME> finish iter 13 14100000ms
+<TIME> finish iter 13 14100000ms
+<TIME> [iter=13] llh=-1138.297828 ollh=-1138.439304 1270000ms
+	llh converged
+Total learning time: 189334.066823
+Total learning time: 189350.961056
+Total learning time: 189374.528155
+Total learning time: 189357.309882
+Total learning time: 189366.765595
+Total learning time: 189362.616183
+Total learning time: 189370.007620
+Total learning time: 189370.227444
+Total learning time: 189316.457017
+Total learning time: 189343.501706
+Total learning time: 189332.063143
+Total learning time: 189347.682792
+Total learning time: 189371.761060
+Total learning time: 189341.364432
+Total learning time: 189360.071806
+Total learning time: 189360.180054
+Total learning time: 189369.745329
+Total learning time: 189354.586087
+Total learning time: 189364.997801
+Total learning time: 191244.725389
+Total learning time: 189088.898317
+Total learning time: 189172.538604
+Total learning time: 189154.717799
+Total learning time: 189140.255550
+Total learning time: 189221.774641
+Total learning time: 189232.309447
+Total learning time: 189126.452959
+Total learning time: 189219.388209
+Total learning time: 189025.111663
+Total learning time: 189110.578121
+Total learning time: 189078.985822
+Total learning time: 189170.947355
+Total learning time: 189198.304283
+Total learning time: 189102.587057
+Total learning time: 189086.372161
+Total learning time: 189182.062441
+Total learning time: 189169.184802
+Total learning time: 189035.848268
+Total learning time: 189266.266873
+Total learning time: 189074.789971
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+<TIME> before comolete left half 1160000ms
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+<TIME> before comolete left half 1160000ms
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+<TIME> before comolete left half 1150000ms
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+<TIME> before comolete left half 1180000ms
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+<TIME> before comolete left half 1150000ms
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+<TIME> before comolete left half 1160000ms
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+<TIME> before comolete left half 1150000ms
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+<TIME> before comolete left half 1170000ms
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+<TIME> before comolete left half 1160000ms
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+<TIME> before comolete left half 1160000ms
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+<TIME> before comolete left half 1170000ms
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+<TIME> before comolete left half 1170000ms
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+<TIME> before comolete left half 1170000ms
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+<TIME> before comolete left half 1170000ms
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+<TIME> before comolete left half 1160000ms
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+<TIME> before comolete left half 1160000ms
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+<TIME> before comolete left half 1150000ms
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+<TIME> before comolete left half 1140000ms
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+<TIME> before comolete left half 1150000ms
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+<TIME> before comolete left half 1150000ms
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+<TIME> before comolete left half 1160000ms
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+<TIME> before comolete left half 1150000ms
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+<TIME> before comolete left half 1160000ms
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+<TIME> before comolete left half 1130000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 1170000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 1170000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 1180000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 1170000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 1180000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 1170000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 1170000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 1180000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 1180000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 1170000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 1170000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 1170000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 1180000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 1170000ms
+<TIME> Complete bottom by Marginal 300000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete left by Marginal 340000ms
+<TIME> before comolete left half 0ms
+<TIME> Complete left by Marginal 330000ms
+<TIME> before comolete left half 0ms
+<TIME> Complete left by Marginal 340000ms
+<TIME> before comolete left half 0ms
+<TIME> Complete left by Marginal 320000ms
+<TIME> before comolete left half 0ms
+<TIME> Complete left by Marginal 330000ms
+<TIME> before comolete left half 0ms
+<TIME> Complete left by Marginal 330000ms
+<TIME> before comolete left half 0ms
+<TIME> Complete left by Marginal 330000ms
+<TIME> before comolete left half 0ms
+<TIME> Complete left by Marginal 330000ms
+<TIME> before comolete left half 0ms
+<TIME> Complete left by Marginal 330000ms
+<TIME> before comolete left half 0ms
+<TIME> Complete left by Marginal 330000ms
+<TIME> before comolete left half 0ms
+<TIME> Complete left by Marginal 330000ms
+<TIME> before comolete left half 0ms
+<TIME> Complete left by Marginal 330000ms
+<TIME> before comolete left half 0ms
+<TIME> Complete left by Marginal 330000ms
+<TIME> before comolete left half 0ms
+<TIME> Complete left by Marginal 340000ms
+<TIME> before comolete left half 0ms
+<TIME> Complete left by Marginal 330000ms
+<TIME> before comolete left half 0ms
+<TIME> Complete left by Marginal 340000ms
+<TIME> before comolete left half 0ms
+<TIME> Complete left by Marginal 330000ms
+<TIME> before comolete left half 0ms
+<TIME> Complete left by Marginal 330000ms
+<TIME> before comolete left half 0ms
+<TIME> Complete left by Marginal 330000ms
+<TIME> before comolete left half 0ms
+<TIME> Complete left by Marginal 330000ms
+<TIME> before comolete left half 0ms
+<TIME> Complete left by Marginal 340000ms
+<TIME> before comolete left half 0ms
+<TIME> Complete left by Marginal 340000ms
+<TIME> before comolete left half 0ms
+<TIME> Complete left by Marginal 340000ms
+<TIME> before comolete left half 0ms
+<TIME> Complete left by Marginal 340000ms
+<TIME> before comolete left half 0ms
+<TIME> Complete bottom by Marginal 340000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 330000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 330000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 340000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 330000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 330000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 330000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 330000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 340000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 330000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 330000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 340000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 330000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 260000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete left by Marginal 310000ms
+<TIME> Complete left by Marginal 310000ms
+<TIME> Complete left by Marginal 320000ms
+<TIME> Complete left by Marginal 310000ms
+<TIME> Complete left by Marginal 310000ms
+<TIME> Complete left by Marginal 310000ms
+<TIME> Complete left by Marginal 310000ms
+<TIME> Complete left by Marginal 320000ms
+<TIME> Complete left by Marginal 310000ms
+<TIME> Complete left by Marginal 310000ms
+<TIME> Complete left by Marginal 310000ms
+<TIME> Complete left by Marginal 310000ms
+<TIME> Complete left by Marginal 310000ms
+<TIME> Complete left by Marginal 320000ms
+<TIME> Complete left by Marginal 320000ms
+<TIME> Complete left by Marginal 310000ms
+<TIME> Complete left by Marginal 310000ms
+<TIME> Complete left by Marginal 320000ms
+<TIME> Complete left by Marginal 320000ms
+<TIME> Complete left by Marginal 310000ms
+<TIME> Complete left by Marginal 310000ms
+<TIME> Complete bottom by Marginal 300000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete left by Marginal 320000ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete left by Marginal 310000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 30000ms
+<TIME> Complete left by Marginal 310000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 30000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 20000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 20000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 20000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 30000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 30000ms
+---> complete left half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-left.dat
+<TIME> before comolete left half 1860000ms
+<TIME> Complete bottom by Marginal 270000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 300000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 330000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete left by Marginal 280000ms
+<TIME> before comolete left half 0ms
+<TIME> Complete bottom by Marginal 260000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete left by Marginal 260000ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 250000ms
+<TIME> before comolete bottom half 0ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 30000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 690000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 730000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 720000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 740000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 740000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 740000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 750000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 760000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 750000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 770000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 770000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 770000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 760000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 780000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 780000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 790000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> before comolete bottom half 790000ms
+---> complete bottom half and output /scratch/cse-zhengyl/results/olivetti/completions/olive-btm.dat
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 300000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 250000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 250000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 240000ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> Complete bottom by Marginal 300000ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 280000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 290000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 290000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 300000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 290000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 290000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 290000ms
+<TIME> Complete bottom by Marginal 290000ms
+<TIME> Complete bottom by Marginal 290000ms
+<TIME> Complete bottom by Marginal 280000ms
+<TIME> Complete bottom by Marginal 290000ms
+<TIME> Complete bottom by Marginal 290000ms
+<TIME> Complete bottom by Marginal 290000ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> before comolete bottom half 0ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> Complete bottom by Marginal 320000ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> Complete bottom by Marginal 310000ms
+<TIME> Complete bottom by Marginal 310000ms
+
+
+PS:
+
+Read file <../errors/stderr_olivetti.err> for stderr output of this job.
+
