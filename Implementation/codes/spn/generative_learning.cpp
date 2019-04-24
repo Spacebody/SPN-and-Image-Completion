@@ -159,12 +159,12 @@ void GenerativeLearning::learn_hard_EM(std::vector<Instance> train)
                 ollh = llh;
             else
             {
-                double dllh = abs(llh - ollh);
+                double dllh = std::abs(llh - ollh);
                 ollh = llh;
                 if (dllh < Parameter::threshold_LLHChg)
                 {
                     Utils::println("\tllh converged");
-                    
+                    std::cout << "delta: " << dllh << " " << Parameter::threshold_LLHChg << std::endl;                    
                     // send msg break
                     for (int k = 0; k < Parameter::num_slave_per_class; ++k)
                         this->send_msg_break(k + MyMPI::my_slave);
