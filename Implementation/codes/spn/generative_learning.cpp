@@ -180,10 +180,10 @@ void GenerativeLearning::learn_hard_EM(std::vector<Instance> train)
         {
             // slave: compute llh, send to class master
             double llh = 0.0;
-            int size = (int)ceil((int)train.size() * 1.0 / Parameter::num_slave_per_class);
-            for (int i = MyMPI::my_offset * size; i < (MyMPI::my_offset + 1) * size && i < (int)(train.size()); i++)
+            int size = (int)ceil((int)(train.size()) * 1.0 / Parameter::num_slave_per_class);
+            for (int i = MyMPI::my_offset * size; i < (MyMPI::my_offset + 1) * size && i < (int)(train.size()); ++i)
             {
-                Instance inst = train[i];
+                Instance &inst = train[i];
                 llh += this->spn.llh(inst);
             }
             this->send_llh(MyMPI::master_rank, llh);
