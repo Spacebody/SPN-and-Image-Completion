@@ -141,15 +141,15 @@ TODO
 
 - [x] Implementation of rest part(*Mar. 4, 2019*)
 
-- [x] Reproduce of the Original Application (*Mar. 20, 2019*)
+- [x] Reproduce of the Original Application (*Apr. 24, 2019*)
 
-- [ ] Further Exploration and Optimization (*Mar. 25, 2019*)
+- [ ] Further Exploration and Optimization (*Apr. 27, 2019*)
 
-- [ ] Interim Report (*April 4, 2019*)
+- [x] Interim Report (*April 4, 2019*)
 
-- [ ] Thesis (*April 15, 2019*)
+- [ ] Thesis Draft(*May 6, 2019*)
 
-- [ ] Presentation and Defence (*TBD*)
+- [ ] Final Defence (*May 20, 2019*)
 
 ### Author
 
