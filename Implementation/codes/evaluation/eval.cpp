@@ -8,7 +8,8 @@
 #include <sstream>
 #include <algorithm>
 
-std::string Eval::exp_dir = "/scratch/cse-zhengyl";
+// std::string Eval::exp_dir = "/scratch/cse-zhengyl";
+std::string Eval::exp_dir = "..";
 
 void Eval::eval_olivetti()
 {
