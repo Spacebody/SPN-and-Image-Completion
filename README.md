@@ -1,4 +1,4 @@
-# Undergraduate-thesis
+# SPN and Image Completion
 
 This is the version which I tested on cluster.
 
@@ -9,10 +9,6 @@ This is the version which I tested on cluster.
 [About This Repo](#about-this-repo)
 
 [Documents of Code](#documents-of-code)
-
-[Callgraph of Program](#callgraph-of-program)
-
-[Set Up Environment](#set-up-environment)
 
 [How to Run](#how-to-run)
 
@@ -30,17 +26,17 @@ This is the version which I tested on cluster.
 
 ### About this repo
 
-#### Motivation(TODO)
+#### Motivation
 
-The complexity of partition function is a key limiting factor in graphical model inference and learning. Sum-product network is a kind of architecture which is tractable, compared to the traditional Bayesian network.
+The complexity of the partition function is a key limiting factor in graphical model inference and learning. Sum-product network is a new kind of architecture which is tractable, compared to Bayesian network and Markov random fields. Recently, SPN have appealed to more and more researchers. This repo contains all files of my undergraduate thesis, a project to implement SPN and reproduce the results of image completion.
 
-#### Target(TODO)
+#### Target
 
-The target of this project is to reproduce the application of image completion in the original paper[1] which first proposed the SPN and build the foundation for any further research corresponding to SPN.
+The target of this project is to reproduce the results of the application to image completion proposed in the original paper[1].
 
-#### About SPN(TODO)
+#### About SPN
 
-SPNs are directed acyclic graphs with variables as leaves, sums, and products as the internal node, and weighted edges. This architecture is tractable and aims to resolve the limiting factor, the complexity of the graphical model. Any tractable graphical model can be cast into SPNs. However, SPNs are more general.
+SPNs are directed acyclic graphs with variables as leaves, sums, and products as the internal node, and probability as weighted edges. This architecture is tractable and aims to resolve the limiting factor, the complexity of the graphical model. Any tractable graphical model can be cast into SPNs. However, SPNs are more general.
 
 #### About Dataset
 
@@ -76,38 +72,44 @@ The models learned from the dataset will be stored in `results/<DOMAIN>/models`,
    7. `region`: Compute the mean and variance of regions in the picture(for this image completion application), as well as the MAP.
    8. `SPN`: Define the Sum-product network, including a root, functions of learning and applications. These functions are implemented via calling other modules.
 
-### Callgraph of Program
+#### Callgraph of Program
 
 This picture will show the call graph between modules of this program.
 
 ![Call graph of SPN](./figures/spn_callgraph.png)
 
-### Set Up Environment
+### How to Run
+
+Code are under folder `Implementation/codes`.
+
+#### Set Up Environment
 
 **openMPI** is needed to provide the parallel computing environmet. Please visit [open-mpi official website](https://www.open-mpi.org) for details if not available.
 
-### How to Run
-
-Code is under folder `Implementation/codes`.
-
-### File Path
+#### File Path
 
 To make the program read files correctly, please modify the file path in `dataset.cpp`, `eval.cpp`, and `run.cpp` to correct path before compiling.
 
 For TaiYi(SUSTech), **data** and results should be put in `/scratch/user-name`, **Code** should be put in `/work/user-name`.
 
-### Compilation
+#### Compilation
 
-Run the following commands to compile the executable program on compilation node:
+Please use **MPI** wrapped **g++** compilers, either **openmpi-wrapped gcc** or **Intel compilers** with **OpenMPI** library.
+
+Compile `run` first and run the binary for results.
+
+Compile `eval` second and run the bianry to evaluate the MSE.
+
+Run the following commands to get the executable program:
 
 ```sh
 make run # to run the learning process
 make eval # to do evaluation
 # or
-make  # compile both caltech and olivetti
+make  # compile 'run' and 'eval'
 ```
 
-#### Submit Jobs
+#### Job Submission
 
 Run the following commands to submit jobs on TaiYi(SUSTech):
 
@@ -117,13 +119,31 @@ bsub < run_caltech.lsf  # for caltech
 bsub < run_olivetti.lsf  # for olivetti
 ```
 
-In `*.lsf`, standard output and standard error are defined to stored in `output` and `errors` respectively in the position where `codes` are stored.
+For caltech, $80$ cores are used.
+
+For olivetti, $40$ cores are used.
+
+In `*.lsf`, standard output and standard error are defined to stored in `output` and `errors` respectively in the directory where `codes` are stored.
 
 ### Results
 
 Results will be stored temporally under `/scratch/user-name`, please move `results` to `/data/user-name` after jobs done.
 
-TODO
+Here are MSE of some categories:
+
+|  Category | MSE in Left Half | MSE in Bottom Half |
+|:---------:|:----------------:|:------------------:|
+| accordion |      $7629$      |       $8291$       |
+|   brain   |      $2799$      |       $3057$       |
+| butterfly |      $4621$      |       $4390$       |
+|    cup    |      $5434$      |       $5278$       |
+|  Olivetti |      $1084$      |       $1156$       |
+
+For models, please see **mdl** files in `Implementation/results/*/models`
+
+For completion data, please see **dat** files in `Implementation/results/*/completions`
+
+For more evaluation results, please see `evaluation_mse.txt` in `Implementation/results`
 
 ### Reference
 
@@ -159,9 +179,16 @@ E-mail: 11510506@mail.sustech.edu.cn
 
 ### Acknowledgement
 
-Prof. He & Prof. Tang
+Supervisors:
 
-PhD. Lee
+- Prof. Shan He(UBir)
+- Prof. Ke Tang(SUSTech)
+
+Other:
+
+- PhD. candidate Weifeng Li(UBir)
+- PhD. Xiaofen Lu(SUSTech)
+- Phd. Guiying Li(SUSTech)
 
 ### License
 
