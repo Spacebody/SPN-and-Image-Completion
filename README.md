@@ -133,11 +133,11 @@ Here are MSE of some categories:
 
 |  Category | MSE in Left Half | MSE in Bottom Half |
 |:---------:|:----------------:|:------------------:|
-| accordion |      $7629$      |       $8291$       |
-|   brain   |      $2799$      |       $3057$       |
-| butterfly |      $4621$      |       $4390$       |
-|    cup    |      $5434$      |       $5278$       |
-|  Olivetti |      $1084$      |       $1156$       |
+| accordion |       7629       |        8291        |
+|   brain   |       2799       |        3057        |
+| butterfly |       4621       |        4390        |
+|    cup    |       5434       |        5278        |
+|  Olivetti |       1084       |        1156        |
 
 For models, please see **mdl** files in `Implementation/results/<DOMAIN>/models`
 
