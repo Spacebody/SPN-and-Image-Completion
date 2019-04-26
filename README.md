@@ -108,9 +108,9 @@ make eval # to do evaluation
 Run the following commands to reproduce the experiment:
 
 ```sh
-mpic++ run -d C -n 102  #for caltech, 2 groups with 50 slaves per group and 1 master
+mpic++ -n 102 run -d C  #for caltech, 2 groups with 50 slaves and 1 master per group
 # or
-mpic++ run -d D -n 51 # for olivetti, 1 group with 50 slaves and 1 master
+mpic++ -n 51 run -d O  # for olivetti, 1 group with 50 slaves and 1 master
 ```
 
 ### Results
