@@ -1,8 +1,8 @@
 # SPN and Image Completion
 
-This is the version which I tested on cluster.
+This version is the experimental one that I used on cluster.
 
-*Sum-product network* (**SPN**) implementation and its application on image completion and gene dataset.
+*Sum-product network* (**SPN**) implementation and its application on image completion.
 
 ## Content
 
@@ -139,9 +139,9 @@ Here are MSE of some categories:
 |    cup    |      $5434$      |       $5278$       |
 |  Olivetti |      $1084$      |       $1156$       |
 
-For models, please see **mdl** files in `Implementation/results/*/models`
+For models, please see **mdl** files in `Implementation/results/<DOMAIN>/models`
 
-For completion data, please see **dat** files in `Implementation/results/*/completions`
+For completion data, please see **dat** files in `Implementation/results/<DOMAIN>/completions`
 
 For more evaluation results, please see `evaluation_mse.txt` in `Implementation/results`
 
