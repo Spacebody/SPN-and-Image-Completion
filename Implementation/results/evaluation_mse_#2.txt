@@ -104,4 +104,4 @@ yin_yang 24315.000000 24242.000000
 Caltech-101	5371.000000	5344.000000
 
 
-Olivetti MSE	 Left=nan	Bottom=nan
+Olivetti MSE	 Left=1084.000000	Bottom=1156.000000
