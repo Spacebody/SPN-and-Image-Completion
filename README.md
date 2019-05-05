@@ -151,11 +151,11 @@ For more evaluation results, please see `evaluation_mse.txt` in `Implementation/
 
 - [x] Reproduce of the Original Application (*Apr. 24, 2019*)
 
-- [ ] Further Exploration and Optimization (*Apr. 27, 2019*)
+- ~~[ ] Further Exploration and Optimization (*Apr. 27, 2019*)~~
 
 - [x] Interim Report (*Apr. 4, 2019*)
 
-- [ ] Thesis Draft(*May 6, 2019*)
+- [x] Thesis Draft(*May 6, 2019*)
 
 - [ ] Final Defence (*May 20, 2019*)
 
