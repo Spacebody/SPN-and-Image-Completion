@@ -6,11 +6,27 @@
 
 [About This Repo](#about-this-repo)
 
+- [Motivation](#motivation)
+- [Target](#target)
+- [About SPN](#about-spn)
+- [About Dataset](#about-dataset)
+- [About Results](#about-results)
+
 [Documents of Code](#documents-of-code)
+
+- [Code](#code)
+- [Callgraph of Program](#callgraph-of-program)
 
 [How to Run](#how-to-run)
 
+- [Set Up Environment](#set-up-environment)
+- [File Path](#file-path)
+- [Compilation](#compilation)
+
 [Results](#results)
+
+- [Evaluation](#evaluation)
+- [Image Comparison](#images-comparison)
 
 [Timeline](#timeline)
 
@@ -50,7 +66,7 @@ The models learned from the dataset will be stored in `results/<DOMAIN>/models`,
 
 ### Documents of Code
 
-#### Code Structure
+#### Code
 
 1. **common**
    1. `my_mpi`: Use **OpenMPI** to support the messaging in a parallel program. It means that this program will use parallel architecture to accelerate computing.
@@ -117,6 +133,8 @@ mpic++ -n 51 run -d O  # for olivetti, 1 group with 50 slaves and 1 master
 
 Results will be stored temporally under `Implementation/results`.
 
+#### Evaluation
+
 Here are MSE of some categories:
 
 |  Category | MSE in Left Half | MSE in Bottom Half |
@@ -126,6 +144,11 @@ Here are MSE of some categories:
 | butterfly |       4621       |        4390        |
 |    cup    |       5434       |        5278        |
 |  Olivetti |       1084       |        1156        |
+
+#### Image Comparison
+
+
+
 
 For models, please see **mdl** files in `Implementation/results/<DOMAIN>/models`
 
