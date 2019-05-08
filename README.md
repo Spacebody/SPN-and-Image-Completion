@@ -8,11 +8,28 @@ This version is the experimental one that I used on cluster.
 
 [About This Repo](#about-this-repo)
 
+- [Motivation](#motivation)
+- [Target](#target)
+- [About SPN](#about-spn)
+- [About Dataset](#about-dataset)
+- [About Results](#about-results)
+
 [Documents of Code](#documents-of-code)
+
+- [Code](#code)
+- [Callgraph of Program](#callgraph-of-program)
 
 [How to Run](#how-to-run)
 
+- [Set Up Environment](#set-up-environment)
+- [File Path](#file-path)
+- [Compilation](#compilation)
+- [Job Submission](#job-submission)
+
 [Results](#results)
+
+- [Evaluation](#evaluation)
+- [Image Comparison](#images-comparison)
 
 [Timeline](#timeline)
 
@@ -51,6 +68,8 @@ Two dataset are used in this program, following the application of orginal paper
 The models learned from the dataset will be stored in `results/<DOMAIN>/models`, which DOMAIN will either be `caltech` or `olivetti`. And the images for left and bottom completion will be output to `results/<DOMAIN>/completion`. The original and completed images will be aligned by separation with 10px gaps but no zero intensity.
 
 ### Documents of Code
+
+#### Code
 
 1. **common**
    1. `my_mpi`: Use **OpenMPI** to support the messaging in a parallel program. It means that this program will use parallel architecture to accelerate computing.
@@ -129,6 +148,8 @@ In `*.lsf`, standard output and standard error are defined to stored in `output`
 
 Results will be stored temporally under `/scratch/user-name`, please move `results` to `/data/user-name` after jobs done.
 
+#### Evaluation
+
 Here are MSE of some categories:
 
 |  Category | MSE in Left Half | MSE in Bottom Half |
@@ -139,11 +160,27 @@ Here are MSE of some categories:
 |    cup    |       5434       |        5278        |
 |  Olivetti |       1084       |        1156        |
 
+#### Images Comparison
+
+The following images are the comparison of the original and Poon's(left column), the original and Exp #2(middle column), the original and Exp #4(right column).
+
+|    Original vs Poon's     |  Original vs Exp #2       |    Original vs Exp #4    |
+|:-------------------------:|:-------------------------:|:------------------------:|
+|![Airplane-bottom](./figures/poon/airplanes-btm.jpg) | ![Airplane-bottom](./figures/exp2/airplanes-btm.jpg) | ![Airplane-bottom](./figures/exp4/airplanes-btm.jpg) |
+|![Face_easy-left](./figures/poon/Face_easy-left.jpg)  | ![Face_easy-left](./figures/exp2/Face_easy-left.jpg) | ![Face_easy-left](./figures/exp4/Face_easy-left.jpg) |
+|![panda-left](./figures/poon/panda-left.jpg)  | ![panda-left](./figures/exp2/panda-left.jpg) | ![panda-left](./figures/exp4/panda-left.jpg) |
+|![pyramid-bottom](./figures/poon/pyramid-btm.jpg)  | ![pyramid-bottom](./figures/exp2/pyramid-btm.jpg) | ![pyramid-bottom](./figures/exp4/pyramid-btm.jpg) |
+|![Sunflower-bottom](./figures/poon/sunflower-btm.jpg)  | ![Sunflower-bottom](./figures/exp2/sunflower-btm.jpg) | ![Sunflower-bottom](./figures/exp4/sunflower-btm.jpg) |
+|![umbrella-left](./figures/poon/umbrella-left.jpg)  | ![umbrella-left](./figures/exp2/umbrella-left.jpg) | ![umbrella-left](./figures/exp4/umbrella-left.jpg) |
+|![yin_yang-left](./figures/poon/yin_yang-left.jpg)  | ![yin_yang-left](./figures/exp2/yin_yang-left.jpg) | ![yin_yang-left](./figures/exp4/yin_yang-left.jpg) |
+
 For models, please see **mdl** files in `Implementation/results/<DOMAIN>/models`
 
 For completion data, please see **dat** files in `Implementation/results/<DOMAIN>/completions`
 
 For more evaluation results, please see `evaluation_mse.txt` in `Implementation/results`
+
+For more completed images, please use `plot_img_64x64.m` or `plot_img_100x64.m` in `/Implementation/tools` to output the images. Note that the file path should be manually set.
 
 ### Reference
 
