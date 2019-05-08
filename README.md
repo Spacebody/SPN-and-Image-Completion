@@ -133,6 +133,8 @@ mpic++ -n 51 run -d O  # for olivetti, 1 group with 50 slaves and 1 master
 
 Results will be stored temporally under `Implementation/results`.
 
+Note that the **master** branch does NOT contain any results, please switch the **cluster** branch to get my results.
+
 #### Evaluation
 
 Here are MSE of some categories:
@@ -147,14 +149,27 @@ Here are MSE of some categories:
 
 #### Image Comparison
 
+The following images are the comparison of the original and Poon's(left column), the original and Exp #2(middle column), the original and Exp #4(right column).
 
-
+|    Original vs Poon's     |  Original vs Exp #2       |    Original vs Exp #4    |
+|:-------------------------:|:-------------------------:|:------------------------:|
+|![Airplane-bottom](./figures/poon/airplanes-btm.jpg) | ![Airplane-bottom](./figures/exp2/airplanes-btm.jpg) | ![Airplane-bottom](./figures/exp4/airplanes-btm.jpg) |
+|![Face_easy-left](./figures/poon/Face_easy-left.jpg)  | ![Face_easy-left](./figures/exp2/Face_easy-left.jpg) | ![Face_easy-left](./figures/exp4/Face_easy-left.jpg) |
+|![panda-left](./figures/poon/panda-left.jpg)  | ![panda-left](./figures/exp2/panda-left.jpg) | ![panda-left](./figures/exp4/panda-left.jpg) |
+|![pyramid-bottom](./figures/poon/pyramid-btm.jpg)  | ![pyramid-bottom](./figures/exp2/pyramid-btm.jpg) | ![pyramid-bottom](./figures/exp4/pyramid-btm.jpg) |
+|![Sunflower-bottom](./figures/poon/sunflower-btm.jpg)  | ![Sunflower-bottom](./figures/exp2/sunflower-btm.jpg) | ![Sunflower-bottom](./figures/exp4/sunflower-btm.jpg) |
+|![umbrella-left](./figures/poon/umbrella-left.jpg)  | ![umbrella-left](./figures/exp2/umbrella-left.jpg) | ![umbrella-left](./figures/exp4/umbrella-left.jpg) |
+|![yin_yang-left](./figures/poon/yin_yang-left.jpg)  | ![yin_yang-left](./figures/exp2/yin_yang-left.jpg) | ![yin_yang-left](./figures/exp4/yin_yang-left.jpg) |
 
 For models, please see **mdl** files in `Implementation/results/<DOMAIN>/models`
 
 For completion data, please see **dat** files in `Implementation/results/<DOMAIN>/completions`
 
 For more evaluation results, please see `evaluation_mse.txt` in `Implementation/results`
+
+For more completed images, please use `plot_img_64x64.m` or `plot_img_100x64.m` in `/Implementation/tools` to output the images. Note that the file path should be manually set.
+
+Note that the evaluation and the images in this README were output based on the results stored in the **clutser** branch.
 
 ### Reference
 
