@@ -138,9 +138,37 @@ bsub < run_caltech.lsf  # for caltech
 bsub < run_olivetti.lsf  # for olivetti
 ```
 
-For caltech, $80$ cores are used.
+Four experiments were conducted:
 
-For olivetti, $40$ cores are used.
+1. Experiment #1:
+
+    All input size: $64 \times 64$.
+
+    For caltech, $80$ cores are used.
+
+    For olivetti, $40$ cores are used.
+
+2. Experiment #2:
+
+    All input size: $64 \times 64$.
+
+    For caltech, $120$ cores are used.
+
+    For olivetti, $40$ cores are used.
+
+3. Experiment #3:
+
+    All input size: $100 \times 64$.
+
+    For caltech, $80$ cores are used.
+
+4. Experiment #4:
+
+    All input size: $100 \times 64$.
+
+    For caltech, $120$ cores are used.
+
+Note that only **caltech** can change the input to a larger size.
 
 In `*.lsf`, standard output and standard error are defined to stored in `output` and `errors` respectively in the directory where `codes` are stored.
 
