@@ -234,7 +234,7 @@ For more completed images, please use `plot_img_64x64.m` or `plot_img_100x64.m` 
 
 - [x] Thesis Draft(*May 6, 2019*)
 
-- [ ] Final Defence (*May 20, 2019*)
+- [x] Final Defence (*May 23, 2019*)
 
 ### Author
 
@@ -248,6 +248,16 @@ Supervisors:
 
 - Prof. Shan He(UBir)
 - Prof. Ke Tang(SUSTech)
+
+Inspector:
+
+- Prof. Bo Tang(SUSTech)
+
+Committee Members(SUSTech):
+
+- Prof. Qi Wang (Committee chair)
+- Prof. Jianqiao Yu (Committee member)
+- Prof. Jialin Liu (Committee member)
 
 Other:
 
